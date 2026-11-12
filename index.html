@@ -34,9 +34,9 @@
     <div class="wrap layout" id="top">
 
       <aside class="profile" aria-label="Profile and contact">
-        <div class="avatar">
+        <button type="button" class="avatar" id="avatar-btn" aria-label="Enlarge photo">
           <img src="img/headshot.webp" width="200" height="200" alt="Headshot of Eric Lyman" onerror="this.remove()">
-        </div>
+        </button>
         <h2 class="profile-name">Eric Lyman</h2>
         <ul class="contact-list" id="contact">
           <li><span class="label">Email</span><a href="mailto:hello@ericlyman.com">hello@ericlyman.com</a></li>
@@ -182,5 +182,17 @@
       <a href="mailto:hello@ericlyman.com">hello@ericlyman.com</a>
     </div>
   </footer>
+  <div class="photo-zoom" id="photo-zoom" hidden>
+    <img src="img/headshot.webp" alt="Eric Lyman">
+  </div>
+  <script>
+    (function(){
+      var b=document.getElementById('avatar-btn'),z=document.getElementById('photo-zoom');
+      function close(){z.classList.remove('open');setTimeout(function(){z.hidden=true},200)}
+      b.addEventListener('click',function(){z.hidden=false;requestAnimationFrame(function(){z.classList.add('open')})});
+      z.addEventListener('click',close);
+      document.addEventListener('keydown',function(e){if(e.key==='Escape'&&!z.hidden)close()});
+    })();
+  </script>
 </body>
 </html>
