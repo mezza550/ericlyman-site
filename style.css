@@ -56,9 +56,9 @@ section{margin-bottom:56px}
 .years{font-size:13.5px;font-weight:500;color:var(--muted);white-space:nowrap;font-variant-numeric:tabular-nums}
 .org{margin:4px 0 14px;font-weight:600;color:var(--ink);font-size:15px}
 .org span{font-weight:400;color:var(--muted)}
-.role ul{margin:0;padding-left:18px}
-.role ul li{margin-bottom:8px;padding-left:4px}
-.role ul li::marker{color:#111}
+.role ul{margin:0;padding-left:0;list-style:none}
+.role ul li{margin-bottom:8px;padding-left:20px;position:relative;list-style:none}
+.role ul li::before{content:"";position:absolute;left:3px;top:.62em;width:6px;height:6px;border-radius:50%;background:#111}
 
 .plain-list{list-style:none;margin:0;padding:0}
 .plain-list li{padding:12px 0;border-bottom:1px solid var(--line);display:flex;flex-direction:column}
@@ -90,3 +90,9 @@ section{margin-bottom:56px}
   .footer-inner{flex-direction:column;gap:6px;padding:24px 20px}
 }
 @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+
+.contact-end{padding-top:40px;border-top:2px solid var(--ruby)}
+.contact-list--end{border-top:0;padding-top:0;max-width:440px;font-size:16px}
+.contact-list--end li{grid-template-columns:80px 1fr}
+.btn--inline{width:auto;padding:12px 28px}
+@media (max-width:900px){.content>section.contact-end{order:4;margin-top:48px}}
