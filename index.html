@@ -34,9 +34,9 @@
     <div class="wrap layout" id="top">
 
       <aside class="profile" aria-label="Profile and contact">
-        <button type="button" class="avatar" id="avatar-btn" aria-label="Enlarge photo">
+        <div class="avatar">
           <img src="img/headshot.webp" width="200" height="200" alt="Headshot of Eric Lyman" onerror="this.remove()">
-        </button>
+        </div>
         <h2 class="profile-name">Eric Lyman</h2>
         <ul class="contact-list" id="contact">
           <li><span class="label">Email</span><a href="mailto:hello@ericlyman.com">hello@ericlyman.com</a></li>
@@ -51,7 +51,7 @@
       </aside>
 
       <div class="content">
-        <section class="hero">
+        <section class="hero rule js-rule" style="--fill: 8%">
           <h1>Operations <span class="amp">&amp;</span> AI Transformation Leader</h1>
           <p class="lede">I love designing better processes and building them with AI. At RowCal that meant turning around a struggling branch, breaking property management work into new remote roles, and building AI agents that took error-prone manual work off the team. Outside work, I build agents people rely on daily, from a personal fitness coach to the back office of a freelance design business. I want to do this at a larger scale: finding the processes that should work differently, then designing and rolling out the AI-enabled version.</p>
         </section>
@@ -59,7 +59,7 @@
         <section id="experience" aria-labelledby="exp-h">
           <h2 class="section-title" id="exp-h">Professional Experience</h2>
           <ol class="roles roles--bare">
-            <li class="role">
+            <li class="role rule js-rule" style="--fill: 16.4%">
               <img class="role-logo" src="img/logos/rowcal.png" width="128" height="128" alt="RowCal logo">
               <div class="role-body">
                 <div class="role-head">
@@ -77,7 +77,7 @@
                 </ul>
               </div>
             </li>
-            <li class="role">
+            <li class="role rule js-rule" style="--fill: 24.7%">
               <img class="role-logo" src="img/logos/el-monogram.png" width="128" height="128" alt="Eric Lyman monogram">
               <div class="role-body">
                 <div class="role-head">
@@ -91,7 +91,7 @@
                 </ul>
               </div>
             </li>
-            <li class="role">
+            <li class="role rule js-rule" style="--fill: 33.1%">
               <img class="role-logo" src="img/logos/impact-house-buyers.png" width="128" height="128" alt="Impact House Buyers logo">
               <div class="role-body">
                 <div class="role-head">
@@ -105,7 +105,7 @@
                 </ul>
               </div>
             </li>
-            <li class="role">
+            <li class="role rule js-rule" style="--fill: 41.5%">
               <img class="role-logo" src="img/logos/3xr.png" width="128" height="128" alt="3XR logo">
               <div class="role-body">
                 <div class="role-head">
@@ -119,7 +119,7 @@
                 </ul>
               </div>
             </li>
-            <li class="role">
+            <li class="role rule js-rule" style="--fill: 49.8%">
               <img class="role-logo" src="img/logos/wayfair.png" width="128" height="128" alt="Wayfair logo">
               <div class="role-body">
                 <div class="role-head">
@@ -133,7 +133,7 @@
                 </ul>
               </div>
             </li>
-            <li class="role">
+            <li class="role rule js-rule" style="--fill: 58.2%">
               <img class="role-logo" src="img/logos/lego.png" width="128" height="128" alt="LEGO logo">
               <div class="role-body">
                 <div class="role-head">
@@ -164,20 +164,21 @@
           </ol>
         </section>
 
-        <section id="education" aria-labelledby="edu-h">
+        <section id="education" class="rule-start js-rule" style="--fill: 66.5%" aria-labelledby="edu-h">
           <h2 class="section-title" id="edu-h">Education &amp; Certifications</h2>
           <ul class="plain-list">
-            <li><strong>Community Associations Institute</strong> CMCA, Certified Manager of Community Associations (2026)</li>
-            <li><strong>The Art Institute of Portland</strong> B.S. in Media Arts and Animation (Honors, 2005)</li>
+            <li class="rule js-rule" style="--fill: 74.9%"><strong>Community Associations Institute</strong> CMCA, Certified Manager of Community Associations (2026)</li>
+            <li class="rule js-rule" style="--fill: 83.3%"><strong>The Art Institute of Portland</strong> B.S. in Media Arts and Animation (Honors, 2005)</li>
             <li><strong>Milwaukee Area Technical College</strong> A.A.S. in Computer Graphics (2002)</li>
           </ul>
         </section>
 
-        <section aria-labelledby="comp-h">
+        <section class="rule-start js-rule" style="--fill: 91.6%" aria-labelledby="comp-h">
           <h2 class="section-title" id="comp-h">Core Capabilities</h2>
           <ul class="tags">
             <li>Process Design &amp; Workflow Redesign</li><li>Agentic AI Workflows</li><li>AI Enablement &amp; Change Management</li><li>Human-in-the-Loop AI Governance</li><li>Operating Model Design</li><li>Business Turnaround</li><li>P&amp;L Ownership</li><li>Pilot Programs &amp; Scaling</li><li>Operational Data &amp; Reporting</li><li>SaaS &amp; Systems Integration</li><li>Product Roadmaps</li>
           </ul>
+          <hr class="rule js-rule" style="--fill: 100%">
         </section>
       </div>
     </div>
@@ -189,16 +190,21 @@
       <a href="mailto:hello@ericlyman.com">hello@ericlyman.com</a>
     </div>
   </footer>
-  <div class="photo-zoom" id="photo-zoom" hidden>
-    <img src="img/headshot.webp" alt="Eric Lyman">
-  </div>
   <script>
     (function(){
-      var b=document.getElementById('avatar-btn'),z=document.getElementById('photo-zoom');
-      function close(){z.classList.remove('open');setTimeout(function(){z.hidden=true},200)}
-      b.addEventListener('click',function(){z.hidden=false;requestAnimationFrame(function(){z.classList.add('open')})});
-      z.addEventListener('click',close);
-      document.addEventListener('keydown',function(e){if(e.key==='Escape'&&!z.hidden)close()});
+      function setRuleFills(){
+        var rules=Array.prototype.slice.call(document.querySelectorAll(".js-rule"));
+        if(!rules.length) return;
+        rules.sort(function(a,b){return a.getBoundingClientRect().top-b.getBoundingClientRect().top});
+        var n=rules.length;
+        for(var i=0;i<n;i++){
+          var pct=n===1?100:(8+92*i/(n-1));
+          rules[i].style.setProperty("--fill",(Math.round(pct*10)/10)+"%");
+        }
+      }
+      if(document.readyState==="loading") document.addEventListener("DOMContentLoaded",setRuleFills);
+      else setRuleFills();
+      window.addEventListener("resize",setRuleFills);
     })();
   </script>
 </body>
