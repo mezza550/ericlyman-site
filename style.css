@@ -86,9 +86,13 @@ section{margin-bottom:56px}
 .role ul li::before{content:"";position:absolute;left:3px;top:.62em;width:6px;height:6px;border-radius:50%;background:#111}
 
 .plain-list{list-style:none;margin:0;padding:0}
-.plain-list li{padding:12px 0;display:flex;flex-direction:column;position:relative}
+.plain-list li{padding:14px 0;display:grid;grid-template-columns:44px 1fr;column-gap:14px;align-items:start;position:relative}
 .plain-list li:first-child{padding-top:0}
-.plain-list strong{color:var(--ink);font-weight:600}
+.plain-list .role-logo{width:44px;height:44px;margin-top:2px;padding:0;box-sizing:border-box;background:transparent;border:0;border-radius:0;object-fit:contain;display:block}
+.plain-list .role-logo--sm{width:85%;height:auto;aspect-ratio:1;justify-self:center;margin-top:5.3px}
+.plain-list .role-body{min-width:0}
+.plain-list strong{color:var(--ink);font-weight:600;display:block;line-height:1.35}
+.plain-list .cred{margin:2px 0 0;font-size:15px;color:var(--body)}
 
 .tags{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:10px}
 .tags li{font-size:14px;padding:6px 14px;border:1px solid var(--line);background:var(--surface);border-radius:999px;color:var(--body)}
@@ -118,6 +122,9 @@ section{margin-bottom:56px}
   .role h3{font-size:19px}
   .roles--bare .role{grid-template-columns:40px 1fr;column-gap:12px}
   .roles--bare .role-logo{width:40px;height:40px;padding:0;border:0;border-radius:0;margin-top:2px}
+  .plain-list li{grid-template-columns:40px 1fr;column-gap:12px}
+  .plain-list .role-logo{width:40px;height:40px;margin-top:1px}
+  .plain-list .role-logo--sm{width:85%;height:auto;aspect-ratio:1;margin-top:4px}
 }
 @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
 
