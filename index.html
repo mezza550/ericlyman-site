@@ -23,6 +23,7 @@
     <div class="wrap topbar-inner">
       <a class="name-link" href="#top">Eric Lyman</a>
       <nav aria-label="Primary">
+        <a href="#builds">Builds</a>
         <a href="#experience">Experience</a>
         <a href="#education">Education</a>
         <a href="#contact">Contact</a>
@@ -44,10 +45,16 @@
           <li><span class="label">Web</span><a href="https://www.ericlyman.com/">www.ericlyman.com</a></li>
           <li><span class="label">Social</span><span>@ericjameslyman</span></li>
         </ul>
-        <a class="btn" href="resume/Eric-Lyman-Resume.pdf" download="Eric-Lyman-Resume.pdf">
-          <svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12"/><path d="m7 10 5 5 5-5"/><path d="M5 21h14"/></svg>
-          Download Resume
-        </a>
+        <div class="profile-actions">
+          <a class="btn" href="resume/Eric-Lyman-Resume.pdf" download="Eric-Lyman-Resume.pdf">
+            <svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12"/><path d="m7 10 5 5 5-5"/><path d="M5 21h14"/></svg>
+            Download Resume
+          </a>
+          <a class="btn btn--outline" href="#builds">
+            <svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
+            See My Builds
+          </a>
+        </div>
       </aside>
 
       <div class="content">
@@ -56,10 +63,51 @@
           <p class="lede">I love designing better processes and building them with AI. At RowCal that meant turning around a struggling branch, breaking property management work into new remote roles, and building AI agents that took error-prone manual work off the team. Outside work, I build agents that do real work, from a personal fitness coach to the back office of a freelance design business. I want to do this at a larger scale: finding the processes that should work differently, then designing and rolling out the AI-enabled version.</p>
         </section>
 
+        <!--
+          To add a build: copy one of the cards below, point its links at
+          builds/your-slug/, and copy builds/_template/ to builds/your-slug/.
+          Remove the template's noindex tag and replace its placeholders.
+          Leave the dashed "More builds coming soon" card last. It is not a link.
+        -->
+        <section id="builds" class="builds rule js-rule" style="--fill: 15.7%" aria-labelledby="builds-h">
+          <h2 class="section-title" id="builds-h">Builds</h2>
+          <p class="section-lead">Small AI tools, agents and experiments I've built to automate real business work, each with the guardrails I put around it.</p>
+          <ul class="builds-grid">
+            <li>
+              <article class="build-card">
+                <h3>Back-Office Agent for a Freelance Design Business</h3>
+                <p class="build-desc">An AI agent that handles back-office work for a freelance design business, including drafting invoices for human approval.</p>
+                <ul class="tags" aria-label="Tools">
+                  <li>AI Agents</li>
+                  <li>Automation</li>
+                  <li>Human-in-the-Loop</li>
+                </ul>
+                <a class="build-more" href="builds/melissa-agent/">Read more<span class="sr-only"> about Back-Office Agent for a Freelance Design Business</span><span aria-hidden="true">→</span></a>
+              </article>
+            </li>
+            <li>
+              <article class="build-card">
+                <h3>Personal AI Fitness Coach</h3>
+                <p class="build-desc">A personal fitness coach agent.</p>
+                <ul class="tags" aria-label="Tools">
+                  <li>AI Agents</li>
+                  <li>Personal Productivity</li>
+                </ul>
+                <a class="build-more" href="builds/fitness-coach/">Read more<span class="sr-only"> about Personal AI Fitness Coach</span><span aria-hidden="true">→</span></a>
+              </article>
+            </li>
+            <li>
+              <div class="build-card build-card--soon">
+                <p>More builds coming soon</p>
+              </div>
+            </li>
+          </ul>
+        </section>
+
         <section id="experience" aria-labelledby="exp-h">
           <h2 class="section-title" id="exp-h">Professional Experience</h2>
           <ol class="roles roles--bare">
-            <li class="role rule js-rule" style="--fill: 16.4%">
+            <li class="role rule js-rule" style="--fill: 23.3%">
               <img class="role-logo" src="img/logos/rowcal.png" width="128" height="128" alt="RowCal logo">
               <div class="role-body">
                 <div class="role-head">
@@ -77,7 +125,7 @@
                 </ul>
               </div>
             </li>
-            <li class="role rule js-rule" style="--fill: 24.7%">
+            <li class="role rule js-rule" style="--fill: 31%">
               <img class="role-logo" src="img/logos/el-monogram.png" width="128" height="128" alt="Eric Lyman monogram">
               <div class="role-body">
                 <div class="role-head">
@@ -91,7 +139,7 @@
                 </ul>
               </div>
             </li>
-            <li class="role rule js-rule" style="--fill: 33.1%">
+            <li class="role rule js-rule" style="--fill: 38.7%">
               <img class="role-logo" src="img/logos/impact-house-buyers.png" width="128" height="128" alt="Impact House Buyers logo">
               <div class="role-body">
                 <div class="role-head">
@@ -105,7 +153,7 @@
                 </ul>
               </div>
             </li>
-            <li class="role rule js-rule" style="--fill: 41.5%">
+            <li class="role rule js-rule" style="--fill: 46.3%">
               <img class="role-logo" src="img/logos/3xr.png" width="128" height="128" alt="3XR logo">
               <div class="role-body">
                 <div class="role-head">
@@ -119,7 +167,7 @@
                 </ul>
               </div>
             </li>
-            <li class="role rule js-rule" style="--fill: 49.8%">
+            <li class="role rule js-rule" style="--fill: 54%">
               <img class="role-logo" src="img/logos/wayfair.png" width="128" height="128" alt="Wayfair logo">
               <div class="role-body">
                 <div class="role-head">
@@ -133,7 +181,7 @@
                 </ul>
               </div>
             </li>
-            <li class="role rule js-rule" style="--fill: 58.2%">
+            <li class="role rule js-rule" style="--fill: 61.7%">
               <img class="role-logo" src="img/logos/lego.png" width="128" height="128" alt="LEGO logo">
               <div class="role-body">
                 <div class="role-head">
@@ -164,17 +212,17 @@
           </ol>
         </section>
 
-        <section id="education" class="rule-start js-rule" style="--fill: 66.5%" aria-labelledby="edu-h">
+        <section id="education" class="rule-start js-rule" style="--fill: 69.3%" aria-labelledby="edu-h">
           <h2 class="section-title" id="edu-h">Education &amp; Certifications</h2>
           <ul class="plain-list">
-            <li class="rule js-rule" style="--fill: 74.9%">
+            <li class="rule js-rule" style="--fill: 77%">
               <img class="role-logo role-logo--sm" src="img/logos/cai.png" width="128" height="128" alt="Community Associations Institute logo">
               <div class="role-body">
                 <strong>CMCA, Certified Manager of Community Associations</strong>
                 <p class="cred">Community Associations Institute | 2026</p>
               </div>
             </li>
-            <li class="rule js-rule" style="--fill: 83.3%">
+            <li class="rule js-rule" style="--fill: 84.7%">
               <img class="role-logo" src="img/logos/art-institute-portland.png" width="128" height="128" alt="The Art Institute of Portland logo">
               <div class="role-body">
                 <strong>The Art Institute of Portland</strong>
@@ -191,7 +239,7 @@
           </ul>
         </section>
 
-        <section class="rule-start js-rule" style="--fill: 91.6%" aria-labelledby="comp-h">
+        <section class="rule-start js-rule" style="--fill: 92.3%" aria-labelledby="comp-h">
           <h2 class="section-title" id="comp-h">Core Capabilities</h2>
           <ul class="tags">
             <li>Process Design &amp; Workflow Redesign</li><li>Agentic AI Workflows</li><li>AI Enablement &amp; Change Management</li><li>Human-in-the-Loop AI Governance</li><li>Operating Model Design</li><li>Business Turnaround</li><li>P&amp;L Ownership</li><li>Pilot Programs &amp; Scaling</li><li>Operational Data &amp; Reporting</li><li>SaaS &amp; Systems Integration</li><li>Power BI</li><li>Product Roadmaps</li>

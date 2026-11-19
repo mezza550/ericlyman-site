@@ -47,8 +47,11 @@ h1 .amp{font-style:italic;color:var(--ruby);font-weight:400}
 /* Progress rules: a 2px gray track whose ruby fill grows down the page via --fill (first ~8%, last 100%). */
 .rule,.rule-start,.js-rule{--fill:8%}
 .hero.rule::after,
+.builds.rule::after,
 .role.rule::after,
 .plain-list li.rule::after,
+.build-header.rule::after,
+.build-section.rule::after,
 .rule-start::before{
   content:"";
   position:absolute;
@@ -59,8 +62,11 @@ h1 .amp{font-style:italic;color:var(--ruby);font-weight:400}
   pointer-events:none;
 }
 .hero.rule::after,
+.builds.rule::after,
 .role.rule::after,
-.plain-list li.rule::after{bottom:0}
+.plain-list li.rule::after,
+.build-header.rule::after,
+.build-section.rule::after{bottom:0}
 .rule-start{position:relative;padding-top:48px}
 .rule-start::before{top:0}
 hr.rule{border:0;display:block;height:2px;margin:40px 0 0;padding:0;background:linear-gradient(90deg,var(--ruby) var(--fill),var(--line) var(--fill))}
@@ -133,4 +139,53 @@ section{margin-bottom:56px}
 .contact-list--end li{grid-template-columns:80px 1fr}
 .btn--inline{width:auto;padding:12px 28px}
 @media (max-width:900px){.content>section.contact-end{order:4;margin-top:48px}}
+
+/* Builds: homepage grid and case-study pages. */
+.profile-actions{display:flex;flex-direction:column;gap:10px}
+.btn--outline{background:transparent;color:var(--ruby);box-shadow:inset 0 0 0 1.5px var(--ruby);transition:background .15s,color .15s}
+.btn--outline:hover{background:var(--ruby);color:#fff;text-decoration:none}
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+.builds.rule{position:relative;padding-bottom:40px;margin-bottom:48px}
+.builds .section-title{margin-bottom:12px}
+.section-lead{margin:0 0 28px;max-width:40em;font-size:16.5px;line-height:1.65;color:var(--body)}
+.builds-grid{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,280px),1fr));gap:16px}
+.builds-grid>li{display:flex;min-width:0}
+.builds-grid>li:last-child{grid-column:1 / -1}
+.build-card{display:flex;flex-direction:column;flex:1;width:100%;background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:22px 22px 18px}
+.build-card h3{font-family:var(--serif);font-weight:500;font-size:21px;line-height:1.3;color:var(--ink);margin:0 0 8px}
+.build-desc{margin:0 0 16px;font-size:15.5px;line-height:1.6;color:var(--body)}
+.build-card .tags{gap:6px;margin:auto 0 16px}
+.build-card .tags li{font-size:12.5px;line-height:1.3;padding:4px 10px}
+.build-more{display:inline-flex;align-items:baseline;gap:6px;margin-top:0;font-size:14.5px;font-weight:600;white-space:nowrap}
+.build-card--soon{border-style:dashed;border-color:var(--muted);background:transparent;align-items:center;justify-content:center;text-align:center;min-height:112px}
+.build-card--soon p{margin:0;color:var(--muted);font-size:15px;font-weight:500;line-height:1.5}
+
+.build-page{max-width:1120px;margin:0 auto;padding:40px 32px 80px}
+.back-link,.build-header,.build-section{max-width:720px}
+.back-link{margin:0 0 20px;font-size:14px;font-weight:500}
+.back-link a{color:var(--muted)}
+.back-link a:hover{color:var(--ruby)}
+.build-page h1{font-size:clamp(32px,4.2vw,48px);max-width:16em;margin-bottom:16px}
+.build-page .lede{max-width:none}
+.build-header.rule,.build-section.rule{position:relative}
+.build-header.rule{padding-bottom:32px;margin-bottom:36px}
+.build-header .tags{margin-top:18px}
+.build-section.rule{padding-bottom:28px;margin-bottom:32px}
+.build-section .section-title{font-size:26px;margin-bottom:12px}
+.build-section p{margin:0 0 12px;max-width:none}
+.build-section p:last-child{margin-bottom:0}
+.demo{margin:4px 0 0;max-width:none}
+.demo-frame{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;aspect-ratio:16/9;border:1px dashed var(--muted);border-radius:12px;background:var(--stone);color:var(--muted)}
+.demo-frame p{margin:0;max-width:none;font-size:14.5px;font-weight:500}
+.demo figcaption{margin-top:8px;font-size:13.5px;color:var(--muted)}
+.build-repo{margin:28px 0 0;font-size:15px;font-weight:600}
+
+@media (max-width:560px){
+  .build-page{padding:28px 20px 64px}
+  .build-section .section-title{font-size:24px}
+}
+@media (max-width:420px){
+  .topbar-inner{height:auto;flex-wrap:wrap;row-gap:6px;padding-top:14px;padding-bottom:14px}
+  .topbar nav{gap:10px 12px;flex-wrap:wrap}
+}
 
