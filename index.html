@@ -64,10 +64,11 @@
         </section>
 
         <!--
-          To add a build: copy one of the cards below, point its links at
-          builds/your-slug/, and copy builds/_template/ to builds/your-slug/.
-          Remove the template's noindex tag and replace its placeholders.
-          Leave the dashed "More builds coming soon" card last. It is not a link.
+          To add a build: add a card here and on builds/index.html. Point the
+          link at /builds/<slug>/ with data-build="<slug>", and copy
+          builds/_template/ to builds/<slug>/. Remove the template's noindex
+          tag and replace its placeholders. The modal loads that page.
+          Leave the See More card last. It links to /builds/.
         -->
         <section id="builds" class="builds rule js-rule" style="--fill: 15.7%" aria-labelledby="builds-h">
           <h2 class="section-title" id="builds-h">Builds</h2>
@@ -81,7 +82,7 @@
                   <ul class="tags" aria-label="Tools">
                     <li>Android</li>
                   </ul>
-                  <a class="build-more" href="builds/chapter-bridge/">Read more<span class="sr-only"> about Chapter Bridge</span><span aria-hidden="true">→</span></a>
+                  <a class="build-more" href="/builds/chapter-bridge/" data-build="chapter-bridge">Read more<span class="sr-only"> about Chapter Bridge</span><span aria-hidden="true">→</span></a>
                 </div>
               </article>
             </li>
@@ -95,7 +96,7 @@
                     <li>Automation</li>
                     <li>Human-in-the-Loop</li>
                   </ul>
-                  <a class="build-more" href="builds/backoffice-agent/">Read more<span class="sr-only"> about Backoffice Agent</span><span aria-hidden="true">→</span></a>
+                  <a class="build-more" href="/builds/backoffice-agent/" data-build="backoffice-agent">Read more<span class="sr-only"> about Backoffice Agent</span><span aria-hidden="true">→</span></a>
                 </div>
               </article>
             </li>
@@ -108,14 +109,15 @@
                     <li>Windows</li>
                     <li>Encryption</li>
                   </ul>
-                  <a class="build-more" href="builds/backup-bucket/">Read more<span class="sr-only"> about Backup Bucket</span><span aria-hidden="true">→</span></a>
+                  <a class="build-more" href="/builds/backup-bucket/" data-build="backup-bucket">Read more<span class="sr-only"> about Backup Bucket</span><span aria-hidden="true">→</span></a>
                 </div>
               </article>
             </li>
             <li>
-              <div class="build-card build-card--soon">
-                <p>More builds coming soon</p>
-              </div>
+              <a class="build-card build-card--more" href="/builds/">
+                See More
+                <svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+              </a>
             </li>
           </ul>
         </section>
@@ -289,5 +291,6 @@
       window.addEventListener("resize",setRuleFills);
     })();
   </script>
+  <script src="builds.js"></script>
 </body>
 </html>
