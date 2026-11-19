@@ -3,13 +3,13 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Chapter Bridge | Eric Lyman</title>
-  <meta name="description" content="An Android app that keeps an ebook and its audiobook in sync across devices.">
+  <title>ChapterBridge | Eric Lyman</title>
+  <meta name="description" content="Read or listen to the same book without losing your place.">
   <link rel="canonical" href="https://ericlyman.com/builds/chapter-bridge/">
   <meta property="og:type" content="article">
   <meta property="og:url" content="https://ericlyman.com/builds/chapter-bridge/">
-  <meta property="og:title" content="Chapter Bridge | Eric Lyman">
-  <meta property="og:description" content="An Android app that keeps an ebook and its audiobook in sync across devices.">
+  <meta property="og:title" content="ChapterBridge | Eric Lyman">
+  <meta property="og:description" content="Read or listen to the same book without losing your place.">
   <meta name="theme-color" content="#faf9f7">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -36,55 +36,60 @@
       <p class="back-link"><a href="/builds/"><span aria-hidden="true">← </span>Back to builds</a></p>
 
       <header class="build-header rule js-rule" style="--fill: 8%">
-        <h1>Chapter Bridge</h1>
-        <p class="lede">An Android app that keeps an ebook and its audiobook in sync across devices.</p>
-        <ul class="tags" aria-label="Tools">
-          <li>Android</li>
-        </ul>
+        <h1>ChapterBridge</h1>
+        <p class="build-subtitle">Read or listen to the same book without losing your place.</p>
+        <p class="build-facts">Personal project · Windows and Android · Built in about five weeks with AI coding agents</p>
       </header>
 
-      <section class="build-section rule js-rule" style="--fill: 23.3%" aria-labelledby="problem-h">
-        <h2 class="section-title" id="problem-h">The problem</h2>
-        <!-- PLACEHOLDER: Describe the reading problem this app takes on. -->
-        <p>Details coming soon.</p>
+      <section class="build-section rule js-rule" style="--fill: 21.1%" aria-labelledby="why-h">
+        <h2 class="section-title" id="why-h">Why I built it</h2>
+        <p>I like switching between reading and listening, depending on whether I’m at my desk or in the car. Every time I switched, I lost my place and ended up scrubbing through hours of audio to find where I left off. The big platforms sync reading and listening, but only for books you buy in their store. Nothing did it for files I already owned, so I built it.</p>
       </section>
 
-      <section class="build-section rule js-rule" style="--fill: 38.7%" aria-labelledby="does-h">
+      <section class="build-section rule js-rule" style="--fill: 34.3%" aria-labelledby="does-h">
         <h2 class="section-title" id="does-h">What it does</h2>
-        <p>It keeps an ebook and its audiobook in sync across devices.</p>
-        <!-- PLACEHOLDER: Add how the sync works, in Eric's words. -->
-        <p>Details coming soon.</p>
+        <ul>
+          <li>Lines up an ebook and its audiobook word by word, using speech-to-text that runs on my own PC.</li>
+          <li>Lets me read, listen, or follow along with each word highlighted as the narrator reads it. All three share one saved place.</li>
+          <li>Syncs that place between my PC and phone through my own Google Drive, and works offline on the phone.</li>
+          <li>Flags passages it couldn’t match instead of guessing.</li>
+        </ul>
+        <p class="stat-callout"><span class="stat-figure" aria-hidden="true">91%</span><span>On a 22-hour novel, it matched 91% of the words (about 155,000 of 170,000) and flagged the rest for review.</span></p>
       </section>
 
-      <section class="build-section rule js-rule" style="--fill: 54%" aria-labelledby="built-h">
-        <h2 class="section-title" id="built-h">How I built it</h2>
-        <p>Shipped as the product owner directing AI coding tools, without writing the code himself.</p>
-        <!-- PLACEHOLDER: Add anything else about how it was built. Leave out anything that should stay private. -->
-        <p>Details coming soon.</p>
+      <section class="build-section rule js-rule" style="--fill: 47.4%" aria-labelledby="decisions-h">
+        <h2 class="section-title" id="decisions-h">Key decisions</h2>
+        <ul>
+          <li><strong>My own Google Drive as the backend.</strong> There’s no server to run, pay for or secure, and the data stays in my account. The app can only see files it created.</li>
+          <li><strong>Local transcription.</strong> The books are copyrighted and private, so I ran Whisper on my PC instead of sending audio to a cloud service. It’s slower, but it’s free and nothing leaves the machine.</li>
+          <li><strong>No “last save wins.”</strong> Every saved position is kept as history. If my phone and PC disagree after being offline, the app asks me which one is right. Phone clocks drift, and the farthest point isn’t always where I actually stopped.</li>
+          <li><strong>Sized for one user.</strong> One PC manages the shared library and each phone keeps its own file. For a real product, I’d move to a proper sync service and cloud transcription.</li>
+        </ul>
       </section>
 
-      <section class="build-section rule js-rule" style="--fill: 69.3%" aria-labelledby="guardrails-h">
-        <h2 class="section-title" id="guardrails-h">Guardrails</h2>
-        <!-- PLACEHOLDER: Add the limits around this app. -->
-        <p>Details coming soon.</p>
+      <section class="build-section rule js-rule" style="--fill: 60.6%" aria-labelledby="privacy-h">
+        <h2 class="section-title" id="privacy-h">Privacy and security</h2>
+        <p>There’s no analytics or tracking. The desktop app only accepts connections from the same computer. Google credentials and the app’s signing key are encrypted with Windows’ built-in protection, and a secret scan runs before every push to GitHub. Book files are hash-checked before the phone treats them as ready, and nothing bypasses DRM.</p>
       </section>
 
-      <section class="build-section rule js-rule" style="--fill: 84.7%" aria-labelledby="results-h">
+      <section class="build-section rule js-rule" style="--fill: 73.7%" aria-labelledby="ai-h">
+        <h2 class="section-title" id="ai-h">How I built it with AI</h2>
+        <p>I was the product owner and reviewer, and OpenAI Codex and Claude Code wrote the code. Before any code was written, I set the rules in an instructions file the agents read every session: one saved place per book, never invent a position, never delete reading history, and ask me before installing anything on my phone or restarting anything while audio was playing. Every release also had to spell out what was built, what was tested, and what still needed a check on my actual phone.</p>
+        <p>The best example of steering it came early. The agents built separate bookmarks for reading and listening and asked which one to resume every time I opened a book. It worked, but it was the wrong product, so I had them collapse it into one shared place per book. Another time, a release started silently skipping audio it couldn’t match to the text. I had them change it to stop and ask me instead.</p>
+      </section>
+
+      <section class="build-section rule js-rule" style="--fill: 86.9%" aria-labelledby="results-h">
         <h2 class="section-title" id="results-h">Results</h2>
-        <!-- PLACEHOLDER: Add outcomes you want public. Do not invent numbers. -->
-        <p>Details coming soon.</p>
+        <ul>
+          <li>More than 30 signed Android releases in about five weeks</li>
+          <li>About 300 automated tests on the desktop side and about 40 Android test suites</li>
+          <li>Roughly 12,500 lines of Node.js and Java, all written by AI</li>
+        </ul>
       </section>
 
-      <section class="build-section rule js-rule" style="--fill: 100%" aria-labelledby="demo-h">
-        <h2 class="section-title" id="demo-h">Demo</h2>
-        <!-- PLACEHOLDER: Replace the frame below with a screenshot or video of the build. -->
-        <figure class="demo">
-          <div class="demo-frame">
-            <svg aria-hidden="true" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="m21 15-5-5L5 21"/></svg>
-            <p>Demo coming soon.</p>
-          </div>
-          <figcaption>Screenshot or video placeholder.</figcaption>
-        </figure>
+      <section class="build-section rule js-rule" style="--fill: 100%" aria-labelledby="next-h">
+        <h2 class="section-title" id="next-h">What I’d bring to my next role</h2>
+        <p>The decisions that mattered most were the rules I wrote down before any code. I also learned to make the AI report exactly what it verified. “It built,” “the tests pass” and “it works on my phone” are three different claims, and asking for each one separately kept me from shipping guesses.</p>
       </section>
 
       <!--
