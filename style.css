@@ -165,9 +165,12 @@ section{margin-bottom:56px}
 .builds-index{padding-top:36px;padding-bottom:80px}
 .builds-index h1{font-family:var(--serif);font-weight:500;color:var(--ink);font-size:clamp(34px,4.4vw,52px);line-height:1.08;letter-spacing:-.005em;margin:0 0 12px}
 html.build-dialog-open,html.build-dialog-open body{overflow:hidden}
-.build-dialog{width:min(800px,calc(100vw - 48px));max-height:min(86vh,920px);margin:auto;padding:18px 28px 32px;border:1px solid var(--line);border-radius:16px;background:var(--bg);color:var(--body);box-shadow:0 24px 60px rgba(31,30,28,.18);overflow:auto}
+.build-dialog{width:min(800px,calc(100vw - 48px));max-height:min(86vh,920px);margin:auto;padding:0 28px 32px;border:1px solid var(--line);border-radius:16px;background:var(--bg);color:var(--body);box-shadow:0 24px 60px rgba(31,30,28,.18);overflow:auto}
 .build-dialog::backdrop{background:rgba(31,30,28,.48)}
-.build-dialog-bar{position:sticky;top:0;z-index:2;display:flex;justify-content:flex-end;margin:-18px -28px 8px;padding:10px 12px 8px;background:var(--bg)}
+/* Top padding lives on the bar, not as a negative margin. A negative margin-top
+   pulls the title up under this sticky bar (its background matches the dialog),
+   which slices off Fraunces ascenders. Side margins still full-bleed the bar. */
+.build-dialog-bar{position:sticky;top:0;z-index:2;display:flex;justify-content:flex-end;margin:0 -28px 2px;padding:28px 12px 10px;background:var(--bg)}
 .build-dialog-close{display:inline-flex;align-items:center;justify-content:center;width:40px;height:40px;padding:0;border:1px solid var(--line);border-radius:999px;background:var(--surface);color:var(--ink);cursor:pointer}
 .build-dialog-close:hover{border-color:var(--ruby);color:var(--ruby)}
 .build-dialog-close:focus-visible{outline:2px solid var(--ruby);outline-offset:3px}
@@ -176,8 +179,8 @@ html.build-dialog-open,html.build-dialog-open body{overflow:hidden}
 .build-dialog .build-page{max-width:none;margin:0;padding:0}
 .build-dialog .build-header,.build-dialog .build-section{max-width:none}
 @media (max-width:700px){
-  .build-dialog{width:calc(100vw - 12px);height:calc(100dvh - 12px);max-height:calc(100dvh - 12px);padding:14px 16px 24px;border-radius:12px}
-  .build-dialog-bar{margin:-14px -16px 8px}
+  .build-dialog{width:calc(100vw - 12px);height:calc(100dvh - 12px);max-height:calc(100dvh - 12px);padding:0 16px 24px;border-radius:12px}
+  .build-dialog-bar{margin:0 -16px 2px;padding-top:24px}
 }
 
 .build-page{max-width:1120px;margin:0 auto;padding:40px 32px 80px}
