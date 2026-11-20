@@ -8,6 +8,10 @@
   "users": "One freelance designer",
   "card_line": "A back-office agent that logs hours, drafts invoices, and tracks payments.",
   "tags": ["Human-in-the-loop", "Python", "SQLite", "DeepSeek", "OpenRouter"],
+  "icon": {
+    "src": "/img/builds/ruby-icon.webp",
+    "alt": "Ruby gemstone icon"
+  },
   "built_with": "Python, SQLite, DeepSeek via OpenRouter, Claude Code, Gemini",
   "time_to_build": "Five days of building (November 16-20, 2026), after a week of planning",
   "snapshot": {

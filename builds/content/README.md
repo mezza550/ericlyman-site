@@ -23,6 +23,7 @@ Commit the JSON and the HTML the script writes. GitHub Pages publishes those fil
 | headline_metric | Optional `value`, `label`, and `basis` (`measured` or `expected`). | |
 | tags | 2 or 3 from the tag list below. | |
 | thumbnail | `src` and `alt`. | Image 16:9 |
+| icon | Optional `src` and `alt`. Sits beside the name on the card and the page, like the Experience logos. | 96×96 transparent PNG or WebP |
 | og_image | Optional sharing image. | 1200×630 |
 | built_with | Short tools line. Platform names go here, not in tags. | 60 characters |
 | time_to_build | Short text, such as "About five weeks". | |
@@ -46,7 +47,8 @@ Process redesign, Human approval, Evals, Rules in code, Data reconciliation, Mul
 
 ## Images
 
-- Card thumbnail: 16:9, WebP or AVIF, with alt text. The card uses a gray block when `thumbnail` is empty.
+- Card thumbnail: 16:9, WebP or AVIF, with alt text. The card uses a gray block when both `thumbnail` and `icon` are empty. A build with an icon and no thumbnail drops that gray block.
+- Icon: 96×96 transparent PNG or WebP, with alt text. It is shown at 44px (40px under 560px) in a column beside the title, with a 14px gap (12px under 560px). No empty box when `icon` is omitted.
 - Open Graph image: 1200×630. When `og_image` is empty, the page uses `/img/og-default.png`.
 
 ## Home page

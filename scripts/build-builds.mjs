@@ -1,4 +1,4 @@
-import { readFileSync, writeFileSync, mkdirSync, readdirSync } from "fs";
+import { existsSync, readFileSync, writeFileSync, mkdirSync, readdirSync } from "fs";
 import { dirname, join } from "path";
 import { fileURLToPath } from "url";
 
@@ -125,12 +125,37 @@ function check(file, build) {
   if (build.thumbnail && build.thumbnail.src && !build.thumbnail.alt) {
     warn(file, "thumbnail.alt", "is missing");
   }
+  if (build.icon && (build.icon.src || build.icon.alt)) {
+    if (!build.icon.src) warn(file, "icon.src", "is missing");
+    if (!build.icon.alt) warn(file, "icon.alt", "is missing");
+    if (build.icon.src && build.icon.src.startsWith("/")) {
+      const iconPath = join(root, build.icon.src.slice(1));
+      if (!existsSync(iconPath)) warn(file, "icon.src", `file not found: ${build.icon.src}`);
+    }
+  }
+}
+
+function hasIcon(build) {
+  return Boolean(build.icon && build.icon.src);
+}
+
+function iconImg(build) {
+  if (!hasIcon(build)) return "";
+  return `<img class="build-icon" src="${esc(build.icon.src)}" alt="${esc(build.icon.alt || "")}" width="96" height="96">`;
+}
+
+function titleRow(build, tag) {
+  const icon = iconImg(build);
+  const heading = `<${tag}>${esc(build.name)}</${tag}>`;
+  if (!icon) return heading;
+  return `<div class="build-title">${icon}${heading}</div>`;
 }
 
 function thumb(build) {
   if (build.thumbnail && build.thumbnail.src) {
     return `<img class="build-thumb" src="${esc(build.thumbnail.src)}" alt="${esc(build.thumbnail.alt || "")}" width="640" height="360" loading="lazy">`;
   }
+  if (hasIcon(build)) return "";
   return `<span class="build-thumb" aria-hidden="true"></span>`;
 }
 
@@ -154,10 +179,10 @@ function tagList(build) {
 }
 
 function card(build) {
+  const image = thumb(build);
   return `<li>
             <a class="build-card" href="/builds/${esc(build.slug)}/" aria-label="${esc(build.name)}">
-              ${thumb(build)}
-              <h3>${esc(build.name)}</h3>
+              ${image ? `${image}\n              ` : ""}${titleRow(build, "h3")}
               <p class="build-line">${esc(build.card_line || "")}</p>
               ${statusLine(build)}
               ${metric(build)}
@@ -366,7 +391,7 @@ ${topbar("builds")}
     <article class="build-page">
       <p class="back-link"><a href="/builds/"><span aria-hidden="true">← </span>Back to builds</a></p>
       <header class="build-header">
-        <h1>${esc(build.name)}</h1>
+        ${titleRow(build, "h1")}
         ${filled(build.card_line) ? `<p class="build-subtitle">${esc(build.card_line)}</p>` : ""}
         ${metaLine(build)}
       </header>
