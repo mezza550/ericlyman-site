@@ -2,10 +2,11 @@
   var map = {
     "chapter-bridge": "/builds/chapterbridge/",
     "chapterbridge": "/builds/chapterbridge/",
-    "backoffice-agent": "/builds/back-office-agent/",
-    "back-office-agent": "/builds/back-office-agent/",
+    "backoffice-agent": "/builds/ruby/",
+    "back-office-agent": "/builds/ruby/",
     "backup-bucket": "/builds/backup-bucket/",
-    "melissa-agent": "/builds/back-office-agent/"
+    "melissa-agent": "/builds/ruby/",
+    "ruby": "/builds/ruby/"
   };
   var slug = (location.hash || "").replace(/^#/, "");
   if (!slug || !map[slug]) return;

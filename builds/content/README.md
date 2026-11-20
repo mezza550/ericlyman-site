@@ -15,7 +15,7 @@ Commit the JSON and the HTML the script writes. GitHub Pages publishes those fil
 | slug | URL slug. The page is `/builds/<slug>/`. | |
 | name | Build name. | |
 | order | Display order. Lower numbers come first. | |
-| context | `Personal project` or `Work project`. Work projects may include `employer`. | |
+| context | `Personal project`, `Work project`, or `Small-business project`. Work projects may include `employer`. | |
 | status | One of: In daily use, In testing, In progress, Retired. | |
 | status_since | Month and year. | |
 | users | Who uses it. | 40 characters |
@@ -42,7 +42,7 @@ The script prints a warning when a filled field is outside its limit. It still w
 
 ## Tags
 
-Process redesign, Human approval, Evals, Rules in code, Data reconciliation, Multi-system automation, Local AI, Privacy by design, Automated testing.
+Process redesign, Human approval, Evals, Rules in code, Data reconciliation, Multi-system automation, Local AI, Privacy by design, Automated testing, Human-in-the-loop.
 
 ## Images
 

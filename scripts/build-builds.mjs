@@ -17,14 +17,17 @@ const TAGS = [
   "Multi-system automation",
   "Local AI",
   "Privacy by design",
-  "Automated testing"
+  "Automated testing",
+  "Human-in-the-loop"
 ];
 const STATUSES = ["In daily use", "In testing", "In progress", "Retired"];
+const CONTEXTS = ["Personal project", "Work project", "Small-business project"];
 const OWNERS = ["Person", "AI", "Code", "TODO"];
 const REDIRECTS = {
   "chapter-bridge": "chapterbridge",
-  "backoffice-agent": "back-office-agent",
-  "melissa-agent": "back-office-agent"
+  "backoffice-agent": "ruby",
+  "back-office-agent": "ruby",
+  "melissa-agent": "ruby"
 };
 
 const words = (value) => String(value || "").trim().split(/\s+/).filter(Boolean);
@@ -115,6 +118,9 @@ function check(file, build) {
   });
   if (filled(build.status) && !STATUSES.includes(build.status)) {
     warn(file, "status", `is ${build.status}`);
+  }
+  if (filled(build.context) && !CONTEXTS.includes(build.context)) {
+    warn(file, "context", `is ${build.context}`);
   }
   if (build.thumbnail && build.thumbnail.src && !build.thumbnail.alt) {
     warn(file, "thumbnail.alt", "is missing");
