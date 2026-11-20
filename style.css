@@ -128,6 +128,15 @@ section{margin-bottom:56px}
 }
 @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
 
+/* Standalone documents, such as the Chapter Bridge legal pages. */
+.doc{max-width:40rem;padding-top:56px;padding-bottom:80px}
+.doc h1{font-size:clamp(36px,4.8vw,52px);margin-bottom:12px}
+.doc-meta{margin:0 0 28px;color:var(--muted);font-size:14.5px}
+.doc section{margin:0}
+.doc h2{font-family:var(--serif);font-weight:500;font-size:24px;color:var(--ink);letter-spacing:-.01em;margin:32px 0 8px}
+.doc p{margin:0 0 14px}
+.doc-end{margin-top:36px;padding-top:20px;border-top:1px solid var(--line)}
+
 .contact-end{padding-top:40px;border-top:2px solid var(--ruby)}
 .contact-list--end{border-top:0;padding-top:0;max-width:440px;font-size:16px}
 .contact-list--end li{grid-template-columns:80px 1fr}
