@@ -7,7 +7,8 @@
   "status_since": "November 2026",
   "users": "One freelance designer",
   "card_line": "A back-office agent that logs hours, drafts invoices, and tracks payments.",
-  "tags": ["Human-in-the-loop", "Python", "SQLite", "DeepSeek", "OpenRouter"],
+  "tags": ["Human-in-the-loop"],
+  "tools": ["Python", "SQLite", "DeepSeek", "OpenRouter", "Claude Code", "Gemini"],
   "icon": {
     "src": "/img/builds/ruby-icon.webp",
     "alt": "Ruby gemstone icon"

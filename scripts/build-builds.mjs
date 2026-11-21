@@ -23,6 +23,14 @@ const TAGS = [
 const STATUSES = ["In daily use", "In testing", "In progress", "Retired"];
 const CONTEXTS = ["Personal project", "Work project", "Small-business project"];
 const OWNERS = ["Person", "AI", "Code", "TODO"];
+const TOOL_ICONS = {
+  "Python": "python.svg",
+  "SQLite": "sqlite.svg",
+  "DeepSeek": "deepseek.svg",
+  "OpenRouter": "openrouter.svg",
+  "Claude Code": "claude.svg",
+  "Gemini": "gemini.svg"
+};
 const REDIRECTS = {
   "chapter-bridge": "chapterbridge",
   "backoffice-agent": "ruby",
@@ -110,11 +118,17 @@ function check(file, build) {
     if (count > 25) warn(file, `next[${index}]`, `is ${count} words (limit 25)`);
   });
   const tags = build.tags || [];
-  if (tags.length && (tags.length < 2 || tags.length > 3)) {
-    warn(file, "tags", `has ${tags.length} tags (limit 2-3)`);
+  if (tags.length > 3) {
+    warn(file, "tags", `has ${tags.length} tags (limit 1-3)`);
   }
   tags.forEach((tag) => {
     if (!TAGS.includes(tag)) warn(file, "tags", `has ${tag}, which is not in the tag list`);
+  });
+  (build.tools || []).forEach((name, index) => {
+    const fileName = TOOL_ICONS[name];
+    if (!fileName || !existsSync(join(root, "img", "tools", fileName))) {
+      warn(file, `tools[${index}]`, `has no logo for ${name}; the card shows a text label`);
+    }
   });
   if (filled(build.status) && !STATUSES.includes(build.status)) {
     warn(file, "status", `is ${build.status}`);
@@ -175,18 +189,44 @@ function metric(build) {
 
 function tagList(build) {
   if (!build.tags || !build.tags.length) return "";
+  if (build.tools && build.tools.length) {
+    return `<ul class="build-tags" aria-label="Tags">${build.tags.map((tag) => `<li><span class="build-tag">${esc(tag)}</span></li>`).join("")}</ul>`;
+  }
   return `<ul class="tags" aria-label="Tags">${build.tags.map((tag) => `<li>${esc(tag)}</li>`).join("")}</ul>`;
+}
+
+function toolSvg(name) {
+  const fileName = TOOL_ICONS[name];
+  if (!fileName) return "";
+  const file = join(root, "img", "tools", fileName);
+  if (!existsSync(file)) return "";
+  const raw = readFileSync(file, "utf8");
+  const inner = raw.replace(/^<svg[^>]*>/, "").replace(/<\/svg>\s*$/, "");
+  return `<svg class="tool-svg" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" focusable="false">${inner}</svg>`;
+}
+
+function toolsRow(build) {
+  if (!build.tools || !build.tools.length) return "";
+  const items = build.tools.map((name) => {
+    const label = esc(name);
+    const svg = toolSvg(name);
+    if (!svg) return `<li><span class="tool-logo tool-logo--text" title="${label}">${label}</span></li>`;
+    return `<li><span class="tool-logo" title="${label}">${svg}<span class="sr-only">${label}</span></span></li>`;
+  }).join("");
+  return `<ul class="build-tools" aria-label="Tools">${items}</ul>`;
 }
 
 function card(build, heading) {
   const image = thumb(build);
+  const named = build.tools && build.tools.length ? "" : ` aria-label="${esc(build.name)}"`;
   return `<li>
-            <a class="build-card" href="/builds/${esc(build.slug)}/" aria-label="${esc(build.name)}">
+            <a class="build-card" href="/builds/${esc(build.slug)}/"${named}>
               ${image ? `${image}\n              ` : ""}${titleRow(build, heading)}
               <p class="build-line">${esc(build.card_line || "")}</p>
               ${statusLine(build)}
               ${metric(build)}
               ${tagList(build)}
+              ${toolsRow(build)}
             </a>
           </li>`;
 }

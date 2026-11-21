@@ -21,7 +21,8 @@ Commit the JSON and the HTML the script writes. GitHub Pages publishes those fil
 | users | Who uses it. | 40 characters |
 | card_line | One sentence on the job it does. | 80 characters |
 | headline_metric | Optional `value`, `label`, and `basis` (`measured` or `expected`). | |
-| tags | 2 or 3 from the tag list below. | |
+| tags | Up to 3 concept tags from the list below. On a card with `tools`, these are tag-shaped labels. Other cards keep the plain pills. | |
+| tools | Optional tool names for the card's logo row. Names come from `built_with`. The page header still uses `built_with`. | |
 | thumbnail | `src` and `alt`. | Image 16:9 |
 | icon | Optional `src` and `alt`. Sits beside the name on the card and the page, like the Experience logos. | 96×96 transparent PNG or WebP |
 | og_image | Optional sharing image. | 1200×630 |
@@ -52,6 +53,16 @@ Process redesign, Human approval, Evals, Rules in code, Data reconciliation, Mul
 - Card thumbnail: 16:9, WebP or AVIF, with alt text. The card uses a gray block when both `thumbnail` and `icon` are empty. A build with an icon and no thumbnail drops that gray block.
 - Icon: 96×96 transparent PNG or WebP, with alt text. It is shown at 44px (40px under 560px) in a column beside the title, with a 14px gap (12px under 560px). No empty box when `icon` is omitted.
 - Open Graph image: 1200×630. When `og_image` is empty, the page uses `/img/og-default.png`.
+- Tool logos: Simple Icons, CC0, stored in `img/tools/` and inlined on the card. They are about 20px, gray by default, and ruby when the card is hovered or focused. Each one has a tooltip and a visually hidden name. A name with no file falls back to a small text label.
+
+| Tool name | File |
+| --- | --- |
+| Python | `img/tools/python.svg` |
+| SQLite | `img/tools/sqlite.svg` |
+| DeepSeek | `img/tools/deepseek.svg` |
+| OpenRouter | `img/tools/openrouter.svg` |
+| Claude Code | `img/tools/claude.svg` (the Claude mark) |
+| Gemini | `img/tools/gemini.svg` |
 
 ## Home page
 
