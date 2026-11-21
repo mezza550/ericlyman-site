@@ -46,14 +46,18 @@ The script prints a warning when a filled field is outside its limit. It still w
 
 ## Tags
 
-Process redesign, Human approval, Evals, Rules in code, Data reconciliation, Multi-system automation, Local AI, Privacy by design, Automated testing, Human-in-the-loop.
+Process redesign, Human approval, Evals, Rules in code, Data reconciliation, Multi-system automation, Local AI, Privacy by design, Automated testing, Human-in-the-loop, Small Business, Accounting.
+
+`tag-glossary.json` holds an optional description for a tag. The card reuses that text for every build with the tag. A tag with no entry shows no bubble. Bubbles are on the cards only.
+
+- Tool logos: Simple Icons, CC0, stored in `img/tools/` and inlined on the card. They are about 20px, gray by default, and ruby when the card is hovered or focused. Each logo is a button with a styled bubble for its name. A name with no file falls back to a small text label. The bubble also opens on keyboard focus, and a tap toggles it on a touch screen.
 
 ## Images
 
 - Card thumbnail: 16:9, WebP or AVIF, with alt text. The card uses a gray block when both `thumbnail` and `icon` are empty. A build with an icon and no thumbnail drops that gray block.
 - Icon: 96×96 transparent PNG or WebP, with alt text. It is shown at 44px (40px under 560px) in a column beside the title, with a 14px gap (12px under 560px). No empty box when `icon` is omitted.
 - Open Graph image: 1200×630. When `og_image` is empty, the page uses `/img/og-default.png`.
-- Tool logos: Simple Icons, CC0, stored in `img/tools/` and inlined on the card. They are about 20px, gray by default, and ruby when the card is hovered or focused. Each one has a tooltip and a visually hidden name. A name with no file falls back to a small text label.
+- Tool logos: Simple Icons, CC0, stored in `img/tools/` and inlined on the card. See the tag section for how the bubble works. A name with no file falls back to a small text label.
 
 | Tool name | File |
 | --- | --- |

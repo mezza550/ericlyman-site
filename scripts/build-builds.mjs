@@ -4,6 +4,8 @@ import { fileURLToPath } from "url";
 
 const root = join(dirname(fileURLToPath(import.meta.url)), "..");
 const contentDir = join(root, "builds", "content");
+const glossaryPath = join(contentDir, "tag-glossary.json");
+const glossary = existsSync(glossaryPath) ? JSON.parse(readFileSync(glossaryPath, "utf8")) : {};
 const HOME_BUILD_LIMIT = 4;
 const SITE = "https://ericlyman.com";
 const OG_DEFAULT = "/img/og-default.png";
@@ -18,7 +20,9 @@ const TAGS = [
   "Local AI",
   "Privacy by design",
   "Automated testing",
-  "Human-in-the-loop"
+  "Human-in-the-loop",
+  "Small Business",
+  "Accounting"
 ];
 const STATUSES = ["In daily use", "In testing", "In progress", "Retired"];
 const CONTEXTS = ["Personal project", "Work project", "Small-business project"];
@@ -61,7 +65,7 @@ function filled(value) {
 }
 
 function loadBuilds() {
-  const files = readdirSync(contentDir).filter((name) => name.endsWith(".json")).sort();
+  const files = readdirSync(contentDir).filter((name) => name.endsWith(".json") && name !== "tag-glossary.json").sort();
   return files.map((name) => {
     const build = JSON.parse(readFileSync(join(contentDir, name), "utf8"));
     check(name, build);
@@ -187,10 +191,20 @@ function metric(build) {
   return `<p class="build-metric"><span class="build-metric-value">${esc(item.value)}</span> ${label} ${basis}</p>`;
 }
 
+function tip(id, text) {
+  return `<span class="tip" id="${id}" role="tooltip" hidden>${esc(text)}</span>`;
+}
+
 function tagList(build) {
   if (!build.tags || !build.tags.length) return "";
   if (build.tools && build.tools.length) {
-    return `<ul class="build-tags" aria-label="Tags">${build.tags.map((tag) => `<li><span class="build-tag">${esc(tag)}</span></li>`).join("")}</ul>`;
+    const items = build.tags.map((tag, index) => {
+      const description = glossary[tag];
+      if (!description) return `<li><span class="build-tag">${esc(tag)}</span></li>`;
+      const id = `tip-${esc(build.slug)}-tag-${index}`;
+      return `<li><button type="button" class="build-tag" data-tip aria-describedby="${id}">${esc(tag)}</button>${tip(id, description)}</li>`;
+    }).join("");
+    return `<ul class="build-tags" aria-label="Tags">${items}</ul>`;
   }
   return `<ul class="tags" aria-label="Tags">${build.tags.map((tag) => `<li>${esc(tag)}</li>`).join("")}</ul>`;
 }
@@ -207,26 +221,41 @@ function toolSvg(name) {
 
 function toolsRow(build) {
   if (!build.tools || !build.tools.length) return "";
-  const items = build.tools.map((name) => {
+  const items = build.tools.map((name, index) => {
     const label = esc(name);
+    const id = `tip-${esc(build.slug)}-tool-${index}`;
     const svg = toolSvg(name);
-    if (!svg) return `<li><span class="tool-logo tool-logo--text" title="${label}">${label}</span></li>`;
-    return `<li><span class="tool-logo" title="${label}">${svg}<span class="sr-only">${label}</span></span></li>`;
+    const mark = svg || label;
+    const textClass = svg ? "" : " tool-logo--text";
+    const hidden = svg ? `<span class="sr-only">${label}</span>` : "";
+    return `<li><button type="button" class="tool-logo${textClass}" data-tip aria-describedby="${id}">${mark}${hidden}</button>${tip(id, name)}</li>`;
   }).join("");
   return `<ul class="build-tools" aria-label="Tools">${items}</ul>`;
 }
 
 function card(build, heading) {
   const image = thumb(build);
-  const named = build.tools && build.tools.length ? "" : ` aria-label="${esc(build.name)}"`;
+  const body = `${image ? `${image}\n                ` : ""}${titleRow(build, heading)}
+                <p class="build-line">${esc(build.card_line || "")}</p>
+                ${statusLine(build)}
+                ${metric(build)}`;
+  if (build.tools && build.tools.length) {
+    return `<li>
+            <div class="build-card">
+              <a class="build-card-link" href="/builds/${esc(build.slug)}/">
+                ${body}
+              </a>
+              <div class="build-card-extra">
+                ${tagList(build)}
+                ${toolsRow(build)}
+              </div>
+            </div>
+          </li>`;
+  }
   return `<li>
-            <a class="build-card" href="/builds/${esc(build.slug)}/"${named}>
-              ${image ? `${image}\n              ` : ""}${titleRow(build, heading)}
-              <p class="build-line">${esc(build.card_line || "")}</p>
-              ${statusLine(build)}
-              ${metric(build)}
+            <a class="build-card" href="/builds/${esc(build.slug)}/" aria-label="${esc(build.name)}">
+              ${body}
               ${tagList(build)}
-              ${toolsRow(build)}
             </a>
           </li>`;
 }
