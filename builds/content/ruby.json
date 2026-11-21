@@ -23,30 +23,37 @@
   "problem": "She's a designer, not a bookkeeper, and very non-technical. Bookkeeping was a drag that kept her from the more rewarding, creative work. The designer ran all of her admin by hand in a spreadsheet. Hours were typed into cells, totals were worked out by hand, and every invoice was built and emailed manually. It was a copy-paste nightmare that led to miscalculations. Following up on unpaid invoices depended on remembering to check, so it got missed. Her main client also caps weekly hours, so she had to keep a running total.",
   "how_it_works": [
     {
+      "title": "Logs hours in a sentence",
       "text": "She tells Ruby what she worked on in a plain sentence, like \"2.5 hours on the holiday mailer today.\"",
       "owner": "Person"
     },
     {
+      "title": "Turns the sentence into a date, hours, and an item",
       "text": "The model turns the sentence into a date, hours, and an item. If something is missing, it asks instead of guessing.",
       "owner": "AI"
     },
     {
+      "title": "Applies the billing rules",
       "text": "Code applies the billing rules, catches likely duplicates, saves the entry, and warns her as she nears her weekly hours cap.",
       "owner": "Code"
     },
     {
+      "title": "Nudges her and flags past due",
       "text": "Ruby nudges her at the end of any workday with nothing logged, and flags every invoice that's past due.",
       "owner": "Code"
     },
     {
+      "title": "Builds the invoice and drafts the email",
       "text": "At the end of the week, Ruby builds the invoice PDF in her own layout and drafts the email to the client.",
       "owner": "Code"
     },
     {
+      "title": "Reviews the preview and hits Send",
       "text": "She reviews the preview and says yes. Ruby saves the draft in Gmail, and she hits Send herself.",
       "owner": "Person"
     },
     {
+      "title": "Confirms each payment",
       "text": "She confirms each payment Ruby matched from her inbox. Ruby marks the invoice paid and reminds her what to set aside for taxes.",
       "owner": "Person"
     }
@@ -54,7 +61,7 @@
   "decisions": [
     {
       "decision": "A person owns the final mile.",
-      "reason": "Ruby does the prep. She confirms every payment match and sends every invoice and email herself. Ruby's email connection can't send, and code holds changes until she says yes."
+      "reason": "Ruby does the prep. She confirms every payment match and sends every invoice and email herself. Ruby's email connection can't send, and code holds changes until she says yes. An AI is never allowed to hit Send."
     },
     {
       "decision": "I watched how she actually invoiced before writing any code.",
@@ -111,7 +118,6 @@
   ],
   "next": [
     "Draft a follow-up email when an invoice goes past due, so she only has to review it and hit Send.",
-    "Track her admin time for a month and replace my one-hour estimate. I should have timed the old process before I started.",
     "Keep the model test chats in the project and rerun them after every change. Right now only the code tests rerun automatically."
   ]
 }

@@ -405,6 +405,42 @@ function ownerIcon(owner) {
   return OWNER_ICONS[String(owner || "TODO").toLowerCase()] || OWNER_ICONS.todo;
 }
 
+const FLOW_ARROWS = {
+  right: `<svg aria-hidden="true" width="22" height="12" viewBox="0 0 22 12" fill="none" focusable="false"><path d="M1 6h14" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><path d="M12 2.2 19.2 6 12 9.8" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>`,
+  left: `<svg aria-hidden="true" width="22" height="12" viewBox="0 0 22 12" fill="none" focusable="false"><path d="M21 6H7" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><path d="M10 2.2 2.8 6 10 9.8" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>`,
+  down: `<svg aria-hidden="true" width="12" height="22" viewBox="0 0 12 22" fill="none" focusable="false"><path d="M6 1v14" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><path d="M2.2 12 6 19.2 9.8 12" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>`
+};
+
+function flowColumns(count) {
+  if (count <= 3) return count;
+  if (count === 4) return 2;
+  return 3;
+}
+
+function flowChart(build) {
+  const steps = build.how_it_works || [];
+  if (!steps.length) return "";
+  const owners = steps.map((step) => String(step.owner || "TODO").toLowerCase());
+  if (owners.every((owner) => owner === "todo")) return "";
+  if (steps.some((step) => !filled(step.title))) return "";
+  const cols = flowColumns(steps.length);
+  const nodes = steps.map((step, index) => {
+    const rowIndex = Math.floor(index / cols);
+    const pos = index % cols;
+    const col = rowIndex % 2 === 0 ? pos + 1 : cols - pos;
+    let dir = "";
+    if (index < steps.length - 1) {
+      const nextRow = Math.floor((index + 1) / cols);
+      dir = nextRow !== rowIndex ? "down" : rowIndex % 2 === 0 ? "right" : "left";
+    }
+    const owner = step.owner || "TODO";
+    const id = `tip-${esc(build.slug)}-step-${index}`;
+    const join = dir ? `<span class="flow-join flow-join-${dir}" aria-hidden="true">${FLOW_ARROWS[dir]}</span>` : "";
+    return `<li class="flow-node" style="--r:${rowIndex + 1};--c:${col}"><button type="button" class="flow-card" data-tip aria-describedby="${id}"><span class="owner owner-${esc(String(owner).toLowerCase())}">${ownerIcon(owner)}${esc(owner)}</span><span class="flow-title">${esc(step.title)}</span></button>${tip(id, step.text)}${join}</li>`;
+  }).join("");
+  return `<div class="flow"><ol class="flow-nodes" style="--flow-cols:${cols}" aria-label="How it works, in short">${nodes}</ol></div>`;
+}
+
 function stepsSection(build) {
   const steps = build.how_it_works || [];
   if (!steps.length) return "";
@@ -412,7 +448,7 @@ function stepsSection(build) {
     const owner = step.owner || "TODO";
     return `<li><span class="step-no">${index + 1}</span><div><span class="owner owner-${esc(String(owner).toLowerCase())}">${ownerIcon(owner)}${esc(owner)}</span><p>${esc(step.text)}</p></div></li>`;
   }).join("");
-  return `<section class="build-block" aria-labelledby="works-h"><h2 id="works-h">How it works</h2><ol class="steps">${items}</ol></section>`;
+  return `<section class="build-block" aria-labelledby="works-h"><h2 id="works-h">How it works</h2>${flowChart(build)}<ol class="steps">${items}</ol></section>`;
 }
 
 function decisionsSection(build) {
