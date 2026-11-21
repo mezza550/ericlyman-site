@@ -178,11 +178,11 @@ function tagList(build) {
   return `<ul class="tags" aria-label="Tags">${build.tags.map((tag) => `<li>${esc(tag)}</li>`).join("")}</ul>`;
 }
 
-function card(build) {
+function card(build, heading) {
   const image = thumb(build);
   return `<li>
             <a class="build-card" href="/builds/${esc(build.slug)}/" aria-label="${esc(build.name)}">
-              ${image ? `${image}\n              ` : ""}${titleRow(build, "h3")}
+              ${image ? `${image}\n              ` : ""}${titleRow(build, heading)}
               <p class="build-line">${esc(build.card_line || "")}</p>
               ${statusLine(build)}
               ${metric(build)}
@@ -200,7 +200,7 @@ function homeSection(builds) {
           <h2 class="section-title" id="builds-h">Builds</h2>
           <p class="section-lead">${esc(INTRO)}</p>
           <ul class="builds-grid">
-            ${shown.map(card).join("\n            ")}
+            ${shown.map((build) => card(build, "h3")).join("\n            ")}
           </ul>${more}
         </section>`;
 }
@@ -277,7 +277,7 @@ ${topbar("builds")}
       <h1>Builds</h1>
       <p class="section-lead">${esc(INTRO)}</p>
       <ul class="builds-grid">
-        ${builds.map(card).join("\n        ")}
+        ${builds.map((build) => card(build, "h2")).join("\n        ")}
       </ul>
     </div>
   </main>
