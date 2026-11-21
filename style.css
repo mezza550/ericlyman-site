@@ -245,6 +245,31 @@ button.tool-logo:focus-visible,a.tool-logo:focus-visible{outline:2px solid var(-
   .tl-tool-mark svg{width:14px;height:14px}
   .tl-tool-name{font-size:11px}
 }
+.shot-gallery figure{margin:0}
+.shot-lead{margin:0 0 18px}
+.shot-link{display:block;color:inherit;text-decoration:none}
+.shot-link:hover{text-decoration:none}
+.shot-link:focus-visible{outline:2px solid var(--ruby);outline-offset:3px;border-radius:12px}
+.shot-lead img,.shot-frame{display:block;width:100%;border:1px solid var(--line);border-radius:12px;box-shadow:0 1px 2px rgba(31,30,28,.06);background:var(--stone)}
+.shot-lead img{height:auto}
+.shot-frame{aspect-ratio:3799 / 1980;overflow:hidden}
+.shot-frame img{width:100%;height:100%;object-fit:cover;object-position:center top;border:0;border-radius:0;box-shadow:none;background:transparent}
+.shot-gallery figcaption{margin:8px 0 0;font-size:14.5px;line-height:1.45;color:var(--body)}
+.shot-grid{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:1fr 1fr;gap:18px 14px}
+.build-block .shot-grid li{margin:0;padding:0}
+.build-block .shot-grid li::before{content:none}
+.shot-dialog{width:min(960px,calc(100vw - 32px));max-height:calc(100vh - 32px);margin:auto;padding:16px 16px 14px;border:0;border-radius:12px;background:var(--bg);color:var(--body);box-shadow:0 16px 40px rgba(31,30,28,.28)}
+.shot-dialog::backdrop{background:rgba(31,30,28,.62)}
+.shot-dialog-top{display:flex;justify-content:flex-end;margin:0 0 10px}
+.shot-dialog-img{display:block;width:100%;height:auto;max-height:min(68vh,760px);object-fit:contain;background:var(--stone);border-radius:8px}
+.shot-dialog-cap{margin:10px 0 0;font-size:15px;line-height:1.45;color:var(--ink)}
+.shot-dialog-nav{display:flex;gap:8px;margin-top:12px}
+.shot-dialog button{margin:0;padding:6px 12px;border:1px solid var(--line);border-radius:999px;background:var(--surface);color:var(--ink);font:inherit;font-size:14px;font-weight:600;cursor:pointer}
+.shot-dialog button:hover{border-color:#c4beb6}
+.shot-dialog button:focus-visible{outline:2px solid var(--ruby);outline-offset:3px}
+@media (max-width:719px){
+  .shot-grid{grid-template-columns:1fr}
+}
 .result-tiles{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:1fr 1fr;gap:10px;align-items:stretch}
 .build-block .result-tiles li{margin:0;padding:12px 14px;background:var(--surface);border:1px solid var(--line);border-radius:12px}
 .build-block .result-tiles li::before{content:none}

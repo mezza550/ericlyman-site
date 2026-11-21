@@ -123,5 +123,164 @@
   "next": [
     "Draft a follow-up email when an invoice goes past due, so she only has to review it and hit Send.",
     "Keep the model test chats in the project and rerun them after every change. Right now only the code tests rerun automatically."
-  ]
+  ],
+  "gallery": {
+    "heading": "Ruby in use",
+    "shots": [
+      {
+        "caption": "Logging time takes one sentence. Ruby works out the date, project, and project manager, saves the entry to the spreadsheet, and reports the running total for this week's invoice.",
+        "alt": "Ruby's main window with a spreadsheet of time entries on the left and a chat on the right where the user logs 2.5 hours and Ruby confirms the entry.",
+        "large": {
+          "src": "/img/builds/ruby/01-log-hours-1600.webp",
+          "width": 1600,
+          "height": 834
+        },
+        "small": {
+          "src": "/img/builds/ruby/01-log-hours-800.webp",
+          "width": 800,
+          "height": 417
+        }
+      },
+      {
+        "caption": "When a request is ambiguous, Ruby asks instead of guessing, because a wrong guess becomes a wrong line on an invoice. Once the entry is saved, it warns her that she has passed 90% of the client's 40-hour weekly cap.",
+        "alt": "Chat where Ruby asks if \"outdoor cushions\" means the existing Outdoor Cushion Refresh project, then saves the entry and warns that the week is at 36.5 of 40 hours.",
+        "large": {
+          "src": "/img/builds/ruby/02-asks-then-warns-1600.webp",
+          "width": 1600,
+          "height": 834
+        },
+        "small": {
+          "src": "/img/builds/ruby/02-asks-then-warns-800.webp",
+          "width": 800,
+          "height": 417
+        }
+      },
+      {
+        "caption": "Corrections work the same way as logging. Ruby shows what changed, from 2.5 hours to 3, and updates the weekly total. Records are never deleted; replaced entries are kept as history.",
+        "alt": "Chat where the user corrects an entry from 2.5 to 3 hours and Ruby confirms the change and the new weekly total.",
+        "large": {
+          "src": "/img/builds/ruby/03-fix-an-entry-1600.webp",
+          "width": 1600,
+          "height": 834
+        },
+        "small": {
+          "src": "/img/builds/ruby/03-fix-an-entry-800.webp",
+          "width": 800,
+          "height": 417
+        }
+      },
+      {
+        "caption": "She can ask about her week in plain language. Ruby answers from the stored records, with a total, a breakdown by project, and how much room is left under the cap.",
+        "alt": "Chat where Ruby summarizes the week as 37 of 40 hours logged, broken down by project, with a warning about the hours cap.",
+        "large": {
+          "src": "/img/builds/ruby/04-weekly-summary-1600.webp",
+          "width": 1600,
+          "height": 834
+        },
+        "small": {
+          "src": "/img/builds/ruby/04-weekly-summary-800.webp",
+          "width": 800,
+          "height": 417
+        }
+      },
+      {
+        "caption": "Each work week becomes one invoice, and Ruby tracks it from In Progress to Funds Received. Most status changes come from email Ruby reads for her: the sent invoice, the client's receipt notice, the payment notice, and the bank's deposit alert.",
+        "alt": "Invoices table with six weekly invoices and color-coded statuses from In Progress to Funds Received, under a banner announcing a payment email to review.",
+        "large": {
+          "src": "/img/builds/ruby/05-invoices-1600.webp",
+          "width": 1600,
+          "height": 834
+        },
+        "small": {
+          "src": "/img/builds/ruby/05-invoices-800.webp",
+          "width": 800,
+          "height": 417
+        }
+      },
+      {
+        "caption": "When the client's payment notice arrives, Ruby reads it, matches the amount to the right invoice, and shows the original email next to its match. Nothing changes until she confirms. Ruby only reads email and never logs in to the bank.",
+        "alt": "Review window showing a $1,925 remittance email matched to invoice 216, with the original email shown beside the match and buttons to confirm or reject it.",
+        "large": {
+          "src": "/img/builds/ruby/06-payment-review-1600.webp",
+          "width": 1600,
+          "height": 980
+        },
+        "small": {
+          "src": "/img/builds/ruby/06-payment-review-800.webp",
+          "width": 800,
+          "height": 490
+        }
+      },
+      {
+        "caption": "Ruby builds the weekly invoice from her logged hours, using her own invoice design, then saves it as a Gmail draft for her to review and send. Ruby can't send email itself.",
+        "alt": "A one-page invoice with line items for three projects, 33.5 total hours at $55 per hour, and a total due of $1,843.",
+        "large": {
+          "src": "/img/builds/ruby/07-invoice-1600.webp",
+          "width": 1236,
+          "height": 1600
+        },
+        "small": {
+          "src": "/img/builds/ruby/07-invoice-800.webp",
+          "width": 618,
+          "height": 800
+        }
+      },
+      {
+        "caption": "Each Friday she sends the client a forecast of next week's hours. She describes her plan in a sentence, and Ruby fills in the form and writes the email for her to review.",
+        "alt": "Estimates tab with a form for next week's hours on the left, an email preview in the middle, and the chat where the user describes the plan.",
+        "large": {
+          "src": "/img/builds/ruby/08-weekly-estimate-1600.webp",
+          "width": 1600,
+          "height": 834
+        },
+        "small": {
+          "src": "/img/builds/ruby/08-weekly-estimate-800.webp",
+          "width": 800,
+          "height": 417
+        }
+      },
+      {
+        "caption": "Rate changes are scheduled by date, so past invoices keep the rate they were billed at. Ruby confirms the change and the first week it applies to before saving anything.",
+        "alt": "Rates table with three hourly rates by date, and a chat where Ruby confirms a change to $60 per hour starting January 4, 2027.",
+        "large": {
+          "src": "/img/builds/ruby/09-rate-change-1600.webp",
+          "width": 1600,
+          "height": 834
+        },
+        "small": {
+          "src": "/img/builds/ruby/09-rate-change-800.webp",
+          "width": 800,
+          "height": 417
+        }
+      },
+      {
+        "caption": "Setup happens in the app with no config files. The API key is stored only on her computer and never included in the installer.",
+        "alt": "Settings screen with sections for the AI connection, invoice numbering, appearance, and the assistant's name.",
+        "large": {
+          "src": "/img/builds/ruby/10-settings-1600.webp",
+          "width": 1600,
+          "height": 834
+        },
+        "small": {
+          "src": "/img/builds/ruby/10-settings-800.webp",
+          "width": 800,
+          "height": 417
+        }
+      },
+      {
+        "caption": "Ruby follows the Mac's light or dark appearance, or she can pick one.",
+        "alt": "Ruby's main window in dark mode, showing the time entries spreadsheet and the chat about the weekly hours cap.",
+        "large": {
+          "src": "/img/builds/ruby/11-dark-mode-1600.webp",
+          "width": 1600,
+          "height": 834
+        },
+        "small": {
+          "src": "/img/builds/ruby/11-dark-mode-800.webp",
+          "width": 800,
+          "height": 417
+        }
+      }
+    ]
+  }
 }

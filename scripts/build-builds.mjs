@@ -434,6 +434,29 @@ function stepsSection(build) {
   return `<section class="build-block" aria-labelledby="works-h"><h2 id="works-h">How it works</h2><ol class="timeline">${items}</ol></section>`;
 }
 
+function shotsSection(build) {
+  const gallery = build.gallery;
+  const shots = gallery && gallery.shots;
+  if (!shots || !shots.length) return "";
+  const heading = gallery.heading || "In use";
+  const figure = (shot, index, lead) => {
+    const large = shot.large;
+    const small = shot.small;
+    const srcset = `${esc(small.src)} ${small.width}w, ${esc(large.src)} ${large.width}w`;
+    const sizes = lead
+      ? "(min-width: 720px) 686px, calc(100vw - 40px)"
+      : "(min-width: 720px) 330px, calc(100vw - 40px)";
+    const loading = lead ? `loading="eager"` : `loading="lazy"`;
+    const img = `<img src="${esc(small.src)}" srcset="${srcset}" sizes="${sizes}" width="${large.width}" height="${large.height}" alt="${esc(shot.alt)}" ${loading} decoding="async">`;
+    const frame = lead ? img : `<span class="shot-frame">${img}</span>`;
+    return `<figure class="${lead ? "shot-lead" : "shot"}"><a class="shot-link" href="${esc(large.src)}" data-shot="${index}">${frame}</a><figcaption>${esc(shot.caption)}</figcaption></figure>`;
+  };
+  const rest = shots.slice(1).map((shot, index) => `<li>${figure(shot, index + 1, false)}</li>`).join("");
+  const grid = rest ? `<ul class="shot-grid">${rest}</ul>` : "";
+  const dialog = `<dialog class="shot-dialog"><div class="shot-dialog-top"><button type="button" data-shot-close>Close</button></div><img class="shot-dialog-img" alt=""><p class="shot-dialog-cap"></p><div class="shot-dialog-nav"><button type="button" data-shot-prev>Previous</button><button type="button" data-shot-next>Next</button></div></dialog>`;
+  return `<section class="build-block shot-gallery" aria-labelledby="shots-h"><h2 id="shots-h">${esc(heading)}</h2>${figure(shots[0], 0, true)}${grid}${dialog}</section>`;
+}
+
 function decisionsSection(build) {
   const items = build.decisions || [];
   if (!items.length) return "";
@@ -532,6 +555,7 @@ ${topbar("builds")}
       ${demo(build)}
       ${proseSection("problem-h", "The problem", build.problem)}
       ${stepsSection(build)}
+      ${shotsSection(build)}
       ${decisionsSection(build)}
       ${nextSection(build)}
       ${note}

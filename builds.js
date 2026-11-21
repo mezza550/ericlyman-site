@@ -112,3 +112,71 @@
   window.addEventListener("resize", function () { if (open) hide(open); });
   window.addEventListener("scroll", function () { if (open) hide(open); }, true);
 })();
+
+(function () {
+  var galleries = document.querySelectorAll(".shot-gallery");
+  if (!galleries.length || typeof HTMLDialogElement === "undefined") return;
+
+  galleries.forEach(function (gallery) {
+    var dialog = gallery.querySelector(".shot-dialog");
+    var links = gallery.querySelectorAll(".shot-link");
+    if (!dialog || !links.length) return;
+    var image = dialog.querySelector(".shot-dialog-img");
+    var caption = dialog.querySelector(".shot-dialog-cap");
+    var closeButton = dialog.querySelector("[data-shot-close]");
+    var prevButton = dialog.querySelector("[data-shot-prev]");
+    var nextButton = dialog.querySelector("[data-shot-next]");
+    var index = 0;
+    var opener = null;
+
+    function show(next) {
+      var count = links.length;
+      index = (next + count) % count;
+      var link = links[index];
+      var figure = link.closest("figure");
+      var figcaption = figure.querySelector("figcaption");
+      var thumb = link.querySelector("img");
+      image.src = link.href;
+      image.alt = thumb ? thumb.alt : "";
+      caption.textContent = figcaption ? figcaption.textContent : "";
+      if (count < 2) {
+        prevButton.hidden = true;
+        nextButton.hidden = true;
+      }
+    }
+
+    function openAt(next, from) {
+      opener = from || null;
+      show(next);
+      if (!dialog.open) dialog.showModal();
+      closeButton.focus();
+    }
+
+    links.forEach(function (link, linkIndex) {
+      link.addEventListener("click", function (event) {
+        event.preventDefault();
+        openAt(linkIndex, link);
+      });
+    });
+
+    prevButton.addEventListener("click", function () { show(index - 1); });
+    nextButton.addEventListener("click", function () { show(index + 1); });
+    closeButton.addEventListener("click", function () { dialog.close(); });
+
+    dialog.addEventListener("click", function (event) {
+      if (event.target === dialog) dialog.close();
+    });
+    dialog.addEventListener("close", function () {
+      if (opener) opener.focus();
+    });
+    dialog.addEventListener("keydown", function (event) {
+      if (event.key === "ArrowRight") {
+        event.preventDefault();
+        show(index + 1);
+      } else if (event.key === "ArrowLeft") {
+        event.preventDefault();
+        show(index - 1);
+      }
+    });
+  });
+})();
