@@ -433,6 +433,26 @@ function contact() {
   return `<div class="build-contact"><a href="mailto:hello@ericlyman.com">hello@ericlyman.com</a><a class="btn btn--inline" href="/resume/Eric-Lyman-Resume.pdf" download="Eric-Lyman-Resume.pdf"><svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12"/><path d="m7 10 5 5 5-5"/><path d="M5 21h14"/></svg>Download Resume</a></div>`;
 }
 
+const backScript = `<script>
+(function () {
+  var link = document.getElementById("build-back");
+  var label = document.getElementById("build-back-label");
+  if (!link || !label || !document.referrer) return;
+  var ref;
+  try { ref = new URL(document.referrer); } catch (e) { return; }
+  if (ref.origin !== location.origin) return;
+  var path = ref.pathname.replace(/\\/index\\.html$/, "");
+  if (path.length > 1 && path.endsWith("/")) path = path.slice(0, -1);
+  if (path === "" || path === "/") {
+    link.href = "/#builds";
+    label.textContent = "Back to home";
+  } else if (path === "/builds") {
+    link.href = "/builds/";
+    label.textContent = "Back to builds";
+  }
+})();
+</script>`;
+
 function buildPage(build, builds) {
   const image = build.og_image || OG_DEFAULT;
   const description = build.card_line || build.name;
@@ -450,7 +470,8 @@ function buildPage(build, builds) {
 ${topbar("builds")}
   <main id="main">
     <article class="build-page">
-      <p class="back-link"><a href="/builds/"><span aria-hidden="true">← </span>Back to builds</a></p>
+      <p class="back-link"><a id="build-back" href="/builds/"><span aria-hidden="true">← </span><span id="build-back-label">All builds</span></a></p>
+      ${backScript}
       <header class="build-header">
         ${titleRow(build, "h1")}
         ${filled(build.card_line) ? `<p class="build-subtitle">${esc(build.card_line)}</p>` : ""}
@@ -466,6 +487,7 @@ ${topbar("builds")}
       ${note}
       ${pager(build, builds)}
       ${contact()}
+      <p class="build-all"><a href="/builds/">All builds</a></p>
     </article>
   </main>
 ${footer}

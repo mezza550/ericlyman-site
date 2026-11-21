@@ -200,7 +200,7 @@ button.tool-logo:focus-visible,a.tool-logo:focus-visible{outline:2px solid var(-
 .build-page h1{font-size:clamp(32px,4vw,40px);line-height:1.12;max-width:20em;margin:0 0 8px}
 .build-header .build-title{margin:0 0 8px}
 .build-header .build-title h1{margin:0}
-.build-header,.build-block,.snapshot,.build-pager,.build-contact,.build-note{max-width:68ch}
+.build-header,.build-block,.snapshot,.build-pager,.build-contact,.build-note,.build-all{max-width:68ch}
 .build-header{border-bottom:2px solid var(--ruby);padding-bottom:14px;margin-bottom:18px}
 .build-block{margin:0 0 28px}
 .build-block h2{font-family:var(--serif);font-weight:500;font-size:20px;line-height:1.25;color:var(--ink);letter-spacing:-.01em;margin:0 0 8px}
@@ -235,6 +235,9 @@ button.tool-logo:focus-visible,a.tool-logo:focus-visible{outline:2px solid var(-
 .build-note{margin:8px 0 0}
 .build-pager{display:flex;flex-wrap:wrap;gap:8px 16px;margin-top:32px;padding-top:16px;border-top:1px solid var(--line)}
 .build-contact{display:flex;flex-wrap:wrap;gap:12px 16px;align-items:center;margin-top:18px}
+.build-all{margin:22px 0 0;font-size:14px}
+.build-all a{color:var(--muted);font-weight:500}
+.build-all a:hover{color:var(--ruby)}
 @media (prefers-reduced-motion:reduce){
   .demo-gif{display:none}
   .demo-still{display:block}

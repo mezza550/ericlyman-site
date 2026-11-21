@@ -42,6 +42,8 @@ Leave a field as `""` or `[]` when it is unknown. The page skips empty sections.
 
 On the page, the Results tiles sit directly under the snapshot and before The problem. A build with no results skips that heading.
 
+The top link on a build page is "All builds" and goes to `/builds/`. A small script checks `document.referrer` on this site only: from the homepage it becomes "Back to home" (`/#builds`), and from `/builds/` it becomes "Back to builds". A quieter "All builds" link also sits at the bottom of the page.
+
 The script prints a warning when a filled field is outside its limit. It still writes the page, and the site shows the full text.
 
 ## Tags
