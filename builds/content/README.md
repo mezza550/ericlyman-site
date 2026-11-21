@@ -31,7 +31,7 @@ Commit the JSON and the HTML the script writes. GitHub Pages publishes those fil
 | snapshot | `problem`, `what_i_built`, and `result`. | 120 characters each |
 | demo | Optional `type` (`video`, `gif`, or `images`), `sources`, `poster`, and `captions`. | |
 | problem | The manual process before, in plain prose. | 40–80 words |
-| how_it_works | 3–7 steps. Each has `text` and `owner` (`Person`, `AI`, `Code`, or `TODO`). Optional `title` for the desktop graph, and optional `tools` (`name` and `label`) for a branch under that step. | 25 words per step |
+| how_it_works | 3–7 steps. Each has `text` and `owner` (`Person`, `AI`, `Code`, or `TODO`). Optional `title` is stored and not shown. Optional `tools` (`name` and `label`) hang under that step. | 25 words per step |
 | decisions | 3–5 items. Each has `decision` and `reason`. | 35 words per item |
 | results | 1–4 items. Each has `value` and `label`. `basis` (`measured`, `expected`, or `TODO`) is optional. Omit it when the tile is an outcome, not a metric. | |
 | checks | Optional items for How I checked it, directly under Results. Same fields as `results`. | |

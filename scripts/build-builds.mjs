@@ -415,36 +415,23 @@ function stepTools(step) {
   }).filter((tool) => filled(tool.name));
 }
 
-function flowChart(build) {
-  const steps = build.how_it_works || [];
-  if (!steps.length) return "";
-  const owners = steps.map((step) => String(step.owner || "TODO").toLowerCase());
-  if (owners.every((owner) => owner === "todo")) return "";
-  if (steps.some((step) => !filled(step.title))) return "";
-  const nodes = steps.map((step, index) => {
-    const owner = step.owner || "TODO";
-    const id = `tip-${esc(build.slug)}-step-${index}`;
-    const link = index < steps.length - 1 ? `<span class="graph-link" aria-hidden="true"></span>` : "";
-    const tools = stepTools(step).map((tool, toolIndex) => {
-      const toolId = `tip-${esc(build.slug)}-step-${index}-tool-${toolIndex}`;
-      const svg = toolSvg(tool.name);
-      const mark = svg || `<span class="graph-tool-fallback">${esc(tool.name.slice(0, 2))}</span>`;
-      return `<div class="graph-tool-item"><button type="button" class="graph-tool" data-tip aria-label="${esc(tool.label)}" aria-describedby="${toolId}">${mark}</button><span class="graph-tool-name" aria-hidden="true">${esc(tool.label)}</span>${tip(toolId, tool.label)}</div>`;
-    }).join("");
-    const branch = tools ? `<div class="graph-branch"><span class="graph-stem" aria-hidden="true"></span><div class="graph-tools">${tools}</div></div>` : "";
-    return `<li class="graph-step"><div class="graph-rail"><button type="button" class="graph-node owner-${esc(String(owner).toLowerCase())}" data-tip aria-label="${esc(owner)}. ${esc(step.title)}" aria-describedby="${id}">${ownerIcon(owner)}</button>${link}</div>${tip(id, step.text)}<p class="graph-title" aria-hidden="true">${esc(step.title)}</p>${branch}</li>`;
-  }).join("");
-  return `<div class="flow"><ol class="graph" style="--steps:${steps.length}" aria-label="How it works, in short">${nodes}</ol></div>`;
-}
-
 function stepsSection(build) {
   const steps = build.how_it_works || [];
   if (!steps.length) return "";
   const items = steps.map((step, index) => {
     const owner = step.owner || "TODO";
-    return `<li><span class="step-no">${index + 1}</span><div><span class="owner owner-${esc(String(owner).toLowerCase())}">${ownerIcon(owner)}${esc(owner)}</span><p>${esc(step.text)}</p></div></li>`;
+    const id = `tip-${esc(build.slug)}-step-${index}`;
+    const line = index < steps.length - 1 ? `<span class="tl-line" aria-hidden="true"></span>` : "";
+    const tools = stepTools(step).map((tool, toolIndex) => {
+      const toolId = `tip-${esc(build.slug)}-step-${index}-tool-${toolIndex}`;
+      const svg = toolSvg(tool.name);
+      const mark = svg || `<span class="tl-tool-fallback">${esc(tool.name.slice(0, 2))}</span>`;
+      return `<button type="button" class="tl-tool" data-tip aria-label="${esc(tool.label)}" aria-describedby="${toolId}"><span class="tl-tool-mark">${mark}</span><span class="tl-tool-name" aria-hidden="true">${esc(tool.label)}</span></button>${tip(toolId, tool.label)}`;
+    }).join("");
+    const branch = tools ? `<div class="tl-tools"><span class="tl-stem" aria-hidden="true"></span>${tools}</div>` : "";
+    return `<li class="tl-step"><div class="tl-rail"><button type="button" class="tl-node owner-${esc(String(owner).toLowerCase())}" data-tip aria-label="${esc(owner)}" aria-describedby="${id}">${ownerIcon(owner)}</button>${line}</div>${tip(id, owner)}<div class="tl-body"><p>${esc(step.text)}</p>${branch}</div></li>`;
   }).join("");
-  return `<section class="build-block" aria-labelledby="works-h"><h2 id="works-h">How it works</h2>${flowChart(build)}<ol class="steps">${items}</ol></section>`;
+  return `<section class="build-block" aria-labelledby="works-h"><h2 id="works-h">How it works</h2><ol class="timeline">${items}</ol></section>`;
 }
 
 function decisionsSection(build) {
