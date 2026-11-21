@@ -221,9 +221,9 @@ button.tool-logo:focus-visible,a.tool-logo:focus-visible{outline:2px solid var(-
 .steps p{margin:0}
 .owner{display:inline-flex;align-items:center;gap:6px;margin:0 0 4px;padding:0;border:0;background:none;font-size:12px;font-weight:600;letter-spacing:.04em;text-transform:uppercase;color:var(--muted)}
 .owner svg{display:block;flex:0 0 auto;width:20px;height:20px}
-.owner-person{color:#2c4f73}
-.owner-ai{color:#62406e}
-.owner-code{color:#3a5c44}
+.owner-person{color:#1d6fd6}
+.owner-ai{color:#7c3aed}
+.owner-code{color:#15803d}
 .result-tiles{list-style:none;margin:0;padding:0;display:grid;gap:10px}
 .build-block .result-tiles li{margin:0;padding:12px 14px;background:var(--surface);border:1px solid var(--line);border-radius:12px}
 .build-block .result-tiles li::before{content:none}
