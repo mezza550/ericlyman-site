@@ -408,14 +408,23 @@ function decisionsSection(build) {
   return `<section class="build-block" aria-labelledby="decisions-h"><h2 id="decisions-h">Decisions and guardrails</h2><ul class="decisions">${list}</ul></section>`;
 }
 
-function resultsSection(build) {
-  const items = build.results || [];
-  if (!items.length) return "";
-  const list = items.map((item) => {
+function resultTiles(items) {
+  return items.map((item) => {
     const basis = item.basis === "expected" ? `<span class="result-basis">Expected</span>` : item.basis === "measured" ? `<span class="result-basis">Measured</span>` : "";
     return `<li><span class="result-value">${esc(item.value || "")}</span><span class="result-label">${esc(item.label || "")}</span>${basis}</li>`;
   }).join("");
-  return `<section class="build-block" aria-labelledby="results-h"><h2 id="results-h">Results</h2><ul class="result-tiles">${list}</ul></section>`;
+}
+
+function resultsSection(build) {
+  const items = build.results || [];
+  if (!items.length) return "";
+  return `<section class="build-block" aria-labelledby="results-h"><h2 id="results-h">Results</h2><ul class="result-tiles">${resultTiles(items)}</ul></section>`;
+}
+
+function checksSection(build) {
+  const items = build.checks || [];
+  if (!items.length) return "";
+  return `<section class="build-block" aria-labelledby="checks-h"><h2 id="checks-h">How I checked it</h2><ul class="result-tiles check-tiles">${resultTiles(items)}</ul></section>`;
 }
 
 function nextSection(build) {
@@ -487,6 +496,7 @@ ${topbar("builds")}
       </header>
       ${snapshot(build)}
       ${resultsSection(build)}
+      ${checksSection(build)}
       ${demo(build)}
       ${proseSection("problem-h", "The problem", build.problem)}
       ${stepsSection(build)}

@@ -75,13 +75,27 @@
   ],
   "results": [
     {
-      "value": "26 of 26",
-      "label": "End-to-end test chats logged correctly, checked against what was saved (22 of 26 before I fixed what the first run caught)",
-      "basis": "measured"
+      "value": "Consistent billing",
+      "label": "Invoices go out the same way every week."
     },
     {
-      "value": "$0.00003",
-      "label": "Model cost per message",
+      "value": "No missed follow-ups",
+      "label": "Unpaid invoices get flagged."
+    },
+    {
+      "value": "Fewer errors",
+      "label": "No more napkin math or copy-paste."
+    },
+    {
+      "value": "About 1 hour",
+      "label": "Admin time saved per week",
+      "basis": "expected"
+    }
+  ],
+  "checks": [
+    {
+      "value": "26 of 26",
+      "label": "End-to-end test chats logged correctly, checked against what was saved (22 of 26 before I fixed what the first run caught)",
       "basis": "measured"
     },
     {
@@ -90,9 +104,9 @@
       "basis": "measured"
     },
     {
-      "value": "About 1 hour",
-      "label": "Admin time saved per week",
-      "basis": "expected"
+      "value": "$0.00003",
+      "label": "Model cost per message",
+      "basis": "measured"
     }
   ],
   "next": [

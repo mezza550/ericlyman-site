@@ -226,9 +226,14 @@ button.tool-logo:focus-visible,a.tool-logo:focus-visible{outline:2px solid var(-
 .result-tiles{list-style:none;margin:0;padding:0;display:grid;gap:10px}
 .build-block .result-tiles li{margin:0;padding:12px 14px;background:var(--surface);border:1px solid var(--line);border-radius:12px}
 .build-block .result-tiles li::before{content:none}
-.result-value{display:block;font-family:var(--serif);font-weight:500;font-size:28px;line-height:1.1;color:var(--ruby)}
+.result-value{display:block;font-family:var(--serif);font-weight:500;font-size:22px;line-height:1.2;color:var(--ruby)}
 .result-label{display:block;margin-top:4px;color:var(--body)}
 .result-basis{display:inline-block;margin-top:6px;font-size:12px;font-weight:600;letter-spacing:.04em;text-transform:uppercase;color:var(--muted)}
+.check-tiles{gap:8px}
+.build-block .check-tiles li{padding:8px 12px;background:var(--stone)}
+.check-tiles .result-value{font-size:18px;line-height:1.25}
+.check-tiles .result-label{font-size:14.5px}
+.check-tiles .result-basis{margin-top:4px}
 .build-video,.demo-gif,.demo-shots img{display:block;width:100%;height:auto;border-radius:12px;background:#d8d3cd}
 .demo-shots{display:grid;gap:12px}
 .demo-shots figcaption,.build-note{margin-top:6px;font-size:13.5px;color:var(--muted)}

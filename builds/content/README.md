@@ -33,14 +33,15 @@ Commit the JSON and the HTML the script writes. GitHub Pages publishes those fil
 | problem | The manual process before, in plain prose. | 40–80 words |
 | how_it_works | 3–7 steps. Each has `text` and `owner` (`Person`, `AI`, `Code`, or `TODO`). | 25 words per step |
 | decisions | 3–5 items. Each has `decision` and `reason`. | 35 words per item |
-| results | 1–4 items. Each has `value`, `label`, and `basis` (`measured`, `expected`, or `TODO`). | |
+| results | 1–4 items. Each has `value` and `label`. `basis` (`measured`, `expected`, or `TODO`) is optional. Omit it when the tile is an outcome, not a metric. | |
+| checks | Optional items for How I checked it, directly under Results. Same fields as `results`. | |
 | next | What to change next. | 2–3 bullets, 25 words each |
 | confidentiality_note | Optional short note. | |
 | links | Optional public links, such as a video. | |
 
 Leave a field as `""` or `[]` when it is unknown. The page skips empty sections. Do not write "coming soon".
 
-On the page, the Results tiles sit directly under the snapshot and before The problem. A build with no results skips that heading.
+On the page, the Results tiles sit directly under the snapshot. How I checked it sits under Results when `checks` is filled. A build with no results or no checks skips that heading.
 
 The top link on a build page is "All builds" and goes to `/builds/`. A small script checks `document.referrer` on this site only: from the homepage it becomes "Back to home" (`/#builds`), and from `/builds/` it becomes "Back to builds". Each row of links at the bottom ends with ` | Home`, and Home goes to `/`.
 
