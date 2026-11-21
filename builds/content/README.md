@@ -31,7 +31,7 @@ Commit the JSON and the HTML the script writes. GitHub Pages publishes those fil
 | snapshot | `problem`, `what_i_built`, and `result`. | 120 characters each |
 | demo | Optional `type` (`video`, `gif`, or `images`), `sources`, `poster`, and `captions`. | |
 | problem | The manual process before, in plain prose. | 40–80 words |
-| how_it_works | 3–7 steps. Each has `text` and `owner` (`Person`, `AI`, `Code`, or `TODO`). | 25 words per step |
+| how_it_works | 3–7 steps. Each has `text` and `owner` (`Person`, `AI`, `Code`, or `TODO`). Optional `title` for the desktop graph, and optional `tools` (`name` and `label`) for a branch under that step. | 25 words per step |
 | decisions | 3–5 items. Each has `decision` and `reason`. | 35 words per item |
 | results | 1–4 items. Each has `value` and `label`. `basis` (`measured`, `expected`, or `TODO`) is optional. Omit it when the tile is an outcome, not a metric. | |
 | checks | Optional items for How I checked it, directly under Results. Same fields as `results`. | |
@@ -72,6 +72,7 @@ A description Eric approved for Human-in-the-loop, saved here in case it is want
 | OpenRouter | `img/tools/openrouter.svg` |
 | Claude Code | `img/tools/claude.svg` (the Claude mark) |
 | Gemini | `img/tools/gemini.svg` |
+| Gmail | `img/tools/gmail.svg` |
 
 ## Home page
 

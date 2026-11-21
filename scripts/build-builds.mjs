@@ -31,7 +31,8 @@ const TOOL_ICONS = {
   "DeepSeek": "deepseek.svg",
   "OpenRouter": "openrouter.svg",
   "Claude Code": "claude.svg",
-  "Gemini": "gemini.svg"
+  "Gemini": "gemini.svg",
+  "Gmail": "gmail.svg"
 };
 const REDIRECTS = {
   "chapter-bridge": "chapterbridge",
@@ -405,16 +406,13 @@ function ownerIcon(owner) {
   return OWNER_ICONS[String(owner || "TODO").toLowerCase()] || OWNER_ICONS.todo;
 }
 
-const FLOW_ARROWS = {
-  right: `<svg aria-hidden="true" width="22" height="12" viewBox="0 0 22 12" fill="none" focusable="false"><path d="M1 6h14" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><path d="M12 2.2 19.2 6 12 9.8" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>`,
-  left: `<svg aria-hidden="true" width="22" height="12" viewBox="0 0 22 12" fill="none" focusable="false"><path d="M21 6H7" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><path d="M10 2.2 2.8 6 10 9.8" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>`,
-  down: `<svg aria-hidden="true" width="12" height="22" viewBox="0 0 12 22" fill="none" focusable="false"><path d="M6 1v14" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><path d="M2.2 12 6 19.2 9.8 12" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>`
-};
-
-function flowColumns(count) {
-  if (count <= 3) return count;
-  if (count === 4) return 2;
-  return 3;
+function stepTools(step) {
+  return (step.tools || []).map((tool) => {
+    if (typeof tool === "string") return { name: tool, label: tool };
+    const name = tool && tool.name ? String(tool.name) : "";
+    const label = tool && filled(tool.label) ? String(tool.label) : name;
+    return { name, label };
+  }).filter((tool) => filled(tool.name));
 }
 
 function flowChart(build) {
@@ -423,22 +421,20 @@ function flowChart(build) {
   const owners = steps.map((step) => String(step.owner || "TODO").toLowerCase());
   if (owners.every((owner) => owner === "todo")) return "";
   if (steps.some((step) => !filled(step.title))) return "";
-  const cols = flowColumns(steps.length);
   const nodes = steps.map((step, index) => {
-    const rowIndex = Math.floor(index / cols);
-    const pos = index % cols;
-    const col = rowIndex % 2 === 0 ? pos + 1 : cols - pos;
-    let dir = "";
-    if (index < steps.length - 1) {
-      const nextRow = Math.floor((index + 1) / cols);
-      dir = nextRow !== rowIndex ? "down" : rowIndex % 2 === 0 ? "right" : "left";
-    }
     const owner = step.owner || "TODO";
     const id = `tip-${esc(build.slug)}-step-${index}`;
-    const join = dir ? `<span class="flow-join flow-join-${dir}" aria-hidden="true">${FLOW_ARROWS[dir]}</span>` : "";
-    return `<li class="flow-node" style="--r:${rowIndex + 1};--c:${col}"><button type="button" class="flow-card" data-tip aria-describedby="${id}"><span class="owner owner-${esc(String(owner).toLowerCase())}">${ownerIcon(owner)}${esc(owner)}</span><span class="flow-title">${esc(step.title)}</span></button>${tip(id, step.text)}${join}</li>`;
+    const link = index < steps.length - 1 ? `<span class="graph-link" aria-hidden="true"></span>` : "";
+    const tools = stepTools(step).map((tool, toolIndex) => {
+      const toolId = `tip-${esc(build.slug)}-step-${index}-tool-${toolIndex}`;
+      const svg = toolSvg(tool.name);
+      const mark = svg || `<span class="graph-tool-fallback">${esc(tool.name.slice(0, 2))}</span>`;
+      return `<div class="graph-tool-item"><button type="button" class="graph-tool" data-tip aria-label="${esc(tool.label)}" aria-describedby="${toolId}">${mark}</button><span class="graph-tool-name" aria-hidden="true">${esc(tool.label)}</span>${tip(toolId, tool.label)}</div>`;
+    }).join("");
+    const branch = tools ? `<div class="graph-branch"><span class="graph-stem" aria-hidden="true"></span><div class="graph-tools">${tools}</div></div>` : "";
+    return `<li class="graph-step"><div class="graph-rail"><button type="button" class="graph-node owner-${esc(String(owner).toLowerCase())}" data-tip aria-label="${esc(owner)}. ${esc(step.title)}" aria-describedby="${id}">${ownerIcon(owner)}</button>${link}</div>${tip(id, step.text)}<p class="graph-title" aria-hidden="true">${esc(step.title)}</p>${branch}</li>`;
   }).join("");
-  return `<div class="flow"><ol class="flow-nodes" style="--flow-cols:${cols}" aria-label="How it works, in short">${nodes}</ol></div>`;
+  return `<div class="flow"><ol class="graph" style="--steps:${steps.length}" aria-label="How it works, in short">${nodes}</ol></div>`;
 }
 
 function stepsSection(build) {

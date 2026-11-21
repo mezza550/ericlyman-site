@@ -30,12 +30,14 @@
     {
       "title": "Turns the sentence into a date, hours, and an item",
       "text": "The model turns the sentence into a date, hours, and an item. If something is missing, it asks instead of guessing.",
-      "owner": "AI"
+      "owner": "AI",
+      "tools": [{ "name": "DeepSeek", "label": "DeepSeek (via OpenRouter)" }]
     },
     {
       "title": "Applies the billing rules",
       "text": "Code applies the billing rules, catches likely duplicates, saves the entry, and warns her as she nears her weekly hours cap.",
-      "owner": "Code"
+      "owner": "Code",
+      "tools": [{ "name": "SQLite", "label": "SQLite" }]
     },
     {
       "title": "Nudges her and flags past due",
@@ -50,12 +52,14 @@
     {
       "title": "Reviews the preview and hits Send",
       "text": "She reviews the preview and says yes. Ruby saves the draft in Gmail, and she hits Send herself.",
-      "owner": "Person"
+      "owner": "Person",
+      "tools": [{ "name": "Gmail", "label": "Gmail (read-only)" }]
     },
     {
       "title": "Confirms each payment",
       "text": "She confirms each payment Ruby matched from her inbox. Ruby marks the invoice paid and reminds her what to set aside for taxes.",
-      "owner": "Person"
+      "owner": "Person",
+      "tools": [{ "name": "Gmail", "label": "Gmail (read-only)" }]
     }
   ],
   "decisions": [
