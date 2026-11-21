@@ -434,46 +434,33 @@ function stepsSection(build) {
   return `<section class="build-block" aria-labelledby="works-h"><h2 id="works-h">How it works</h2><ol class="timeline">${items}</ol></section>`;
 }
 
-function mediaFileReady(src) {
-  if (!src || !src.startsWith("/")) return false;
-  return existsSync(join(root, src.slice(1)));
-}
-
 function clipFigure(item) {
   const caption = `<figcaption class="shot-cap">${esc(item.caption || "")}</figcaption>`;
-  const ready = item.ready && mediaFileReady(item.src);
-  if (!ready) {
-    return `<figure class="shot-clip"><div class="clip-soon"><span>Clip coming soon</span></div>${caption}</figure>`;
-  }
   const label = item.label ? ` aria-label="${esc(item.label)}"` : "";
   const poster = item.poster ? ` poster="${esc(item.poster)}"` : "";
   return `<figure class="shot-clip"><video class="demo-clip" muted loop playsinline preload="none"${poster} width="${item.width || 1920}" height="${item.height || 1080}"${label}><source src="${esc(item.src)}" type="video/mp4"></video>${caption}</figure>`;
 }
 
-function shotFigure(item, figureClass) {
+function shotFigure(item) {
   const page = item.page || {};
   const full = item.full || page;
   const srcset = page.srcset ? ` srcset="${esc(page.srcset)}"` : "";
   const sizes = item.sizes ? ` sizes="${esc(item.sizes)}"` : "";
   const lightbox = item.lightbox || item.caption || "";
-  return `<figure class="${figureClass}"><a class="shot-link" href="${esc(full.src)}" data-caption="${esc(lightbox)}"><img src="${esc(page.src)}"${srcset}${sizes} width="${page.width}" height="${page.height}" alt="${esc(item.alt || "")}" loading="lazy" decoding="async"></a><figcaption class="shot-cap">${esc(item.caption || "")}</figcaption></figure>`;
+  const img = `<img src="${esc(page.src)}"${srcset}${sizes} width="${page.width}" height="${page.height}" alt="${esc(item.alt || "")}" loading="lazy" decoding="async">`;
+  return `<figure class="shot-thumb"><a class="shot-link" href="${esc(full.src)}" data-caption="${esc(lightbox)}"><span class="shot-frame">${img}</span></a><figcaption class="shot-cap">${esc(item.caption || "")}</figcaption></figure>`;
 }
 
 function shotsSection(build) {
   const gallery = build.gallery;
-  if (!gallery || (!gallery.lead && !(gallery.groups && gallery.groups.length))) return "";
+  const clips = gallery && (gallery.clips || (gallery.lead ? [gallery.lead] : []));
+  const thumbs = gallery && gallery.thumbs;
+  if (!gallery || ((!clips || !clips.length) && (!thumbs || !thumbs.length))) return "";
   const heading = gallery.heading || "In use";
-  const lead = gallery.lead ? clipFigure(gallery.lead) : "";
-  const groups = (gallery.groups || []).map((group) => {
-    const title = group.heading ? `<h3>${esc(group.heading)}</h3>` : "";
-    const clip = group.clip ? clipFigure(group.clip) : "";
-    const figures = (group.figures || []).map((item) => shotFigure(item, item.layout === "narrow" ? "shot-narrow" : "shot-wide")).join("");
-    const thumbs = (group.thumbs || []).map((item) => `<li>${shotFigure(item, "shot-thumb")}</li>`).join("");
-    const grid = thumbs ? `<ul class="shot-thumbs">${thumbs}</ul>` : "";
-    return `<div class="shot-group">${title}${clip}${figures}${grid}</div>`;
-  }).join("");
+  const clipHtml = (clips || []).map((item) => clipFigure(item)).join("");
+  const grid = thumbs && thumbs.length ? `<ul class="shot-thumbs">${thumbs.map((item) => `<li>${shotFigure(item)}</li>`).join("")}</ul>` : "";
   const dialog = `<dialog class="shot-dialog"><div class="shot-dialog-top"><button type="button" data-shot-close>Close</button></div><img class="shot-dialog-img" alt=""><p class="shot-dialog-cap"></p><div class="shot-dialog-nav"><button type="button" data-shot-prev>Previous</button><button type="button" data-shot-next>Next</button></div></dialog>`;
-  return `<section class="build-block shot-gallery" aria-labelledby="shots-h"><h2 id="shots-h">${esc(heading)}</h2>${lead}${groups}${dialog}</section>`;
+  return `<section class="build-block shot-gallery" aria-labelledby="shots-h"><h2 id="shots-h">${esc(heading)}</h2>${clipHtml}${grid}${dialog}</section>`;
 }
 
 function decisionsSection(build) {

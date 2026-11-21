@@ -246,19 +246,16 @@ button.tool-logo:focus-visible,a.tool-logo:focus-visible{outline:2px solid var(-
   .tl-tool-name{font-size:11px}
 }
 .shot-gallery figure{margin:0 0 14px}
-.shot-gallery h3{font-family:var(--sans);font-size:15px;font-weight:600;line-height:1.3;margin:26px 0 10px;color:var(--ink)}
 .shot-link{display:block;color:inherit;text-decoration:none}
 .shot-link:hover{text-decoration:none}
 .shot-link:focus-visible{outline:2px solid var(--ruby);outline-offset:3px;border-radius:12px}
-.shot-clip video,.shot-wide img,.shot-narrow img,.shot-thumb img,.clip-soon{display:block;width:100%;border-radius:12px;box-shadow:0 8px 22px rgba(31,30,28,.08)}
-.shot-clip video,.shot-wide img,.shot-narrow img,.shot-thumb img{height:auto;border:1px solid var(--line);background:var(--stone)}
-.shot-clip video,.clip-soon{aspect-ratio:16/9;object-fit:contain}
-.clip-soon{display:grid;place-items:center;background:var(--stone);color:var(--muted);font-size:14px;font-weight:600}
-.shot-narrow{width:min(520px,100%);margin-left:auto;margin-right:auto}
+.shot-clip video{display:block;width:100%;height:auto;border-radius:12px;box-shadow:0 8px 22px rgba(31,30,28,.08);border:1px solid var(--line);background:#1f1e1c;aspect-ratio:16/9;object-fit:contain}
 .shot-cap,.shot-gallery figcaption{margin:8px 0 0;font-size:13.5px;line-height:1.45;color:var(--muted)}
-.shot-thumbs{list-style:none;margin:4px 0 0;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px 12px}
+.shot-thumbs{list-style:none;margin:8px 0 0;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px 12px}
 .build-block .shot-thumbs li{margin:0;padding:0}
 .build-block .shot-thumbs li::before{content:none}
+.shot-frame{display:block;aspect-ratio:3799 / 1980;overflow:hidden;border:1px solid var(--line);border-radius:12px;background:var(--stone);box-shadow:0 8px 22px rgba(31,30,28,.08)}
+.shot-frame img{display:block;width:100%;height:100%;object-fit:contain;object-position:center;border:0;border-radius:0;box-shadow:none;background:transparent}
 @media (max-width:719px){
   .shot-thumbs{grid-template-columns:1fr 1fr}
 }
