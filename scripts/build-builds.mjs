@@ -436,9 +436,9 @@ function stepsSection(build) {
 
 function clipFigure(item) {
   const caption = `<figcaption class="shot-cap">${esc(item.caption || "")}</figcaption>`;
-  const label = item.label ? ` aria-label="${esc(item.label)}"` : "";
+  const label = item.label || item.caption || "";
   const poster = item.poster ? ` poster="${esc(item.poster)}"` : "";
-  return `<figure class="shot-clip"><video class="demo-clip" muted loop playsinline preload="none"${poster} width="${item.width || 1920}" height="${item.height || 1080}"${label}><source src="${esc(item.src)}" type="video/mp4"></video>${caption}</figure>`;
+  return `<figure class="shot-clip"><div class="shot-clip-hit"><video class="demo-clip" muted loop playsinline preload="none"${poster} width="${item.width || 1920}" height="${item.height || 1080}" aria-hidden="true"><source src="${esc(item.src)}" type="video/mp4"></video><button type="button" class="shot-open" data-kind="video" data-src="${esc(item.src)}" data-poster="${esc(item.poster || "")}" data-caption="${esc(item.caption || "")}" aria-label="${esc(label)}"></button></div>${caption}</figure>`;
 }
 
 function shotFigure(item) {
@@ -447,8 +447,11 @@ function shotFigure(item) {
   const srcset = page.srcset ? ` srcset="${esc(page.srcset)}"` : "";
   const sizes = item.sizes ? ` sizes="${esc(item.sizes)}"` : "";
   const lightbox = item.lightbox || item.caption || "";
+  const sources = [];
+  if (page.srcset) sources.push(page.srcset);
+  if (full.src && full.width && full.src !== page.src) sources.push(`${full.src} ${full.width}w`);
   const img = `<img src="${esc(page.src)}"${srcset}${sizes} width="${page.width}" height="${page.height}" alt="${esc(item.alt || "")}" loading="lazy" decoding="async">`;
-  return `<figure class="shot-thumb"><a class="shot-link" href="${esc(full.src)}" data-caption="${esc(lightbox)}"><span class="shot-frame">${img}</span></a><figcaption class="shot-cap">${esc(item.caption || "")}</figcaption></figure>`;
+  return `<figure class="shot-thumb"><a class="shot-link" href="${esc(full.src)}" data-srcset="${esc(sources.join(", "))}" data-caption="${esc(lightbox)}"><span class="shot-frame">${img}</span></a><figcaption class="shot-cap">${esc(item.caption || "")}</figcaption></figure>`;
 }
 
 function shotsSection(build) {
@@ -459,7 +462,7 @@ function shotsSection(build) {
   const heading = gallery.heading || "In use";
   const clipHtml = (clips || []).map((item) => clipFigure(item)).join("");
   const grid = thumbs && thumbs.length ? `<ul class="shot-thumbs">${thumbs.map((item) => `<li>${shotFigure(item)}</li>`).join("")}</ul>` : "";
-  const dialog = `<dialog class="shot-dialog"><div class="shot-dialog-top"><button type="button" data-shot-close>Close</button></div><img class="shot-dialog-img" alt=""><p class="shot-dialog-cap"></p><div class="shot-dialog-nav"><button type="button" data-shot-prev>Previous</button><button type="button" data-shot-next>Next</button></div></dialog>`;
+  const dialog = `<dialog class="shot-dialog"><div class="shot-dialog-top"><button type="button" data-shot-close>Close</button></div><div class="shot-dialog-stage"><img class="shot-dialog-img" alt="" sizes="95vw"><video class="shot-dialog-video" controls muted loop playsinline hidden></video></div><p class="shot-dialog-cap"></p><div class="shot-dialog-nav"><button type="button" data-shot-prev>Previous</button><button type="button" data-shot-next>Next</button></div></dialog>`;
   return `<section class="build-block shot-gallery" aria-labelledby="shots-h"><h2 id="shots-h">${esc(heading)}</h2>${clipHtml}${grid}${dialog}</section>`;
 }
 

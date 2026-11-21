@@ -116,29 +116,106 @@
 (function () {
   var galleries = document.querySelectorAll(".shot-gallery");
   if (!galleries.length || typeof HTMLDialogElement === "undefined") return;
+  var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  function mostlyVisible(el) {
+    var rect = el.getBoundingClientRect();
+    if (!rect.height) return false;
+    var view = window.innerHeight || document.documentElement.clientHeight;
+    var visible = Math.min(rect.bottom, view) - Math.max(rect.top, 0);
+    return visible / rect.height >= 0.4;
+  }
+
+  function fit(el) {
+    var width = el.naturalWidth || el.videoWidth;
+    var height = el.naturalHeight || el.videoHeight;
+    if (!width || !height) return;
+    el.style.maxWidth = "min(95vw, " + width + "px)";
+    el.style.maxHeight = "min(85vh, calc(100vh - 168px), " + height + "px)";
+  }
 
   galleries.forEach(function (gallery) {
     var dialog = gallery.querySelector(".shot-dialog");
-    var links = gallery.querySelectorAll(".shot-link");
-    if (!dialog || !links.length) return;
+    var items = gallery.querySelectorAll(".shot-open, .shot-link");
+    if (!dialog || !items.length) return;
     var image = dialog.querySelector(".shot-dialog-img");
+    var video = dialog.querySelector(".shot-dialog-video");
     var caption = dialog.querySelector(".shot-dialog-cap");
     var closeButton = dialog.querySelector("[data-shot-close]");
     var prevButton = dialog.querySelector("[data-shot-prev]");
     var nextButton = dialog.querySelector("[data-shot-next]");
     var index = 0;
     var opener = null;
+    var held = [];
+
+    function hold(inline) {
+      if (!inline || held.indexOf(inline) !== -1) return;
+      inline.setAttribute("data-held", "true");
+      inline.pause();
+      held.push(inline);
+    }
+
+    function stopDialogVideo() {
+      if (!video) return;
+      video.pause();
+      video.removeAttribute("src");
+      video.load();
+      video.hidden = true;
+      video.style.maxWidth = "";
+      video.style.maxHeight = "";
+    }
+
+    function releaseHeld() {
+      held.forEach(function (inline) {
+        inline.removeAttribute("data-held");
+        if (!reduce && mostlyVisible(inline)) {
+          var play = inline.play();
+          if (play && play.catch) play.catch(function () {});
+        }
+      });
+      held = [];
+    }
 
     function show(next) {
-      var count = links.length;
+      var count = items.length;
       index = (next + count) % count;
-      var link = links[index];
-      var figure = link.closest("figure");
-      var figcaption = figure.querySelector("figcaption");
-      var thumb = link.querySelector("img");
-      image.src = link.href;
-      image.alt = thumb ? thumb.alt : "";
-      caption.textContent = link.getAttribute("data-caption") || (figcaption ? figcaption.textContent : "");
+      var item = items[index];
+      var figure = item.closest("figure");
+      var figcaption = figure ? figure.querySelector("figcaption") : null;
+      caption.textContent = item.getAttribute("data-caption") || (figcaption ? figcaption.textContent : "");
+      if (item.getAttribute("data-kind") === "video") {
+        image.hidden = true;
+        image.removeAttribute("src");
+        image.removeAttribute("srcset");
+        video.hidden = false;
+        video.poster = item.getAttribute("data-poster") || "";
+        video.src = item.getAttribute("data-src") || "";
+        video.muted = true;
+        video.loop = true;
+        video.controls = true;
+        video.setAttribute("aria-label", item.getAttribute("aria-label") || "");
+        hold(item.parentNode.querySelector("video.demo-clip"));
+        video.onloadedmetadata = function () { fit(video); };
+        if (reduce) video.pause();
+        else {
+          var play = video.play();
+          if (play && play.catch) play.catch(function () {});
+        }
+      } else {
+        stopDialogVideo();
+        var thumb = item.querySelector("img");
+        image.hidden = false;
+        image.alt = thumb ? thumb.alt : "";
+        image.style.maxWidth = "";
+        image.style.maxHeight = "";
+        image.onload = null;
+        image.removeAttribute("src");
+        image.sizes = "(min-width: 1200px) 2400px, 95vw";
+        image.srcset = item.getAttribute("data-srcset") || "";
+        image.onload = function () { fit(image); };
+        image.src = item.href;
+        if (image.complete && image.naturalWidth) fit(image);
+      }
       if (count < 2) {
         prevButton.hidden = true;
         nextButton.hidden = true;
@@ -152,10 +229,10 @@
       closeButton.focus();
     }
 
-    links.forEach(function (link, linkIndex) {
-      link.addEventListener("click", function (event) {
-        event.preventDefault();
-        openAt(linkIndex, link);
+    items.forEach(function (item, itemIndex) {
+      item.addEventListener("click", function (event) {
+        if (item.tagName === "A") event.preventDefault();
+        openAt(itemIndex, item);
       });
     });
 
@@ -167,6 +244,8 @@
       if (event.target === dialog) dialog.close();
     });
     dialog.addEventListener("close", function () {
+      stopDialogVideo();
+      releaseHeld();
       if (opener) opener.focus();
     });
     dialog.addEventListener("keydown", function (event) {
@@ -179,19 +258,22 @@
       }
     });
   });
-})();
 
-(function () {
-  var videos = document.querySelectorAll("video.demo-clip");
-  if (!videos.length || typeof IntersectionObserver === "undefined") return;
-  var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-  videos.forEach(function (video) {
+  document.querySelectorAll("video.demo-clip").forEach(function (video) {
+    var clip = video.closest(".shot-clip");
     if (reduce) {
       video.controls = true;
+      video.removeAttribute("aria-hidden");
+      if (clip) clip.classList.add("is-reduced");
       return;
     }
+    if (typeof IntersectionObserver === "undefined") return;
     new IntersectionObserver(function (entries) {
       entries.forEach(function (entry) {
+        if (entry.target.getAttribute("data-held") === "true") {
+          entry.target.pause();
+          return;
+        }
         if (entry.isIntersecting) {
           var play = entry.target.play();
           if (play && play.catch) play.catch(function () {});

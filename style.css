@@ -249,7 +249,12 @@ button.tool-logo:focus-visible,a.tool-logo:focus-visible{outline:2px solid var(-
 .shot-link{display:block;color:inherit;text-decoration:none}
 .shot-link:hover{text-decoration:none}
 .shot-link:focus-visible{outline:2px solid var(--ruby);outline-offset:3px;border-radius:12px}
-.shot-clip video{display:block;width:100%;height:auto;border-radius:12px;box-shadow:0 8px 22px rgba(31,30,28,.08);border:1px solid var(--line);background:#1f1e1c;aspect-ratio:16/9;object-fit:contain}
+.shot-clip-hit{position:relative}
+.shot-clip video{display:block;width:100%;height:auto;border-radius:12px;box-shadow:0 8px 22px rgba(31,30,28,.08);border:1px solid var(--line);background:#1f1e1c;aspect-ratio:16/9;object-fit:contain;transition:transform .18s ease,box-shadow .18s ease}
+.shot-open{position:absolute;inset:0;margin:0;padding:0;border:0;border-radius:12px;background:transparent;cursor:zoom-in}
+.shot-clip:hover video,.shot-clip:focus-within video{transform:translateY(-2px);box-shadow:0 14px 28px rgba(31,30,28,.16)}
+.shot-open:focus-visible{outline:2px solid var(--ruby);outline-offset:3px}
+.shot-clip.is-reduced .shot-open{bottom:48px}
 .shot-cap,.shot-gallery figcaption{margin:8px 0 0;font-size:13.5px;line-height:1.45;color:var(--muted)}
 .shot-thumbs{list-style:none;margin:8px 0 0;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px 12px}
 .build-block .shot-thumbs li{margin:0;padding:0}
@@ -259,10 +264,13 @@ button.tool-logo:focus-visible,a.tool-logo:focus-visible{outline:2px solid var(-
 @media (max-width:719px){
   .shot-thumbs{grid-template-columns:1fr 1fr}
 }
-.shot-dialog{width:min(960px,calc(100vw - 32px));max-height:calc(100vh - 32px);margin:auto;padding:16px 16px 14px;border:0;border-radius:12px;background:var(--bg);color:var(--body);box-shadow:0 16px 40px rgba(31,30,28,.28)}
+.shot-dialog{display:flex;flex-direction:column;width:95vw;max-width:95vw;max-height:calc(100vh - 16px);margin:auto;padding:12px 12px 14px;border:0;border-radius:12px;background:var(--bg);color:var(--body);box-shadow:0 16px 40px rgba(31,30,28,.28);overflow:auto}
 .shot-dialog::backdrop{background:rgba(31,30,28,.62)}
-.shot-dialog-top{display:flex;justify-content:flex-end;margin:0 0 10px}
-.shot-dialog-img{display:block;width:100%;height:auto;max-height:min(68vh,760px);object-fit:contain;background:var(--stone);border-radius:8px}
+.shot-dialog-top{display:flex;justify-content:flex-end;margin:0 0 8px}
+.shot-dialog-stage{display:flex;align-items:center;justify-content:center;min-height:0;max-height:min(85vh,calc(100vh - 168px))}
+.shot-dialog-img,.shot-dialog-video{display:block;width:auto;height:auto;max-width:min(95vw,100%);max-height:min(85vh,calc(100vh - 168px));object-fit:contain;background:var(--stone);border-radius:8px}
+.shot-dialog-img[hidden],.shot-dialog-video[hidden]{display:none !important}
+.shot-dialog-video{background:#1f1e1c}
 .shot-dialog-cap{margin:10px 0 0;font-size:15px;line-height:1.45;color:var(--ink)}
 .shot-dialog-nav{display:flex;gap:8px;margin-top:12px}
 .shot-dialog button{margin:0;padding:6px 12px;border:1px solid var(--line);border-radius:999px;background:var(--surface);color:var(--ink);font:inherit;font-size:14px;font-weight:600;cursor:pointer}
