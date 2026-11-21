@@ -396,11 +396,11 @@ ${topbar("builds")}
         ${metaLine(build)}
       </header>
       ${snapshot(build)}
+      ${resultsSection(build)}
       ${demo(build)}
       ${proseSection("problem-h", "The problem", build.problem)}
       ${stepsSection(build)}
       ${decisionsSection(build)}
-      ${resultsSection(build)}
       ${nextSection(build)}
       ${note}
       ${pager(build, builds)}

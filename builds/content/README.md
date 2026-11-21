@@ -39,6 +39,8 @@ Commit the JSON and the HTML the script writes. GitHub Pages publishes those fil
 
 Leave a field as `""` or `[]` when it is unknown. The page skips empty sections. Do not write "coming soon".
 
+On the page, the Results tiles sit directly under the snapshot and before The problem. A build with no results skips that heading.
+
 The script prints a warning when a filled field is outside its limit. It still writes the page, and the site shows the full text.
 
 ## Tags
