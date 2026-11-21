@@ -1,0 +1,84 @@
+{
+  "slug": "chapterbridge",
+  "name": "ChapterBridge",
+  "order": 2,
+  "context": "Personal project",
+  "status": "",
+  "status_since": "",
+  "users": "",
+  "card_line": "Read or listen to the same book without losing your place.",
+  "tags": [],
+  "built_with": "Windows, Android, Google Drive, Codex, Claude Code",
+  "time_to_build": "About five weeks",
+  "snapshot": {
+    "problem": "I like switching between reading and listening, depending on whether I’m at my desk or in the car.",
+    "what_i_built": "Lines up an ebook and its audiobook word by word. All three share one saved place.",
+    "result": "On a 22-hour novel, it matched 91% of the words (about 155,000 of 170,000) and flagged the rest for review."
+  },
+  "problem": "I like switching between reading and listening, depending on whether I’m at my desk or in the car. Every time I switched, I lost my place and ended up scrubbing through hours of audio to find where I left off. The big platforms sync reading and listening, but only for books you buy in their store. Nothing did it for files I already owned, so I built it.",
+  "how_it_works": [
+    {
+      "text": "Lines up an ebook and its audiobook word by word, using speech-to-text that runs on my own PC.",
+      "owner": "TODO"
+    },
+    {
+      "text": "Lets me read, listen, or follow along with each word highlighted as the narrator reads it. All three share one saved place.",
+      "owner": "TODO"
+    },
+    {
+      "text": "Syncs that place between my PC and phone through my own Google Drive, and works offline on the phone.",
+      "owner": "TODO"
+    },
+    {
+      "text": "Flags passages it couldn’t match instead of guessing.",
+      "owner": "TODO"
+    }
+  ],
+  "decisions": [
+    {
+      "decision": "My own Google Drive as the backend.",
+      "reason": "There’s no server to run, pay for or secure, and the data stays in my account. The app can only see files it created."
+    },
+    {
+      "decision": "Local transcription.",
+      "reason": "The books are copyrighted and private, so I ran Whisper on my PC instead of sending audio to a cloud service. It’s slower, but it’s free and nothing leaves the machine."
+    },
+    {
+      "decision": "No “last save wins.”",
+      "reason": "Every saved position is kept as history. If my phone and PC disagree, the app asks me which one is right. The farthest point isn’t always where I stopped."
+    },
+    {
+      "decision": "Sized for one user.",
+      "reason": "One PC manages the shared library and each phone keeps its own file. For a real product, I’d move to a proper sync service and cloud transcription."
+    },
+    {
+      "decision": "There’s no analytics or tracking.",
+      "reason": "The desktop app only accepts connections from the same computer. Google credentials and the app’s signing key are encrypted with Windows’ built-in protection."
+    }
+  ],
+  "results": [
+    {
+      "value": "More than 30",
+      "label": "signed Android releases in about five weeks",
+      "basis": "TODO"
+    },
+    {
+      "value": "About 300",
+      "label": "automated tests on the desktop side and about 40 Android test suites",
+      "basis": "TODO"
+    },
+    {
+      "value": "Roughly 12,500",
+      "label": "lines of Node.js and Java, all written by AI",
+      "basis": "TODO"
+    },
+    {
+      "value": "91%",
+      "label": "On a 22-hour novel, it matched 91% of the words (about 155,000 of 170,000) and flagged the rest for review.",
+      "basis": "TODO"
+    }
+  ],
+  "next": [
+    "For a real product, I’d move to a proper sync service and cloud transcription."
+  ]
+}

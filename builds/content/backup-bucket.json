@@ -1,0 +1,39 @@
+{
+  "slug": "backup-bucket",
+  "name": "Backup Bucket",
+  "order": 3,
+  "context": "",
+  "status": "",
+  "status_since": "",
+  "users": "",
+  "card_line": "A Windows backup client with encrypted cloud storage and 170+ automated tests.",
+  "tags": [],
+  "built_with": "Windows, encrypted cloud storage",
+  "time_to_build": "",
+  "snapshot": {
+    "problem": "",
+    "what_i_built": "A Windows backup client with encrypted cloud storage.",
+    "result": "It has 170+ automated tests."
+  },
+  "problem": "",
+  "how_it_works": [
+    {
+      "text": "A Windows backup client with encrypted cloud storage.",
+      "owner": "TODO"
+    }
+  ],
+  "decisions": [
+    {
+      "decision": "Shipped as the product owner directing AI coding tools, without writing the code himself.",
+      "reason": ""
+    }
+  ],
+  "results": [
+    {
+      "value": "170+",
+      "label": "automated tests",
+      "basis": "TODO"
+    }
+  ],
+  "next": []
+}
