@@ -48,7 +48,9 @@ The script prints a warning when a filled field is outside its limit. It still w
 
 Process redesign, Human approval, Evals, Rules in code, Data reconciliation, Multi-system automation, Local AI, Privacy by design, Automated testing, Human-in-the-loop, Small Business, Accounting.
 
-`tag-glossary.json` holds an optional description for a tag. The card reuses that text for every build with the tag. A tag with no entry shows no bubble. Bubbles are on the cards only.
+Tags on a card are labels. They are not buttons and they do not open a bubble.
+
+A description Eric approved for Human-in-the-loop, saved here in case it is wanted later: "The agent does the work, but a person approves anything important before it happens, like sending an invoice."
 
 - Tool logos: Simple Icons, CC0, stored in `img/tools/` and inlined on the card. They are about 20px, gray by default, and ruby when the card is hovered or focused. Each logo is a button with a styled bubble for its name. A name with no file falls back to a small text label. The bubble also opens on keyboard focus, and a tap toggles it on a touch screen.
 

@@ -4,8 +4,6 @@ import { fileURLToPath } from "url";
 
 const root = join(dirname(fileURLToPath(import.meta.url)), "..");
 const contentDir = join(root, "builds", "content");
-const glossaryPath = join(contentDir, "tag-glossary.json");
-const glossary = existsSync(glossaryPath) ? JSON.parse(readFileSync(glossaryPath, "utf8")) : {};
 const HOME_BUILD_LIMIT = 4;
 const SITE = "https://ericlyman.com";
 const OG_DEFAULT = "/img/og-default.png";
@@ -65,7 +63,7 @@ function filled(value) {
 }
 
 function loadBuilds() {
-  const files = readdirSync(contentDir).filter((name) => name.endsWith(".json") && name !== "tag-glossary.json").sort();
+  const files = readdirSync(contentDir).filter((name) => name.endsWith(".json")).sort();
   return files.map((name) => {
     const build = JSON.parse(readFileSync(join(contentDir, name), "utf8"));
     check(name, build);
@@ -198,13 +196,7 @@ function tip(id, text) {
 function tagList(build) {
   if (!build.tags || !build.tags.length) return "";
   if (build.tools && build.tools.length) {
-    const items = build.tags.map((tag, index) => {
-      const description = glossary[tag];
-      if (!description) return `<li><span class="build-tag">${esc(tag)}</span></li>`;
-      const id = `tip-${esc(build.slug)}-tag-${index}`;
-      return `<li><button type="button" class="build-tag" data-tip aria-describedby="${id}">${esc(tag)}</button>${tip(id, description)}</li>`;
-    }).join("");
-    return `<ul class="build-tags" aria-label="Tags">${items}</ul>`;
+    return `<ul class="build-tags" aria-label="Tags">${build.tags.map((tag) => `<li><span class="build-tag">${esc(tag)}</span></li>`).join("")}</ul>`;
   }
   return `<ul class="tags" aria-label="Tags">${build.tags.map((tag) => `<li>${esc(tag)}</li>`).join("")}</ul>`;
 }
