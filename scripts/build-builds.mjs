@@ -420,17 +420,19 @@ function nextSection(build) {
   return `<section class="build-block" aria-labelledby="next-h"><h2 id="next-h">What I'd change next</h2><ul>${items.map((item) => `<li>${esc(item)}</li>`).join("")}</ul></section>`;
 }
 
+const homeEnd = `<span class="link-end"><span class="link-sep" aria-hidden="true">|</span><a href="/">Home</a></span>`;
+
 function pager(build, builds) {
   const index = builds.findIndex((item) => item.slug === build.slug);
   const prev = builds[index - 1];
   const next = builds[index + 1];
   const prevLink = prev ? `<a href="/builds/${esc(prev.slug)}/">Previous: ${esc(prev.name)}</a>` : "";
   const nextLink = next ? `<a href="/builds/${esc(next.slug)}/">Next: ${esc(next.name)}</a>` : "";
-  return `<nav class="build-pager" aria-label="Other builds">${prevLink}<a href="/builds/">All builds</a>${nextLink}</nav>`;
+  return `<nav class="build-pager" aria-label="Other builds">${prevLink}<a href="/builds/">All builds</a>${nextLink}${homeEnd}</nav>`;
 }
 
 function contact() {
-  return `<div class="build-contact"><a href="mailto:hello@ericlyman.com">hello@ericlyman.com</a><a class="btn btn--inline" href="/resume/Eric-Lyman-Resume.pdf" download="Eric-Lyman-Resume.pdf"><svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12"/><path d="m7 10 5 5 5-5"/><path d="M5 21h14"/></svg>Download Resume</a></div>`;
+  return `<div class="build-contact"><a href="mailto:hello@ericlyman.com">hello@ericlyman.com</a><a class="btn btn--inline" href="/resume/Eric-Lyman-Resume.pdf" download="Eric-Lyman-Resume.pdf"><svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12"/><path d="m7 10 5 5 5-5"/><path d="M5 21h14"/></svg>Download Resume</a>${homeEnd}</div>`;
 }
 
 const backScript = `<script>
@@ -487,7 +489,7 @@ ${topbar("builds")}
       ${note}
       ${pager(build, builds)}
       ${contact()}
-      <p class="build-all"><a href="/builds/">All builds</a></p>
+      <p class="build-all"><a href="/builds/">All builds</a>${homeEnd}</p>
     </article>
   </main>
 ${footer}

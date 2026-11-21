@@ -238,6 +238,10 @@ button.tool-logo:focus-visible,a.tool-logo:focus-visible{outline:2px solid var(-
 .build-all{margin:22px 0 0;font-size:14px}
 .build-all a{color:var(--muted);font-weight:500}
 .build-all a:hover{color:var(--ruby)}
+.link-end{display:inline-flex;align-items:center;gap:.4em;white-space:nowrap}
+.build-pager .link-end,.build-contact .link-end{margin-left:-8px}
+.build-all .link-end{margin-left:.45em}
+.link-sep{color:var(--muted);font-weight:400}
 @media (prefers-reduced-motion:reduce){
   .demo-gif{display:none}
   .demo-still{display:block}
