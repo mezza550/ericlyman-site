@@ -138,7 +138,7 @@
       var thumb = link.querySelector("img");
       image.src = link.href;
       image.alt = thumb ? thumb.alt : "";
-      caption.textContent = figcaption ? figcaption.textContent : "";
+      caption.textContent = link.getAttribute("data-caption") || (figcaption ? figcaption.textContent : "");
       if (count < 2) {
         prevButton.hidden = true;
         nextButton.hidden = true;
@@ -178,5 +178,27 @@
         show(index - 1);
       }
     });
+  });
+})();
+
+(function () {
+  var videos = document.querySelectorAll("video.demo-clip");
+  if (!videos.length || typeof IntersectionObserver === "undefined") return;
+  var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  videos.forEach(function (video) {
+    if (reduce) {
+      video.controls = true;
+      return;
+    }
+    new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          var play = entry.target.play();
+          if (play && play.catch) play.catch(function () {});
+        } else {
+          entry.target.pause();
+        }
+      });
+    }, { threshold: 0.4 }).observe(video);
   });
 })();

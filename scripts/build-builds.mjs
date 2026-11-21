@@ -434,27 +434,46 @@ function stepsSection(build) {
   return `<section class="build-block" aria-labelledby="works-h"><h2 id="works-h">How it works</h2><ol class="timeline">${items}</ol></section>`;
 }
 
+function mediaFileReady(src) {
+  if (!src || !src.startsWith("/")) return false;
+  return existsSync(join(root, src.slice(1)));
+}
+
+function clipFigure(item) {
+  const caption = `<figcaption class="shot-cap">${esc(item.caption || "")}</figcaption>`;
+  const ready = item.ready && mediaFileReady(item.src);
+  if (!ready) {
+    return `<figure class="shot-clip"><div class="clip-soon"><span>Clip coming soon</span></div>${caption}</figure>`;
+  }
+  const label = item.label ? ` aria-label="${esc(item.label)}"` : "";
+  const poster = item.poster ? ` poster="${esc(item.poster)}"` : "";
+  return `<figure class="shot-clip"><video class="demo-clip" muted loop playsinline preload="none"${poster} width="${item.width || 1920}" height="${item.height || 1080}"${label}><source src="${esc(item.src)}" type="video/mp4"></video>${caption}</figure>`;
+}
+
+function shotFigure(item, figureClass) {
+  const page = item.page || {};
+  const full = item.full || page;
+  const srcset = page.srcset ? ` srcset="${esc(page.srcset)}"` : "";
+  const sizes = item.sizes ? ` sizes="${esc(item.sizes)}"` : "";
+  const lightbox = item.lightbox || item.caption || "";
+  return `<figure class="${figureClass}"><a class="shot-link" href="${esc(full.src)}" data-caption="${esc(lightbox)}"><img src="${esc(page.src)}"${srcset}${sizes} width="${page.width}" height="${page.height}" alt="${esc(item.alt || "")}" loading="lazy" decoding="async"></a><figcaption class="shot-cap">${esc(item.caption || "")}</figcaption></figure>`;
+}
+
 function shotsSection(build) {
   const gallery = build.gallery;
-  const shots = gallery && gallery.shots;
-  if (!shots || !shots.length) return "";
+  if (!gallery || (!gallery.lead && !(gallery.groups && gallery.groups.length))) return "";
   const heading = gallery.heading || "In use";
-  const figure = (shot, index, lead) => {
-    const large = shot.large;
-    const small = shot.small;
-    const srcset = `${esc(small.src)} ${small.width}w, ${esc(large.src)} ${large.width}w`;
-    const sizes = lead
-      ? "(min-width: 720px) 686px, calc(100vw - 40px)"
-      : "(min-width: 720px) 330px, calc(100vw - 40px)";
-    const loading = lead ? `loading="eager"` : `loading="lazy"`;
-    const img = `<img src="${esc(small.src)}" srcset="${srcset}" sizes="${sizes}" width="${large.width}" height="${large.height}" alt="${esc(shot.alt)}" ${loading} decoding="async">`;
-    const frame = lead ? img : `<span class="shot-frame">${img}</span>`;
-    return `<figure class="${lead ? "shot-lead" : "shot"}"><a class="shot-link" href="${esc(large.src)}" data-shot="${index}">${frame}</a><figcaption>${esc(shot.caption)}</figcaption></figure>`;
-  };
-  const rest = shots.slice(1).map((shot, index) => `<li>${figure(shot, index + 1, false)}</li>`).join("");
-  const grid = rest ? `<ul class="shot-grid">${rest}</ul>` : "";
+  const lead = gallery.lead ? clipFigure(gallery.lead) : "";
+  const groups = (gallery.groups || []).map((group) => {
+    const title = group.heading ? `<h3>${esc(group.heading)}</h3>` : "";
+    const clip = group.clip ? clipFigure(group.clip) : "";
+    const figures = (group.figures || []).map((item) => shotFigure(item, item.layout === "narrow" ? "shot-narrow" : "shot-wide")).join("");
+    const thumbs = (group.thumbs || []).map((item) => `<li>${shotFigure(item, "shot-thumb")}</li>`).join("");
+    const grid = thumbs ? `<ul class="shot-thumbs">${thumbs}</ul>` : "";
+    return `<div class="shot-group">${title}${clip}${figures}${grid}</div>`;
+  }).join("");
   const dialog = `<dialog class="shot-dialog"><div class="shot-dialog-top"><button type="button" data-shot-close>Close</button></div><img class="shot-dialog-img" alt=""><p class="shot-dialog-cap"></p><div class="shot-dialog-nav"><button type="button" data-shot-prev>Previous</button><button type="button" data-shot-next>Next</button></div></dialog>`;
-  return `<section class="build-block shot-gallery" aria-labelledby="shots-h"><h2 id="shots-h">${esc(heading)}</h2>${figure(shots[0], 0, true)}${grid}${dialog}</section>`;
+  return `<section class="build-block shot-gallery" aria-labelledby="shots-h"><h2 id="shots-h">${esc(heading)}</h2>${lead}${groups}${dialog}</section>`;
 }
 
 function decisionsSection(build) {
