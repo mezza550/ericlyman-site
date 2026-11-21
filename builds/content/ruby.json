@@ -14,7 +14,7 @@
     "alt": "Ruby gemstone icon"
   },
   "built_with": "Python, SQLite, DeepSeek via OpenRouter, Claude Code, Gemini",
-  "time_to_build": "Five days of building (November 16-20, 2026), after a week of planning",
+  "time_to_build": "One week of planning, one week of building",
   "snapshot": {
     "problem": "Freelance billing ran on manual entry and copy-paste, which caused math errors and missed invoice follow-ups.",
     "what_i_built": "An agent she chats with. It logs hours, nudges her to act, drafts invoice emails, and asks before anything important.",

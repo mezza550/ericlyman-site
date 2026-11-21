@@ -22,12 +22,12 @@ Commit the JSON and the HTML the script writes. GitHub Pages publishes those fil
 | card_line | One sentence on the job it does. | 80 characters |
 | headline_metric | Optional `value`, `label`, and `basis` (`measured` or `expected`). | |
 | tags | Up to 3 concept tags from the list below. On a card with `tools`, these are tag-shaped labels. Other cards keep the plain pills. | |
-| tools | Optional tool names for the card's logo row. Names come from `built_with`. The page header still uses `built_with`. | |
+| tools | Optional tool names. Shown as the logo row on the card and in the build page header. | |
+| time_to_build | Short text, such as "About five weeks". Shown as a muted line under the tags and tools on the build page. | |
 | thumbnail | `src` and `alt`. | Image 16:9 |
 | icon | Optional `src` and `alt`. Sits beside the name on the card and the page, like the Experience logos. | 96×96 transparent PNG or WebP |
 | og_image | Optional sharing image. | 1200×630 |
-| built_with | Short tools line. Platform names go here, not in tags. | 60 characters |
-| time_to_build | Short text, such as "About five weeks". | |
+| built_with | Short tools line kept in the data. It is not shown as the header line. | 60 characters |
 | snapshot | `problem`, `what_i_built`, and `result`. | 120 characters each |
 | demo | Optional `type` (`video`, `gif`, or `images`), `sources`, `poster`, and `captions`. | |
 | problem | The manual process before, in plain prose. | 40–80 words |

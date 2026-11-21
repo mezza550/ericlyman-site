@@ -349,10 +349,14 @@ ${footer}
 `;
 }
 
-function metaLine(build) {
-  const parts = [build.context, build.status_since, filled(build.built_with) ? build.built_with : "", build.time_to_build].filter(filled);
-  if (build.context === "Work project" && filled(build.employer)) parts[0] = `Work project, ${build.employer}`;
-  return parts.length ? `<p class="build-facts">${esc(parts.join(" · "))}</p>` : "";
+function headerTags(build) {
+  if (!build.tags || !build.tags.length) return "";
+  return `<ul class="build-tags" aria-label="Tags">${build.tags.map((tag) => `<li><span class="build-tag">${esc(tag)}</span></li>`).join("")}</ul>`;
+}
+
+function timeLine(build) {
+  if (!filled(build.time_to_build)) return "";
+  return `<p class="build-facts">${esc(build.time_to_build)}</p>`;
 }
 
 function snapshot(build) {
@@ -477,7 +481,9 @@ ${topbar("builds")}
       <header class="build-header">
         ${titleRow(build, "h1")}
         ${filled(build.card_line) ? `<p class="build-subtitle">${esc(build.card_line)}</p>` : ""}
-        ${metaLine(build)}
+        ${headerTags(build)}
+        ${toolsRow(build)}
+        ${timeLine(build)}
       </header>
       ${snapshot(build)}
       ${resultsSection(build)}
@@ -493,6 +499,7 @@ ${topbar("builds")}
     </article>
   </main>
 ${footer}
+  <script src="../../builds.js"></script>
 </body>
 </html>
 `;

@@ -249,6 +249,7 @@ button.tool-logo:focus-visible,a.tool-logo:focus-visible{outline:2px solid var(-
 .demo-still{display:none;width:100%;height:auto;border-radius:12px}
 .build-subtitle{margin:0 0 8px;max-width:36em;font-size:18px;line-height:1.45;color:var(--body)}
 .build-facts{margin:0;font-size:13.5px;font-weight:500;line-height:1.45;color:var(--muted)}
+.build-header .build-tags,.build-header .build-tools,.build-header .build-facts{margin-top:12px}
 .build-section ul{margin:0;padding:0;list-style:none}
 .build-section ul li{margin:0 0 10px;padding-left:18px;position:relative}
 .build-section ul li:last-child{margin-bottom:0}
