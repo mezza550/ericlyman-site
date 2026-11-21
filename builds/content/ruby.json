@@ -16,11 +16,11 @@
   "built_with": "Python, SQLite, DeepSeek via OpenRouter, Claude Code, Gemini",
   "time_to_build": "One week of planning, one week of building with Claude and Gemini",
   "snapshot": {
-    "problem": "She's a designer, not a bookkeeper, and very non-technical. Hour tracking and billing ran on manual entry, napkin math, and copy-paste, which caused errors and missed invoice follow-ups, and the bookkeeping kept her from the more rewarding, creative work.",
+    "problem": "Freelance hour tracking and billing ran on manual entry, napkin math, and copy-paste, which caused errors and missed invoice follow-ups.",
     "what_i_built": "An agent inside a MacOS app she chats with. It logs hours, nudges her to act, drafts invoice emails, and asks before anything important.",
     "result": "Consistency, fewer errors, accurate books and payments, and reliable follow-up. Invoices go out the same way every week, unpaid ones get flagged, and I expect it to save about an hour a week."
   },
-  "problem": "The designer ran all of her admin by hand in a spreadsheet. Hours were typed into cells, totals were worked out by hand, and every invoice was built and emailed manually. It was a copy-paste nightmare that led to miscalculations. Following up on unpaid invoices depended on remembering to check, so it got missed. Her main client also caps weekly hours, so she had to keep a running total.",
+  "problem": "She's a designer, not a bookkeeper, and very non-technical. Bookkeeping was a drag that kept her from the more rewarding, creative work. The designer ran all of her admin by hand in a spreadsheet. Hours were typed into cells, totals were worked out by hand, and every invoice was built and emailed manually. It was a copy-paste nightmare that led to miscalculations. Following up on unpaid invoices depended on remembering to check, so it got missed. Her main client also caps weekly hours, so she had to keep a running total.",
   "how_it_works": [
     {
       "text": "She tells Ruby what she worked on in a plain sentence, like \"2.5 hours on the holiday mailer today.\"",
