@@ -495,8 +495,7 @@ ${topbar("builds")}
         ${timeLine(build)}
       </header>
       ${snapshot(build)}
-      ${resultsSection(build)}
-      ${checksSection(build)}
+      ${resultsSection(build)}${checksSection(build) ? `\n      ${checksSection(build)}` : ""}
       ${demo(build)}
       ${proseSection("problem-h", "The problem", build.problem)}
       ${stepsSection(build)}
