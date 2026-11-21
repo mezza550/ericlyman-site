@@ -215,24 +215,21 @@ button.tool-logo:focus-visible,a.tool-logo:focus-visible{outline:2px solid var(-
 .snapshot div{display:grid;grid-template-columns:8.5em 1fr;gap:8px;align-items:baseline}
 .snapshot dt{margin:0;font-size:12px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
 .snapshot dd{margin:0;color:var(--ink)}
-.timeline{--node:78px;--icon:56px;--ring:2.5px;--stroke:1.071;--gap:22px;list-style:none;margin:8px 0 0;padding:0}
+.timeline{--node:58.5px;--icon:42px;--ring:2px;--stroke:1.143;--gap:22px;--rail:100px;list-style:none;margin:8px 0 0;padding:0}
 .tl-step{display:grid;grid-template-columns:var(--node) minmax(0,1fr);column-gap:16px;align-items:stretch}
-.tl-rail{position:relative;min-height:calc(var(--node) + var(--gap))}
+.tl-rail{position:relative;min-height:var(--rail)}
 .tl-step:last-child .tl-rail{min-height:var(--node)}
 .tl-node{position:relative;z-index:1;display:grid;place-items:center;width:var(--node);height:var(--node);margin:0;padding:0;border:0;border-radius:50%;background:var(--surface);color:var(--muted);font:inherit;cursor:pointer;box-shadow:inset 0 0 0 var(--ring) currentColor}
 .tl-node.owner-person,.tl-line.owner-person{color:#1d6fd6}
 .tl-node.owner-ai,.tl-line.owner-ai{color:#7c3aed}
 .tl-node.owner-code,.tl-line.owner-code{color:#15803d}
 .tl-node svg{display:block;width:var(--icon);height:var(--icon);stroke-width:var(--stroke)}
+.tl-node.owner-person svg{width:calc(var(--icon) * .75);height:calc(var(--icon) * .75);stroke-width:calc(var(--stroke) / .75)}
 .tl-line{position:absolute;z-index:0;top:var(--node);bottom:0;left:50%;width:var(--ring);margin-left:calc(var(--ring) / -2);background:currentColor}
 .tl-body{padding-top:0;padding-bottom:var(--gap);min-width:0}
 .tl-step:last-child .tl-body{padding-bottom:0}
 .timeline .tl-body p{margin:-.2em 0 0}
 .tl-tools{display:flex;align-items:center;gap:8px;margin-top:10px}
-.tl-stem{position:relative;flex:0 0 18px;width:18px;border-top:1.5px dashed #9a948c}
-.tl-stem::before,.tl-stem::after{content:"";position:absolute;top:50%;width:4px;height:4px;margin-top:-2px;border-radius:50%;background:#9a948c}
-.tl-stem::before{left:-2px}
-.tl-stem::after{right:-2px}
 .tl-tool{display:inline-flex;align-items:center;gap:8px;margin:0;padding:0;border:0;background:none;color:inherit;font:inherit;cursor:pointer}
 .tl-tool-mark{display:grid;place-items:center;width:32px;height:32px;border:1.5px solid var(--line);border-radius:50%;background:var(--surface);color:var(--ink)}
 .tl-tool-mark svg{display:block;width:16px;height:16px}
@@ -242,19 +239,22 @@ button.tool-logo:focus-visible,a.tool-logo:focus-visible{outline:2px solid var(-
 .tl-node:focus-visible,.tl-tool:focus-visible{outline:2px solid var(--ruby);outline-offset:3px}
 .tl-tool:hover .tl-tool-mark,.tl-tool:focus-visible .tl-tool-mark{border-color:#c4beb6}
 @media (max-width:719px){
-  .timeline{--node:60px;--icon:42px;--stroke:1.429;--gap:18px}
+  .timeline{--node:45px;--icon:31.5px;--stroke:1.524;--gap:18px;--rail:78px}
   .tl-step{column-gap:12px}
   .tl-tool-mark{width:28px;height:28px}
   .tl-tool-mark svg{width:14px;height:14px}
   .tl-tool-name{font-size:11px}
 }
-.result-tiles{list-style:none;margin:0;padding:0;display:grid;gap:10px}
+.result-tiles{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:1fr 1fr;gap:10px;align-items:stretch}
 .build-block .result-tiles li{margin:0;padding:12px 14px;background:var(--surface);border:1px solid var(--line);border-radius:12px}
 .build-block .result-tiles li::before{content:none}
 .result-value{display:block;font-family:var(--serif);font-weight:500;font-size:22px;line-height:1.2;color:var(--ruby)}
 .result-label{display:block;margin-top:4px;color:var(--body)}
 .result-basis{display:inline-block;margin-top:6px;font-size:12px;font-weight:600;letter-spacing:.04em;text-transform:uppercase;color:var(--muted)}
-.check-tiles{gap:8px}
+.check-tiles{gap:10px}
+@media (max-width:599px){
+  .result-tiles{grid-template-columns:1fr}
+}
 .build-block .check-tiles li{padding:8px 12px;background:var(--stone)}
 .check-tiles .result-value{font-size:18px;line-height:1.25}
 .check-tiles .result-label{font-size:14.5px}

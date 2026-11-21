@@ -396,8 +396,8 @@ function proseSection(id, title, text) {
 }
 
 const OWNER_ICONS = {
-  person: `<svg aria-hidden="true" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" stroke="none" focusable="false"><circle cx="12" cy="6.55" r="3.15"/><path d="M4.4 18.75a7.6 7.6 0 0 1 15.2 0v1.45c0 .85-.65 1.5-1.5 1.5H5.9c-.85 0-1.5-.65-1.5-1.5v-1.45z"/></svg>`,
-  ai: `<svg aria-hidden="true" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" focusable="false"><path d="M12 4v2"/><rect x="7" y="7" width="10" height="9" rx="2"/><circle cx="10" cy="11.3" r="1.15" fill="currentColor" stroke="none"/><circle cx="14" cy="11.3" r="1.15" fill="currentColor" stroke="none"/></svg>`,
+  person: `<svg aria-hidden="true" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" focusable="false"><circle cx="12" cy="5.7" r="2.55"/><path d="M5.5 18.7a6.5 6.5 0 0 1 13 0v1.6c0 .7-.55 1.3-1.3 1.3H6.8c-.75 0-1.3-.6-1.3-1.3v-1.6z"/></svg>`,
+  ai: `<svg aria-hidden="true" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" focusable="false"><g transform="translate(0 .5)"><path d="M12 4v2"/><rect x="7" y="7" width="10" height="9" rx="2"/><circle cx="10" cy="11.3" r="1.15" fill="currentColor" stroke="none"/><circle cx="14" cy="11.3" r="1.15" fill="currentColor" stroke="none"/></g></svg>`,
   code: `<svg aria-hidden="true" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" focusable="false"><rect x="8" y="8" width="8" height="8" rx="1.2"/><path d="M10 5v3M14 5v3M10 16v3M14 16v3M5 10h3M5 14h3M16 10h3M16 14h3"/></svg>`,
   todo: `<svg aria-hidden="true" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" focusable="false"><circle cx="12" cy="12" r="8"/><path d="M9.6 9.5a2.4 2.4 0 1 1 3.3 2.2c-.8.4-1.3.9-1.3 1.8"/><path d="M12 17h.01"/></svg>`
 };
@@ -428,7 +428,7 @@ function stepsSection(build) {
       const mark = svg || `<span class="tl-tool-fallback">${esc(tool.name.slice(0, 2))}</span>`;
       return `<button type="button" class="tl-tool" data-tip aria-label="${esc(tool.label)}" aria-describedby="${toolId}"><span class="tl-tool-mark">${mark}</span><span class="tl-tool-name" aria-hidden="true">${esc(tool.label)}</span></button>${tip(toolId, tool.label)}`;
     }).join("");
-    const branch = tools ? `<div class="tl-tools"><span class="tl-stem" aria-hidden="true"></span>${tools}</div>` : "";
+    const branch = tools ? `<div class="tl-tools">${tools}</div>` : "";
     return `<li class="tl-step"><div class="tl-rail"><button type="button" class="tl-node owner-${esc(String(owner).toLowerCase())}" data-tip aria-label="${esc(owner)}" aria-describedby="${id}">${ownerIcon(owner)}</button>${line}</div>${tip(id, owner)}<div class="tl-body"><p>${esc(step.text)}</p>${branch}</div></li>`;
   }).join("");
   return `<section class="build-block" aria-labelledby="works-h"><h2 id="works-h">How it works</h2><ol class="timeline">${items}</ol></section>`;
