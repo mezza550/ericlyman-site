@@ -265,6 +265,7 @@ button.tool-logo:focus-visible,a.tool-logo:focus-visible{outline:2px solid var(-
 .shot-frame{display:block;aspect-ratio:3799 / 1980;overflow:hidden;border:1px solid var(--line);border-radius:12px;background:var(--stone);box-shadow:0 8px 22px rgba(31,30,28,.08)}
 .shot-frame--portrait{aspect-ratio:220 / 284}
 .shot-feature{margin:0 0 16px}
+.shot-gallery .shot-feature--center{width:min(480px,100%);margin-left:auto;margin-right:auto}
 .shot-placeholder{display:grid;place-items:center;width:100%;border:1px solid var(--line);border-radius:12px;background:var(--stone);color:var(--muted);font-size:12px;font-weight:600;letter-spacing:.06em;text-transform:uppercase}
 .shot-placeholder--feature{aspect-ratio:1240 / 820}
 .shot-placeholder--thumb{aspect-ratio:220 / 114}

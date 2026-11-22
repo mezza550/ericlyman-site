@@ -133,9 +133,31 @@
     el.style.maxHeight = "";
   }
 
+  function bitmapSize(el) {
+    var nw = el.naturalWidth || el.videoWidth || 0;
+    var nh = el.naturalHeight || el.videoHeight || 0;
+    var srcset = el.getAttribute("srcset") || "";
+    if (!srcset || !nw || !nh) return { w: nw, h: nh };
+    var current = (el.currentSrc || el.src || "").split("?")[0].split("/").pop();
+    var parts = srcset.split(",");
+    for (var i = 0; i < parts.length; i++) {
+      var bits = parts[i].trim().split(/\s+/);
+      if (bits.length < 2 || !/^[0-9]+w$/.test(bits[1])) continue;
+      var name = bits[0].split("?")[0].split("/").pop();
+      if (name !== current) continue;
+      var declared = parseInt(bits[1], 10);
+      if (declared && Math.abs(declared - nw) > 1) {
+        return { w: declared, h: Math.max(1, Math.round(nh * declared / nw)) };
+      }
+      break;
+    }
+    return { w: nw, h: nh };
+  }
+
   function fit(el, dialog) {
-    var nw = el.naturalWidth || el.videoWidth;
-    var nh = el.naturalHeight || el.videoHeight;
+    var size = bitmapSize(el);
+    var nw = size.w;
+    var nh = size.h;
     if (!nw || !nh || !dialog.open) return;
     var padX = 24;
     var vw = window.innerWidth || document.documentElement.clientWidth;

@@ -509,7 +509,8 @@ function featureFigure(item) {
   const lightbox = item.lightbox || item.caption || "";
   const ratio = page.width && page.height ? ` style="aspect-ratio:${Number(page.width)} / ${Number(page.height)}"` : "";
   const img = `<img src="${esc(page.src)}"${srcset}${sizes} width="${page.width}" height="${page.height}" alt="${esc(item.alt || "")}" loading="lazy" decoding="async">`;
-  return `<figure class="shot-feature"><a class="shot-link" href="${esc(full.src)}" data-srcset="${esc(lightboxSrcset(full))}" data-caption="${esc(lightbox)}"><span class="shot-frame"${ratio}>${img}</span></a><figcaption class="shot-cap">${esc(item.caption || "")}</figcaption></figure>`;
+  const center = item.present === "center" ? " shot-feature--center" : "";
+  return `<figure class="shot-feature${center}"><a class="shot-link" href="${esc(full.src)}" data-srcset="${esc(lightboxSrcset(full))}" data-caption="${esc(lightbox)}"><span class="shot-frame"${ratio}>${img}</span></a><figcaption class="shot-cap">${esc(item.caption || "")}</figcaption></figure>`;
 }
 
 function hasMedia(item) {

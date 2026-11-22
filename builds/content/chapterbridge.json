@@ -142,79 +142,122 @@
     "heading": "ChapterBridge in use",
     "slides": [
       {
-        "placeholder": true,
-        "kind": "video",
-        "width": 1240,
-        "height": 820,
-        "caption": "Read Along on the phone. The highlight follows the narration word by word, with the text and playback controls on one screen.",
-        "alt": "Phone screen in Read Along mode with a chapter title at the top, a few lines of text with the current spoken word highlighted, and play, pause, and skip controls at the bottom showing the elapsed time."
-      },
-      {
-        "placeholder": true,
         "kind": "image",
-        "width": 1240,
-        "height": 820,
-        "caption": "Adding a book on the PC. I pick the ebook and the tracks, put the tracks in order, and it processes locally.",
-        "alt": "Desktop Add a book screen listing an EPUB file and eight numbered audiobook tracks in order with Move up and Move down buttons, beside a library card showing the book transcribing with a progress bar."
+        "caption": "Read Along on the PC. The highlight follows the narration word by word, with the text and playback controls on one screen.",
+        "alt": "Desktop Read along view of chapter 20 with the overall book position at 35.8 percent, a paragraph of text with the spoken word highlighted, and the player bar at the bottom showing 0:24 elapsed.",
+        "sizes": "(min-width: 720px) 68ch, calc(100vw - 40px)",
+        "page": {
+          "src": "/img/builds/chapterbridge/gallery/slide-read-along-half.webp",
+          "width": 1440,
+          "height": 655,
+          "srcset": "/img/builds/chapterbridge/gallery/slide-read-along-half.webp 1440w, /img/builds/chapterbridge/gallery/slide-read-along.webp 2880w"
+        },
+        "full": {
+          "src": "/img/builds/chapterbridge/gallery/slide-read-along.webp",
+          "width": 2880,
+          "height": 1310
+        }
       },
       {
-        "placeholder": true,
-        "kind": "video",
-        "width": 1240,
-        "height": 820,
+        "kind": "image",
+        "caption": "Adding a book on the PC. I pick the ebook and the tracks, put the tracks in order, and it processes locally.",
+        "alt": "On the left, the Add a book screen with The Time Machine chosen as the ebook, 12 audio files totalling 100.4 MB, and the track order list sorted by name with up and down arrows. On the right, the book's library card reading Recognizing speech, above a progress panel showing Recognizing spoken words with 5 of 28 chunks complete and a Cancel processing button.",
+        "sizes": "(min-width: 720px) 68ch, calc(100vw - 40px)",
+        "page": {
+          "src": "/img/builds/chapterbridge/gallery/slide-add-book-half.webp",
+          "width": 1440,
+          "height": 810,
+          "srcset": "/img/builds/chapterbridge/gallery/slide-add-book-half.webp 1440w, /img/builds/chapterbridge/gallery/slide-add-book.webp 2880w"
+        },
+        "full": {
+          "src": "/img/builds/chapterbridge/gallery/slide-add-book.webp",
+          "width": 2880,
+          "height": 1620
+        }
+      },
+      {
+        "kind": "image",
+        "present": "center",
         "caption": "Two devices moved while apart. The app names the book, shows both places, and waits for me to choose.",
-        "alt": "Dialog titled with the book name showing two device cards, one for the phone at Chapter 31 and one for the PC at Chapter 28, each with a button to keep that place."
+        "alt": "Dialog titled Choose your place for Red Rising, with the cover, asking where to continue. Two cards: Your phone, 62.1 percent complete, 31: The Fall of Mustang, listening; and This device, 52.9 percent complete, 28: My Brother, reading. A Decide later button sits below.",
+        "sizes": "(min-width: 720px) 480px, 92vw",
+        "page": {
+          "src": "/img/builds/chapterbridge/gallery/slide-place-choice-half.webp",
+          "width": 472,
+          "height": 558,
+          "srcset": "/img/builds/chapterbridge/gallery/slide-place-choice-half.webp 472w, /img/builds/chapterbridge/gallery/slide-place-choice.webp 944w"
+        },
+        "full": {
+          "src": "/img/builds/chapterbridge/gallery/slide-place-choice.webp",
+          "width": 944,
+          "height": 1116
+        }
       }
     ],
     "thumbs": [
       {
-        "placeholder": true,
-        "width": 220,
-        "height": 114,
-        "caption": "Library with the current book first",
-        "alt": "Phone library with the book in progress under Continue and three series covers below it."
-      },
-      {
-        "placeholder": true,
-        "width": 220,
-        "height": 284,
-        "caption": "Book details with Read and Listen",
-        "alt": "Book details screen with a large cover, the title, and Read and Listen buttons."
-      },
-      {
-        "placeholder": true,
-        "width": 220,
-        "height": 114,
         "caption": "Tracks put in order before processing",
-        "alt": "List of numbered audiobook tracks in natural order with Move up and Move down buttons."
+        "alt": "Track order list showing four numbered audiobook tracks sorted by name, each with move up and move down arrow buttons.",
+        "sizes": "(min-width: 720px) 220px, calc(50vw - 28px)",
+        "page": {
+          "src": "/img/builds/chapterbridge/gallery/thumb-tracks.webp",
+          "width": 220,
+          "height": 114,
+          "srcset": "/img/builds/chapterbridge/gallery/thumb-tracks.webp 220w, /img/builds/chapterbridge/gallery/thumb-tracks@2x.webp 440w"
+        },
+        "full": {
+          "src": "/img/builds/chapterbridge/gallery/thumb-tracks@hires.webp",
+          "width": 880,
+          "height": 456
+        }
       },
       {
-        "placeholder": true,
-        "width": 220,
-        "height": 284,
-        "caption": "Printed chapter titles from the ebook",
-        "alt": "Chapter list showing the prologue and the first chapters under their printed titles."
+        "caption": "Book details with Read and Listen",
+        "alt": "Book details for Red Rising with a large cover, the line Your place, 20: The House Mars, 36.0 percent complete, and Read, Listen and Read along buttons.",
+        "sizes": "(min-width: 720px) 220px, calc(50vw - 28px)",
+        "page": {
+          "src": "/img/builds/chapterbridge/gallery/thumb-details.webp",
+          "width": 220,
+          "height": 114,
+          "srcset": "/img/builds/chapterbridge/gallery/thumb-details.webp 220w, /img/builds/chapterbridge/gallery/thumb-details@2x.webp 440w"
+        },
+        "full": {
+          "src": "/img/builds/chapterbridge/gallery/thumb-details@hires.webp",
+          "width": 1760,
+          "height": 912
+        }
       },
       {
-        "placeholder": true,
-        "width": 220,
-        "height": 114,
         "caption": "Whole-book progress while listening",
-        "alt": "Listening screen with a whole-book progress bar at 55 percent beneath the chapter scrubber."
+        "alt": "Listening screen on the PC with Reading, Listening and Read along tabs above an overall book position bar at 35.8 percent.",
+        "sizes": "(min-width: 720px) 220px, calc(50vw - 28px)",
+        "page": {
+          "src": "/img/builds/chapterbridge/gallery/thumb-progress.webp",
+          "width": 220,
+          "height": 114,
+          "srcset": "/img/builds/chapterbridge/gallery/thumb-progress.webp 220w, /img/builds/chapterbridge/gallery/thumb-progress@2x.webp 440w"
+        },
+        "full": {
+          "src": "/img/builds/chapterbridge/gallery/thumb-progress@hires.webp",
+          "width": 1056,
+          "height": 547
+        }
       },
       {
-        "placeholder": true,
-        "width": 220,
-        "height": 114,
         "caption": "The sync light in the header",
-        "alt": "Desktop app header with a green sync light beside the library title."
-      },
-      {
-        "placeholder": true,
-        "width": 220,
-        "height": 114,
-        "caption": "Listening time in Stats",
-        "alt": "Stats screen showing hours listened and chapters read on this phone."
+        "alt": "Header button with a green light and the word Synced.",
+        "sizes": "(min-width: 720px) 220px, calc(50vw - 28px)",
+        "page": {
+          "src": "/img/builds/chapterbridge/gallery/thumb-sync.webp",
+          "width": 220,
+          "height": 114,
+          "srcset": "/img/builds/chapterbridge/gallery/thumb-sync.webp 220w, /img/builds/chapterbridge/gallery/thumb-sync@2x.webp 440w"
+        },
+        "full": {
+          "src": "/img/builds/chapterbridge/gallery/thumb-sync@hires.webp",
+          "width": 308,
+          "height": 160
+        }
       }
     ]
   },
