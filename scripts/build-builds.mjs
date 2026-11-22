@@ -22,7 +22,8 @@ const TAGS = [
   "Small Business",
   "Accounting",
   "Property Management",
-  "Browser Automation"
+  "Browser Automation",
+  "Claude Skill"
 ];
 const STATUSES = ["In daily use", "In regular use", "In testing", "In progress", "Retired"];
 const CONTEXTS = ["Personal project", "Work project", "Small-business project"];
@@ -36,7 +37,9 @@ const TOOL_ICONS = {
   "Gemini": "gemini.svg",
   "Gmail": "gmail.svg",
   "Codex": "openai.svg",
-  "Google Maps": "googlemaps.svg"
+  "Google Maps": "googlemaps.svg",
+  "CINC Systems": "cinc.svg",
+  "Microsoft SharePoint": "sharepoint.svg"
 };
 const REDIRECTS = {
   "chapter-bridge": "chapterbridge",
@@ -125,8 +128,8 @@ function check(file, build) {
     if (count > 25) warn(file, `next[${index}]`, `is ${count} words (limit 25)`);
   });
   const tags = build.tags || [];
-  if (tags.length > 3) {
-    warn(file, "tags", `has ${tags.length} tags (limit 1-3)`);
+  if (tags.length > 4) {
+    warn(file, "tags", `has ${tags.length} tags (limit 1-4)`);
   }
   tags.forEach((tag) => {
     if (!TAGS.includes(tag)) warn(file, "tags", `has ${tag}, which is not in the tag list`);

@@ -11,7 +11,8 @@
   "tags": [
     "Human-in-the-loop",
     "Property Management",
-    "Browser Automation"
+    "Browser Automation",
+    "Claude Skill"
   ],
   "tools": [
     "Claude Code",

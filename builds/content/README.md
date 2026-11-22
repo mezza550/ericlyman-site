@@ -22,7 +22,7 @@ Commit the JSON and the HTML the script writes. GitHub Pages publishes those fil
 | users | Who uses it. Shown on the fact strip. Also on the card when `card_status` is empty. | 40 characters |
 | card_line | One sentence on the job it does. | 80 characters |
 | headline_metric | Optional `value`, `label`, and `basis` (`measured` or `expected`). | |
-| tags | Up to 3 concept tags from the list below. On a card with `tools`, these are tag-shaped labels. Other cards keep the plain pills. | |
+| tags | Up to 4 concept tags from the list below. On a card with `tools`, these are tag-shaped labels. Other cards keep the plain pills. Card tag lists use two columns and reserve two lines so the cards line up. | |
 | tools | Optional tool names. Shown as the logo row on the card and in the build page header. | |
 | time_to_build | Short text, such as "About five weeks". Shown as a muted line under the tags and tools on the build page. | |
 | thumbnail | `src` and `alt`. | Image 16:9 |
@@ -51,7 +51,7 @@ The script prints a warning when a filled field is outside its limit. It still w
 
 ## Tags
 
-Process redesign, Human approval, Evals, Rules in code, Data reconciliation, Multi-system automation, Local AI, Privacy by design, Automated testing, Human-in-the-loop, Small Business, Accounting, Property Management, Browser Automation.
+Process redesign, Human approval, Evals, Rules in code, Data reconciliation, Multi-system automation, Local AI, Privacy by design, Automated testing, Human-in-the-loop, Small Business, Accounting, Property Management, Browser Automation, Claude Skill.
 
 Tags on a card are labels. They are not buttons and they do not open a bubble.
 
@@ -77,6 +77,8 @@ A description Eric approved for Human-in-the-loop, saved here in case it is want
 | Gmail | `img/tools/gmail.svg` |
 | Codex | `img/tools/openai.svg` (the OpenAI mark) |
 | Google Maps | `img/tools/googlemaps.svg` |
+| CINC Systems | `img/tools/cinc.svg` (traced concentric C, mark only) |
+| Microsoft SharePoint | `img/tools/sharepoint.svg` (traced S panel and three circles) |
 
 ## Home page
 
