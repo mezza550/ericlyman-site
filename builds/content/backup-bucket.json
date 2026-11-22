@@ -146,8 +146,9 @@
     }
   ],
   "next": [
+    "UX-driven way to create .source.json files for recoverable asset collections. At present they must be created by hand.",
     "Add automated restore verification drills that periodically download and checksum a random sample of backed-up files to prove end-to-end recoverability.",
-    "Support direct cloud-side orphan pruning after a retention review, keeping human confirmation mandatory before removing unreferenced content objects.",
+    "Support direct cloud-side orphan pruning after a retention review, with time horizon controls (for example, 1 year) and snapshots for strategic prunes, keeping human confirmation mandatory before removing unreferenced content objects.",
     "Package a signed Windows installer with automatic update checks alongside the portable build."
   ],
   "gallery": {
@@ -218,9 +219,9 @@
           "srcset": "/img/builds/backup-bucket/thumb-2-attention-triage.webp 220w, /img/builds/backup-bucket/thumb-2-attention-triage@2x.webp 440w"
         },
         "full": {
-          "src": "/img/builds/backup-bucket/thumb-2-attention-triage@2x.webp",
-          "width": 440,
-          "height": 228
+          "src": "/img/builds/backup-bucket/thumb-2-attention-triage@hires.webp",
+          "width": 1320,
+          "height": 684
         }
       },
       {
@@ -234,9 +235,9 @@
           "srcset": "/img/builds/backup-bucket/thumb-3-review-no-receipt.webp 220w, /img/builds/backup-bucket/thumb-3-review-no-receipt@2x.webp 440w"
         },
         "full": {
-          "src": "/img/builds/backup-bucket/thumb-3-review-no-receipt@2x.webp",
-          "width": 440,
-          "height": 228
+          "src": "/img/builds/backup-bucket/thumb-3-review-no-receipt@hires.webp",
+          "width": 1320,
+          "height": 684
         }
       },
       {
@@ -282,9 +283,9 @@
           "srcset": "/img/builds/backup-bucket/thumb-6-run-report.webp 220w, /img/builds/backup-bucket/thumb-6-run-report@2x.webp 440w"
         },
         "full": {
-          "src": "/img/builds/backup-bucket/thumb-6-run-report@2x.webp",
-          "width": 440,
-          "height": 568
+          "src": "/img/builds/backup-bucket/thumb-6-run-report@hires.webp",
+          "width": 1100,
+          "height": 1420
         }
       },
       {
@@ -298,9 +299,9 @@
           "srcset": "/img/builds/backup-bucket/thumb-7-rclone-connected.webp 220w, /img/builds/backup-bucket/thumb-7-rclone-connected@2x.webp 440w"
         },
         "full": {
-          "src": "/img/builds/backup-bucket/thumb-7-rclone-connected@2x.webp",
-          "width": 440,
-          "height": 228
+          "src": "/img/builds/backup-bucket/thumb-7-rclone-connected@hires.webp",
+          "width": 1320,
+          "height": 684
         }
       },
       {
@@ -314,9 +315,9 @@
           "srcset": "/img/builds/backup-bucket/thumb-8-recovery-kit.webp 220w, /img/builds/backup-bucket/thumb-8-recovery-kit@2x.webp 440w"
         },
         "full": {
-          "src": "/img/builds/backup-bucket/thumb-8-recovery-kit@2x.webp",
-          "width": 440,
-          "height": 228
+          "src": "/img/builds/backup-bucket/thumb-8-recovery-kit@hires.webp",
+          "width": 1320,
+          "height": 684
         }
       }
     ]
