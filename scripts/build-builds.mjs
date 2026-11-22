@@ -23,7 +23,10 @@ const TAGS = [
   "Accounting",
   "Property Management",
   "Browser Automation",
-  "Claude Skill"
+  "Claude Skill",
+  "Desktop App",
+  "Data Safety",
+  "Automation"
 ];
 const STATUSES = ["In daily use", "In regular use", "In testing", "In progress", "Retired"];
 const CONTEXTS = ["Personal project", "Work project", "Small-business project"];
@@ -42,7 +45,14 @@ const TOOL_ICONS = {
   "CINC Systems": "cinc.svg",
   "WebAxis": "webaxis.svg",
   "Microsoft SharePoint": "sharepoint.svg",
-  "Microsoft Excel": "excel.svg"
+  "Microsoft Excel": "excel.svg",
+  "Windows (WPF)": "windows.svg",
+  "C#": "csharp.svg",
+  ".NET 8": "dotnet.svg",
+  "rclone": "rclone.svg",
+  "Backblaze B2": "backblaze.svg",
+  "Google Cloud": "googlecloud.svg",
+  "Immich": "immich.svg"
 };
 const REDIRECTS = {
   "chapter-bridge": "chapterbridge",
@@ -486,17 +496,35 @@ function hasMedia(item) {
   return false;
 }
 
+function isPlaceholder(item) {
+  return Boolean(item && item.placeholder === true && !hasMedia(item));
+}
+
+function placeholderFigure(item, featured) {
+  const width = Number(item.width) || 0;
+  const height = Number(item.height) || 0;
+  const shape = width === 220 && height === 284 ? "shot-placeholder--portrait" : width === 220 ? "shot-placeholder--thumb" : "shot-placeholder--feature";
+  const label = item.alt || item.caption || "Placeholder";
+  const box = `<div class="shot-placeholder ${shape}" role="img" aria-label="${esc(label)}"><span aria-hidden="true">Placeholder</span></div>`;
+  const caption = `<figcaption class="shot-cap">${esc(item.caption || "")}</figcaption>`;
+  return `<figure class="${featured ? "shot-feature" : "shot-thumb"}">${box}${caption}</figure>`;
+}
+
 function shotsSection(build) {
   const gallery = build.gallery;
-  const clips = gallery && (gallery.clips || (gallery.lead ? [gallery.lead] : [])).filter(hasMedia);
-  const thumbs = gallery && (gallery.thumbs || []).filter(hasMedia);
-  if (!gallery || ((!clips || !clips.length) && (!thumbs || !thumbs.length))) return "";
+  if (!gallery) return "";
+  const clips = (gallery.clips || (gallery.lead ? [gallery.lead] : [])).filter((item) => hasMedia(item) || isPlaceholder(item));
+  const slides = (gallery.slides || []).filter((item) => hasMedia(item) || isPlaceholder(item));
+  const thumbs = (gallery.thumbs || []).filter((item) => hasMedia(item) || isPlaceholder(item));
+  if (!clips.length && !slides.length && !thumbs.length) return "";
   const heading = gallery.heading || "In use";
   const disclaimer = filled(gallery.disclaimer) ? `<p class="shot-note">${esc(gallery.disclaimer)}</p>` : "";
-  const clipHtml = (clips || []).map((item) => clipFigure(item)).join("");
-  const grid = thumbs && thumbs.length ? `<ul class="shot-thumbs">${thumbs.map((item) => `<li>${shotFigure(item)}</li>`).join("")}</ul>` : "";
-  const dialog = `<dialog class="shot-dialog"><div class="shot-dialog-top"><button type="button" data-shot-close>Close</button></div><div class="shot-dialog-stage"><img class="shot-dialog-img" alt="" sizes="95vw"><video class="shot-dialog-video" controls muted loop playsinline hidden></video></div><p class="shot-dialog-cap"></p><div class="shot-dialog-nav"><button type="button" data-shot-prev>Previous</button><button type="button" data-shot-next>Next</button></div></dialog>`;
-  return `<section class="build-block shot-gallery" aria-labelledby="shots-h"><h2 id="shots-h">${esc(heading)}</h2>${disclaimer}${clipHtml}${grid}${dialog}</section>`;
+  const clipHtml = clips.map((item) => isPlaceholder(item) ? placeholderFigure(item, true) : clipFigure(item)).join("");
+  const slideHtml = slides.map((item) => isPlaceholder(item) ? placeholderFigure(item, true) : (item.kind === "video" ? clipFigure(item) : shotFigure(item))).join("");
+  const grid = thumbs.length ? `<ul class="shot-thumbs">${thumbs.map((item) => `<li>${isPlaceholder(item) ? placeholderFigure(item, false) : shotFigure(item)}</li>`).join("")}</ul>` : "";
+  const hasReal = [...clips, ...slides, ...thumbs].some(hasMedia);
+  const dialog = hasReal ? `<dialog class="shot-dialog"><div class="shot-dialog-top"><button type="button" data-shot-close>Close</button></div><div class="shot-dialog-stage"><img class="shot-dialog-img" alt="" sizes="95vw"><video class="shot-dialog-video" controls muted loop playsinline hidden></video></div><p class="shot-dialog-cap"></p><div class="shot-dialog-nav"><button type="button" data-shot-prev>Previous</button><button type="button" data-shot-next>Next</button></div></dialog>` : "";
+  return `<section class="build-block shot-gallery" aria-labelledby="shots-h"><h2 id="shots-h">${esc(heading)}</h2>${disclaimer}${clipHtml}${slideHtml}${grid}${dialog}</section>`;
 }
 
 function decisionsSection(build) {

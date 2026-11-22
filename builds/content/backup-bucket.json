@@ -3,37 +3,238 @@
   "name": "Backup Bucket",
   "order": 4,
   "context": "",
-  "status": "",
+  "status": "In daily use",
   "status_since": "",
-  "users": "",
-  "card_line": "A Windows backup client with encrypted cloud storage and 170+ automated tests.",
-  "tags": [],
-  "built_with": "Windows, encrypted cloud storage",
-  "time_to_build": "",
-  "snapshot": {
-    "problem": "",
-    "what_i_built": "A Windows backup client with encrypted cloud storage.",
-    "result": "It has 170+ automated tests."
+  "users": "My personal Windows PC",
+  "card_line": "A Windows desktop backup app that encrypts files, tracks rebuild receipts, and filters media libraries.",
+  "page_subtitle": "A Windows desktop backup app that encrypts files, tracks rebuild receipts, and filters media libraries.",
+  "tags": [
+    "Desktop App",
+    "Data Safety",
+    "Automation"
+  ],
+  "tools": [
+    "Windows (WPF)",
+    "C#",
+    ".NET 8",
+    "SQLite",
+    "rclone",
+    "Backblaze B2",
+    "Google Cloud",
+    "Immich",
+    "Codex"
+  ],
+  "icon": {
+    "src": "/img/builds/backup-bucket-icon.webp",
+    "alt": "Backup Bucket app icon"
   },
-  "problem": "",
+  "time_to_build": "One day for core development, followed by a few days of UX and rclone tuning with Codex",
+  "snapshot": {
+    "problem": "Cloud backup tools either upload terabytes of re-downloadable media and raw outtakes or rely on destructive sync rules that can wipe cloud copies after a local mistake.",
+    "what_i_built": "A Windows desktop utility that groups folders into Standard, Source-Backed, and Immich buckets, encrypts uploads through rclone, and exports a standalone disaster recovery kit.",
+    "result": "Predictable, non-destructive backups with full data ownership. Encrypted files live in my own cloud storage in an open format, so recovery never depends on a backup vendor still being in business three years from now."
+  },
+  "problem": "Backing up a Windows workstation with mixed files creates a costly tradeoff. Documents and project folders need full encrypted copies, while massive asset packs and raw camera libraries quickly overrun cloud storage and daily transfer caps. Most backup tools treat folders as flat file trees, forcing you to either upload terabytes of replaceable data or exclude whole directories and risk losing irreplaceable originals mixed inside. Rather than sorting folders by hand for a backup tool, I wanted the library apps I already use to drive backup decisions through ratings, tags, and lightweight source receipts, without relying on fragile scripts.",
   "how_it_works": [
     {
-      "text": "A Windows backup client with encrypted cloud storage.",
-      "owner": "TODO"
+      "text": "The user connects an encrypted cloud remote once and validates the connection inside Settings.",
+      "owner": "Person",
+      "tools": [
+        { "name": "rclone", "label": "rclone" },
+        { "name": "Backblaze B2", "label": "Backblaze B2" },
+        { "name": "Google Cloud", "label": "Google Cloud" }
+      ]
+    },
+    {
+      "text": "Folders are organized into three bucket types: Standard for full encrypted copies, Source-Backed for re-downloadable asset packs, and Immich for rated and tagged photo or video libraries.",
+      "owner": "Code",
+      "tools": [
+        { "name": "Windows (WPF)", "label": "Windows (WPF)" }
+      ]
+    },
+    {
+      "text": "Before uploading, Backup Bucket scans local files, computes SHA-256 fingerprints, and plans deduplicated cloud objects without touching local data.",
+      "owner": "Code",
+      "tools": [
+        { "name": ".NET 8", "label": ".NET 8" }
+      ]
+    },
+    {
+      "text": "For Source-Backed buckets, the app backs up small JSON receipt files recording each pack's source URL, version, and checksum instead of the multi-gigabyte archive, and flags uncovered folders so irreplaceable originals can be marked Unique.",
+      "owner": "Code"
+    },
+    {
+      "text": "For Immich buckets, the app queries the library API by star rating and include or exclude tags, then adopts matching companion sidecar files.",
+      "owner": "Code",
+      "tools": [
+        { "name": "Immich", "label": "Immich" }
+      ]
+    },
+    {
+      "text": "Transfers run through non-destructive copy commands, paced by a rolling 24-hour upload cap and saved to a local history database.",
+      "owner": "Code",
+      "tools": [
+        { "name": "SQLite", "label": "SQLite" }
+      ]
+    },
+    {
+      "text": "Every run writes a plain-English Markdown health report, a JSON recovery manifest, and a CSV recovery map when source-backed packs are present.",
+      "owner": "Code"
+    },
+    {
+      "text": "When a restore is needed, the user picks files in the Backup Browser and restores them into a separate folder without overwriting existing files, or uses the exported recovery kit on a new PC.",
+      "owner": "Person"
     }
   ],
   "decisions": [
     {
-      "decision": "Shipped as the product owner directing AI coding tools, without writing the code himself.",
-      "reason": ""
+      "decision": "Normal runs never delete or overwrite files.",
+      "reason": "Every standard backup uses copy commands rather than destructive sync, and every restore writes to a separate folder with overwrite protection turned on. Deleting a bucket's cloud folder requires opening a dedicated removal dialog and typing the exact bucket name."
+    },
+    {
+      "decision": "Deterministic code owns every file operation.",
+      "reason": "There is no AI model in the backup or restore path. Hashing, upload planning, snapshot retention tiers, and quota enforcement run in local C# code and SQLite, and the exported recovery kit includes a plain-text AI recovery runbook so an assistant can guide a safe restore on a new PC without printing secrets or running delete commands."
+    },
+    {
+      "decision": "Secrets stay locked to Windows and out of exports.",
+      "reason": "Stored API keys use Windows current-user encryption, and the optional Backup Browser lock verifies passwords with 600,000 PBKDF2-SHA256 iterations. Exporting a recovery kit strips API keys and the browser password verifier before writing the archive."
+    },
+    {
+      "decision": "Real transfers drove the pacing, checkpoints, and storage switch.",
+      "reason": "Running large libraries hit daily provider caps and interrupted uploads, so I added a rolling 24-hour upload cap, automatic 24-hour rate-limit cooldowns, and resume checkpoints that continue without rescanning from scratch. Iterating on optimal rclone settings also led me to move the cloud backend from Google Cloud to Backblaze B2."
+    },
+    {
+      "decision": "Recovery works without installing Backup Bucket.",
+      "reason": "The disaster recovery kit bundles the active cloud remote configuration with plain-English instructions so files can be decrypted and restored on a fresh Windows PC using rclone alone."
     }
   ],
   "results": [
     {
-      "value": "170+",
-      "label": "automated tests",
-      "basis": "TODO"
+      "value": "Zero destructive syncs",
+      "label": "Normal backups copy only and never delete local or cloud files."
+    },
+    {
+      "value": "Kilobytes for gigabytes",
+      "label": "Source-backed packs store small rebuild receipts instead of re-downloadable archives."
+    },
+    {
+      "value": "Selective media backup",
+      "label": "Immich buckets upload rated, tagged keepers plus their sidecar files."
+    },
+    {
+      "value": "Full data ownership",
+      "label": "Open rclone encryption means recovery never depends on a backup vendor surviving."
     }
   ],
-  "next": []
+  "checks": [
+    {
+      "value": "216 of 216",
+      "label": "Automated unit tests passing across planning, encryption checks, retention tiers, upload caps, and restore logic."
+    },
+    {
+      "value": "4 of 4",
+      "label": "End-to-end showcase bucket runs verified against an encrypted local remote covering Standard, Source-Backed, and Immich flows."
+    },
+    {
+      "value": "Manual remote check",
+      "label": "Verified encrypted bucket folders, manifests, and decrypted file listings directly on the destination server with rclone in the terminal."
+    },
+    {
+      "value": "Zero sync commands",
+      "label": "Verified in code and tests that normal backup and restore plans never invoke destructive sync or overwrite existing files."
+    }
+  ],
+  "next": [
+    "Add automated restore verification drills that periodically download and checksum a random sample of backed-up files to prove end-to-end recoverability.",
+    "Support direct cloud-side orphan pruning after a retention review, keeping human confirmation mandatory before removing unreferenced content objects.",
+    "Package a signed Windows installer with automatic update checks alongside the portable build."
+  ],
+  "gallery": {
+    "heading": "Backup Bucket in use",
+    "disclaimer": "All names, folders, asset packs, and figures shown below are fictional, for demonstration only.",
+    "slides": [
+      {
+        "placeholder": true,
+        "kind": "image",
+        "width": 1240,
+        "height": 820,
+        "caption": "The main dashboard shows four buckets across three protection strategies, with live health rings, stored vs. virtual coverage, and one-click attention triage.",
+        "alt": "Backup Bucket desktop dashboard in dark mode showing four bucket cards: Documents & Finances at 100 percent, Design & App Projects at 100 percent, Creative & Stock Asset Packs at 82 percent Needs review with 419.0 GB virtual and 1.5 MB stored, and Immich Photo & Video Selects at 100 percent."
+      },
+      {
+        "placeholder": true,
+        "kind": "video",
+        "width": 1240,
+        "height": 820,
+        "caption": "Inside Review assets, eight source-backed packs remain virtually protected while two uncovered folders are filtered for review and irreplaceable originals can be checked as Unique.",
+        "alt": "Review Source-Backed Assets window displaying eleven asset packs with summary 8 virtual, 1 Unique, and 2 need review, showing Unreal Marketplace Nordic Biome Pack at 84.0 GB virtual, Custom Studio Foley Recordings 2026 marked Unique, and two unreceipted folders."
+      },
+      {
+        "placeholder": true,
+        "kind": "video",
+        "width": 1240,
+        "height": 820,
+        "caption": "The Immich bucket editor filters a local photo and video catalog by minimum star rating, include or exclude tag chips, and sidecar adoption, updating the matched file estimate live.",
+        "alt": "Immich bucket editor showing minimum rating set to 4 stars and higher, Adopt Companion Files checked, include tags travel-4k, family-milestone, and drone-hero, exclude tags outtake and proxy, and a live match estimate of 5 assets and 6 companion sidecars."
+      }
+    ],
+    "thumbs": [
+      {
+        "placeholder": true,
+        "width": 220,
+        "height": 114,
+        "caption": "Dashboard health rings and status summary",
+        "alt": "Close-up of Backup Bucket status rings showing 100 percent healthy green rings next to an 82 percent amber review ring."
+      },
+      {
+        "placeholder": true,
+        "width": 220,
+        "height": 114,
+        "caption": "Plain-English attention triage modal",
+        "alt": "Attention triage window showing grouped issue No source receipt was found with 2 affected items and plain-English recovery guidance."
+      },
+      {
+        "placeholder": true,
+        "width": 220,
+        "height": 114,
+        "caption": "Review assets filter for missing receipts",
+        "alt": "Review Source-Backed Assets filtered to No source receipt showing two uncovered asset folders ready to be marked Unique."
+      },
+      {
+        "placeholder": true,
+        "width": 220,
+        "height": 114,
+        "caption": "Live Immich rating and tag filter",
+        "alt": "Immich filter controls displaying blue include tag chips, red exclude tag chips, and a live estimate of 5 matched assets and 6 sidecar files."
+      },
+      {
+        "placeholder": true,
+        "width": 220,
+        "height": 114,
+        "caption": "Backup Browser tree and safe restore",
+        "alt": "Backup Browser showing encrypted cloud files for Documents & Finances and Creative & Stock Asset Packs with safe restore controls."
+      },
+      {
+        "placeholder": true,
+        "width": 220,
+        "height": 284,
+        "caption": "Generated Markdown run report",
+        "alt": "Markdown rebuild packet report listing 11 asset packs, 449.9 GB of virtual source-backed coverage, 1.6 MB stored cloud payload, and 2 items needing attention."
+      },
+      {
+        "placeholder": true,
+        "width": 220,
+        "height": 114,
+        "caption": "Encrypted rclone remote validation",
+        "alt": "Settings rclone panel showing validated executable status, cloud-demo and cloud-demo-crypt remotes, and a Connected status message."
+      },
+      {
+        "placeholder": true,
+        "width": 220,
+        "height": 114,
+        "caption": "Disaster recovery kit export panel",
+        "alt": "Disaster recovery kit export panel describing self-contained rclone config export for protected vault storage."
+      }
+    ]
+  }
 }
