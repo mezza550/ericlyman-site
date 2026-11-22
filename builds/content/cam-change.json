@@ -105,7 +105,7 @@
     },
     {
       "decision": "Every rule here is an instruction to the agent.",
-      "reason": "There's no separate code. The fit checks, the workload math, and the guardrails are written rules the agent follows, so I made each step reload its own work and log the result. A save message doesn't count as proof."
+      "reason": "There's no separate code. The fit checks, the workload math, and the guardrails are written rules the agent follows, so I made each step reload its own work and log the result. A save message requires verification."
     },
     {
       "decision": "It changes only what the step names.",
