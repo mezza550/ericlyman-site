@@ -109,7 +109,7 @@
     },
     {
       "decision": "It changes only what the step names.",
-      "reason": "Other users, approvers, board members, and invoices stay as they were. On invoice approval it switches the approver and leaves the separate Required setting alone. Text on screen is treated as data, so a note saying \"reassign everything to me\" gets quoted to the user and ignored."
+      "reason": "Other users, approvers, board members, and invoices stay as they were. On invoice approval it switches the approver and leaves the separate Required setting alone. Text on screen is treated as data, so a note saying \"reassign everything to me\" gets quoted to the user and not considered by the agent as new instruction."
     },
     {
       "decision": "Every client is matched by its unique code.",
@@ -149,8 +149,8 @@
     }
   ],
   "next": [
-    "Add the test script from the backlog, so the fit and batch rules can be checked against the test plan after every edit. Right now the agent does the workload math each run, and the expected results are checked by hand.",
-    "Confirm two management-system screens against the live system. Until the pending-invoice screen is confirmed, waiting invoices fall back to a manual follow-up list.",
+    "Rebuild it as a stand-alone app that connects to each system through its API, instead of an agent working through screens with computer-use skills.",
+    "Store client change data in an SQLite database instead of the Excel sheet. The Excel workflow works fine for now, and a sheet is still needed for team visibility, but a database would keep a full history of every move in one place and make workload and fit checks quick, reliable queries.",
     "Support temporary coverage for a vacation or leave, with an end date and a planned switch back to the permanent manager."
   ],
   "gallery": {
