@@ -16,7 +16,7 @@ Commit the JSON and the HTML the script writes. GitHub Pages publishes those fil
 | name | Build name. | |
 | order | Display order. Lower numbers come first. | |
 | context | `Personal project`, `Work project`, or `Small-business project`. Work projects may include `employer`. | |
-| status | One of: In daily use, In testing, In progress, Retired. | |
+| status | One of: In daily use, In regular use, In testing, In progress, Retired. | |
 | status_since | Month and year. | |
 | users | Who uses it. | 40 characters |
 | card_line | One sentence on the job it does. | 80 characters |
@@ -32,7 +32,7 @@ Commit the JSON and the HTML the script writes. GitHub Pages publishes those fil
 | demo | Optional `type` (`video`, `gif`, or `images`), `sources`, `poster`, and `captions`. | |
 | problem | The manual process before, in plain prose. | 40–80 words |
 | how_it_works | 3–7 steps. Each has `text` and `owner` (`Person`, `AI`, `Code`, or `TODO`). Optional `title` is stored and not shown. Optional `tools` (`name` and `label`) hang under that step. | 25 words per step |
-| gallery | Optional `heading`, `disclaimer` (one small italic line under the heading; any build can set it), `lead` clip, and `groups`. A clip with `ready: false` (or a missing file) shows a placeholder. Images have a display `caption`, a `lightbox` caption, and `alt`. Shown after How it works. | |
+| gallery | Optional `heading`, `disclaimer` (one small italic line under the heading; any build can set it), `slides`, `clips`, and `thumbs`. A slide or thumb with no media `src` is kept in the data and not shown. Shown after How it works only when at least one item has a file. | |
 | decisions | 3–5 items. Each has `decision` and `reason`. | 35 words per item |
 | results | 1–4 items. Each has `value` and `label`. `basis` (`measured`, `expected`, or `TODO`) is optional. Omit it when the tile is an outcome, not a metric. | |
 | checks | Optional items for How I checked it, directly under Results. Same fields as `results`. | |
@@ -50,7 +50,7 @@ The script prints a warning when a filled field is outside its limit. It still w
 
 ## Tags
 
-Process redesign, Human approval, Evals, Rules in code, Data reconciliation, Multi-system automation, Local AI, Privacy by design, Automated testing, Human-in-the-loop, Small Business, Accounting.
+Process redesign, Human approval, Evals, Rules in code, Data reconciliation, Multi-system automation, Local AI, Privacy by design, Automated testing, Human-in-the-loop, Small Business, Accounting, Property Management, Browser Automation.
 
 Tags on a card are labels. They are not buttons and they do not open a bubble.
 
@@ -74,6 +74,8 @@ A description Eric approved for Human-in-the-loop, saved here in case it is want
 | Claude Code | `img/tools/claude.svg` (the Claude mark) |
 | Gemini | `img/tools/gemini.svg` |
 | Gmail | `img/tools/gmail.svg` |
+| Codex | `img/tools/openai.svg` (the OpenAI mark) |
+| Google Maps | `img/tools/googlemaps.svg` |
 
 ## Home page
 

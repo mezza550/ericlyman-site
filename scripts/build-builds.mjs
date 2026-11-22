@@ -20,9 +20,11 @@ const TAGS = [
   "Automated testing",
   "Human-in-the-loop",
   "Small Business",
-  "Accounting"
+  "Accounting",
+  "Property Management",
+  "Browser Automation"
 ];
-const STATUSES = ["In daily use", "In testing", "In progress", "Retired"];
+const STATUSES = ["In daily use", "In regular use", "In testing", "In progress", "Retired"];
 const CONTEXTS = ["Personal project", "Work project", "Small-business project"];
 const OWNERS = ["Person", "AI", "Code", "TODO"];
 const TOOL_ICONS = {
@@ -32,7 +34,9 @@ const TOOL_ICONS = {
   "OpenRouter": "openrouter.svg",
   "Claude Code": "claude.svg",
   "Gemini": "gemini.svg",
-  "Gmail": "gmail.svg"
+  "Gmail": "gmail.svg",
+  "Codex": "openai.svg",
+  "Google Maps": "googlemaps.svg"
 };
 const REDIRECTS = {
   "chapter-bridge": "chapterbridge",
@@ -425,8 +429,8 @@ function stepsSection(build) {
     const tools = stepTools(step).map((tool, toolIndex) => {
       const toolId = `tip-${esc(build.slug)}-step-${index}-tool-${toolIndex}`;
       const svg = toolSvg(tool.name);
-      const mark = svg || `<span class="tl-tool-fallback">${esc(tool.name.slice(0, 2))}</span>`;
-      return `<button type="button" class="tl-tool" data-tip aria-label="${esc(tool.label)}" aria-describedby="${toolId}"><span class="tl-tool-mark">${mark}</span><span class="tl-tool-name" aria-hidden="true">${esc(tool.label)}</span></button>${tip(toolId, tool.label)}`;
+      const mark = svg ? `<span class="tl-tool-mark">${svg}</span>` : "";
+      return `<button type="button" class="tl-tool" data-tip aria-label="${esc(tool.label)}" aria-describedby="${toolId}">${mark}<span class="tl-tool-name" aria-hidden="true">${esc(tool.label)}</span></button>${tip(toolId, tool.label)}`;
     }).join("");
     const branch = tools ? `<div class="tl-tools">${tools}</div>` : "";
     return `<li class="tl-step"><div class="tl-rail"><button type="button" class="tl-node owner-${esc(String(owner).toLowerCase())}" data-tip aria-label="${esc(owner)}" aria-describedby="${id}">${ownerIcon(owner)}</button>${line}</div>${tip(id, owner)}<div class="tl-body"><p>${esc(step.text)}</p>${branch}</div></li>`;
@@ -454,10 +458,18 @@ function shotFigure(item) {
   return `<figure class="shot-thumb"><a class="shot-link" href="${esc(full.src)}" data-srcset="${esc(sources.join(", "))}" data-caption="${esc(lightbox)}"><span class="shot-frame">${img}</span></a><figcaption class="shot-cap">${esc(item.caption || "")}</figcaption></figure>`;
 }
 
+function hasMedia(item) {
+  if (!item || typeof item !== "object") return false;
+  if (filled(item.src)) return true;
+  if (item.page && filled(item.page.src)) return true;
+  if (item.full && filled(item.full.src)) return true;
+  return false;
+}
+
 function shotsSection(build) {
   const gallery = build.gallery;
-  const clips = gallery && (gallery.clips || (gallery.lead ? [gallery.lead] : []));
-  const thumbs = gallery && gallery.thumbs;
+  const clips = gallery && (gallery.clips || (gallery.lead ? [gallery.lead] : [])).filter(hasMedia);
+  const thumbs = gallery && (gallery.thumbs || []).filter(hasMedia);
   if (!gallery || ((!clips || !clips.length) && (!thumbs || !thumbs.length))) return "";
   const heading = gallery.heading || "In use";
   const disclaimer = filled(gallery.disclaimer) ? `<p class="shot-note">${esc(gallery.disclaimer)}</p>` : "";

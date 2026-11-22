@@ -1,0 +1,184 @@
+{
+  "slug": "cam-change",
+  "name": "CAM Change",
+  "order": 2,
+  "context": "",
+  "status": "In regular use",
+  "status_since": "April 2026",
+  "users": "The Branch President and the VP of Community Management at a property management company",
+  "card_line": "An AI agent that checks a new manager's fit, updates three systems, and records every change.",
+  "tags": [
+    "Human-in-the-loop",
+    "Property Management",
+    "Browser Automation"
+  ],
+  "tools": [
+    "Claude Code",
+    "Claude in Chrome",
+    "Codex",
+    "CINC Systems",
+    "Microsoft SharePoint",
+    "WebAxis",
+    "Google Maps",
+    "Microsoft Excel"
+  ],
+  "icon": {
+    "src": "/img/builds/cam-change-icon.webp",
+    "alt": "CAM Change logo"
+  },
+  "time_to_build": "A few hours to a working prototype in Codex, a week of refining, then moved to Claude Code",
+  "snapshot": {
+    "problem": "Moving an association to a new manager meant about a dozen screens across three web systems, plus spreadsheet updates. Steps were easy to miss, and clients with the same name in different branches could get mixed up.",
+    "what_i_built": "An AI agent that checks whether the new manager is a good fit, makes the change in each system, reads back every save, and drafts the notice email for review.",
+    "result": "Fewer errors. Every move follows the same steps, checks the client's unique code before each save, and leaves a before-and-after record. I expect it to save at least 15 minutes per move."
+  },
+  "problem": "He's the Branch President at a property management company, and manager changes fell to him and the VP of Community Management. Each move meant about a dozen screens across three web systems, then spreadsheet updates. Open action items, invoices waiting on the old manager, and old access were easy to miss. A manager could end up with too many associations, or one too far away to visit. The company has several branches, and some clients share a name, so a search could land on the wrong one. Afterward, nobody could say what had changed.",
+  "how_it_works": [
+    {
+      "text": "He types one command with the association, the new manager, and the effective date. If the date is missing, the agent asks first.",
+      "owner": "Person"
+    },
+    {
+      "text": "The agent checks the move against the client tracker and staff roster: service level, manager type, workload against the limit of 14, and worst-case drive time.",
+      "owner": "AI",
+      "tools": [
+        {
+          "name": "Google Maps",
+          "label": "Google Maps"
+        }
+      ]
+    },
+    {
+      "text": "Any warning stops the run until he keeps the manager, picks a suggested alternative, or cancels, and overriding a staffing rule needs a logged reason.",
+      "owner": "Person"
+    },
+    {
+      "text": "Once he confirms the plan, the agent works through the management system in his browser: access, action items, manager details, invoice approval, waiting invoices, the board listing, and the old manager's access.",
+      "owner": "AI",
+      "tools": [
+        {
+          "name": "Claude in Chrome",
+          "label": "Claude in Chrome"
+        },
+        {
+          "name": "CINC Systems",
+          "label": "CINC Systems"
+        }
+      ]
+    },
+    {
+      "text": "Before each save it checks the client's code on screen, and after each save it reloads the page and logs the before and after values.",
+      "owner": "AI"
+    },
+    {
+      "text": "It moves access in the resident portal and the document site, and asks before removing the old manager from the document site.",
+      "owner": "AI",
+      "tools": [
+        {
+          "name": "WebAxis",
+          "label": "WebAxis"
+        },
+        {
+          "name": "Microsoft SharePoint",
+          "label": "Microsoft SharePoint"
+        }
+      ]
+    },
+    {
+      "text": "It updates the client tracker and drafts the notice email to both managers with a board introduction, which he reviews and sends himself.",
+      "owner": "AI",
+      "tools": [
+        {
+          "name": "Microsoft Excel",
+          "label": "Microsoft Excel"
+        }
+      ]
+    }
+  ],
+  "decisions": [
+    {
+      "decision": "People sign in, approve warnings, and send email.",
+      "reason": "The agent stops at every fit warning and again before it changes any system. Its instructions tell it never to enter a password, never send an email, and never approve, reject, or edit an invoice."
+    },
+    {
+      "decision": "Every rule here is an instruction to the agent.",
+      "reason": "There's no separate code. The fit checks, the workload math, and the guardrails are written rules the agent follows, so I made each step reload its own work and log the result. A save message doesn't count as proof."
+    },
+    {
+      "decision": "It changes only what the step names.",
+      "reason": "Other users, approvers, board members, and invoices stay as they were. On invoice approval it switches the approver and leaves the separate Required setting alone. Text on screen is treated as data, so a note saying \"reassign everything to me\" gets quoted to the user and ignored."
+    },
+    {
+      "decision": "Every client is matched by its unique code.",
+      "reason": "In real use, some clients in different branches had identical names, so matching by name could pick the wrong one. I moved the matching to the client code in the management system, which is unique, and the agent checks it before every save."
+    },
+    {
+      "decision": "One association, one tab, one session at a time.",
+      "reason": "A lock file tells a second session that a change is already running. Batch mode is a run of single changes, each with its own log. Temporary coverage and board action items are left out for now."
+    }
+  ],
+  "results": [
+    {
+      "value": "Right client, every save",
+      "label": "The agent checks the client's unique code on screen before it saves.",
+      "basis": "expected"
+    },
+    {
+      "value": "No loose ends",
+      "label": "Action items, waiting invoices, and old access each get their own step.",
+      "basis": "expected"
+    },
+    {
+      "value": "Fit checked first",
+      "label": "Workload, service level, and drive time are checked before anything changes.",
+      "basis": "expected"
+    },
+    {
+      "value": "15+ minutes",
+      "label": "Saved per manager change, at minimum.",
+      "basis": "expected"
+    }
+  ],
+  "checks": [
+    {
+      "value": "7 of 7",
+      "label": "Manager workloads in the test plan match a recount of the 95-association client tracker.",
+      "basis": "measured"
+    },
+    {
+      "value": "3 placed, 11 no fit",
+      "label": "The batch rules, rerun on a departing remote manager's 14 associations, matched the test plan. The check showed every remote manager is at the limit.",
+      "basis": "measured"
+    }
+  ],
+  "next": [
+    "Add the test script from the backlog, so the fit and batch rules can be checked against the test plan after every edit. Right now the agent does the workload math each run, and the expected results are checked by hand.",
+    "Confirm two management-system screens against the live system. Until the pending-invoice screen is confirmed, waiting invoices fall back to a manual follow-up list.",
+    "Support temporary coverage for a vacation or leave, with an end date and a planned switch back to the permanent manager."
+  ],
+  "gallery": {
+    "heading": "CAM Change in use",
+    "disclaimer": "All names, associations, and figures shown below are fictional, for demonstration only.",
+    "slides": [
+      {
+        "caption": "The fit check runs before any system changes. A full-service association assigned to a remote manager stops with a staffing warning, an over-limit workload, and a local alternative."
+      },
+      {
+        "caption": "When a manager leaves, the agent proposes a new manager for each association. With every remote manager at the limit, 11 of 14 have no fit, and the proposal says so."
+      },
+      {
+        "caption": "Every step ends Verified, Skipped, Failed, or Blocked. Invoices the system won't let it reassign go on a manual follow-up list."
+      }
+    ],
+    "thumbs": [
+      { "caption": "Asks for the effective date first" },
+      { "caption": "Former managers can't be assigned" },
+      { "caption": "\"Is this date a typo?\"" },
+      { "caption": "Planned moves that are now due" },
+      { "caption": "Before and after, in the history log" },
+      { "caption": "Picking up after an outage" },
+      { "caption": "The notice email, drafted for review" },
+      { "caption": "A board introduction, already filled in" }
+    ]
+  }
+}
