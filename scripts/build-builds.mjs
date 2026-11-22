@@ -537,9 +537,14 @@ function pager(build, builds) {
   const index = builds.findIndex((item) => item.slug === build.slug);
   const prev = builds[index - 1];
   const next = builds[index + 1];
-  const prevLink = prev ? `<a href="/builds/${esc(prev.slug)}/">Previous: ${esc(prev.name)}</a>` : "";
-  const nextLink = next ? `<a href="/builds/${esc(next.slug)}/">Next: ${esc(next.name)}</a>` : "";
-  return `<nav class="build-pager" aria-label="Other builds">${prevLink}<a href="/builds/">All builds</a>${nextLink}${homeEnd}</nav>`;
+  const parts = [];
+  if (prev) parts.push(`<a href="/builds/${esc(prev.slug)}/">Previous: ${esc(prev.name)}</a>`);
+  parts.push(`<a href="/builds/">All builds</a>`);
+  if (next) parts.push(`<a href="/builds/${esc(next.slug)}/">Next: ${esc(next.name)}</a>`);
+  parts.push(`<a href="/">Home</a>`);
+  const sep = `<span class="link-sep" aria-hidden="true">|</span>`;
+  const html = parts.map((part, i) => i === 0 ? part : `<span class="link-end">${sep}${part}</span>`).join("");
+  return `<nav class="build-pager" aria-label="Other builds">${html}</nav>`;
 }
 
 function contact() {
