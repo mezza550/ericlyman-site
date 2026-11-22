@@ -134,7 +134,7 @@
     },
     {
       "value": "4 of 4",
-      "label": "End-to-end showcase bucket runs verified against an encrypted local remote covering Standard, Source-Backed, and Immich flows."
+      "label": "End-to-end bucket runs verified against an encrypted local remote covering Standard, Source-Backed, and Immich flows."
     },
     {
       "value": "Manual remote check",
@@ -155,86 +155,169 @@
     "disclaimer": "All names, folders, asset packs, and figures shown below are fictional, for demonstration only.",
     "slides": [
       {
-        "placeholder": true,
         "kind": "image",
-        "width": 1240,
-        "height": 820,
         "caption": "The main dashboard shows four buckets across three protection strategies, with live health rings, stored vs. virtual coverage, and one-click attention triage.",
-        "alt": "Backup Bucket desktop dashboard in dark mode showing four bucket cards: Documents & Finances at 100 percent, Design & App Projects at 100 percent, Creative & Stock Asset Packs at 82 percent Needs review with 419.0 GB virtual and 1.5 MB stored, and Immich Photo & Video Selects at 100 percent."
+        "alt": "Backup Bucket desktop dashboard in dark mode showing four bucket cards: Documents & Finances at 100 percent, Immich Photo & Video Selects at 100 percent, Creative & Stock Asset Packs at 82 percent Needs review with 419.0 GB virtual and 1.5 MB stored, and Design & App Projects at 100 percent.",
+        "sizes": "(min-width: 720px) 68ch, calc(100vw - 40px)",
+        "page": {
+          "src": "/img/builds/backup-bucket/slide-1-dashboard-1240.webp",
+          "width": 1240,
+          "height": 942,
+          "srcset": "/img/builds/backup-bucket/slide-1-dashboard-1240.webp 1240w, /img/builds/backup-bucket/slide-1-dashboard-2480.webp 2480w"
+        },
+        "full": {
+          "src": "/img/builds/backup-bucket/slide-1-dashboard-2480.webp",
+          "width": 2480,
+          "height": 1884
+        }
       },
       {
-        "placeholder": true,
         "kind": "video",
-        "width": 1240,
-        "height": 820,
-        "caption": "Inside Review assets, eight source-backed packs remain virtually protected while two uncovered folders are filtered for review and irreplaceable originals can be checked as Unique.",
-        "alt": "Review Source-Backed Assets window displaying eleven asset packs with summary 8 virtual, 1 Unique, and 2 need review, showing Unreal Marketplace Nordic Biome Pack at 84.0 GB virtual, Custom Studio Foley Recordings 2026 marked Unique, and two unreceipted folders."
+        "src": "/media/backup-bucket/video-1-unique-original-directed.mp4",
+        "poster": "/media/backup-bucket/video-1-unique-original-directed.webp",
+        "width": 1920,
+        "height": 1080,
+        "label": "Demo: a source-backed bucket at 82 percent; an unreceipted field recording is marked Unique, the bucket runs, and health rises to 91 percent.",
+        "caption": "Inside Review assets, eight source-backed packs remain virtually protected while two uncovered folders are filtered for review and irreplaceable originals can be checked as Unique."
       },
       {
-        "placeholder": true,
         "kind": "video",
-        "width": 1240,
-        "height": 820,
-        "caption": "The Immich bucket editor filters a local photo and video catalog by minimum star rating, include or exclude tag chips, and sidecar adoption, updating the matched file estimate live.",
-        "alt": "Immich bucket editor showing minimum rating set to 4 stars and higher, Adopt Companion Files checked, include tags travel-4k, family-milestone, and drone-hero, exclude tags outtake and proxy, and a live match estimate of 5 assets and 6 companion sidecars."
+        "src": "/media/backup-bucket/video-2-immich-filters-directed.mp4",
+        "poster": "/media/backup-bucket/video-2-immich-filters-directed.webp",
+        "width": 1920,
+        "height": 1080,
+        "label": "Demo: in the Immich bucket editor the rating rises from 4 to 5 stars, the match estimate shrinks, and typing \"land\" suggests the landscape tag.",
+        "caption": "The Immich bucket editor filters a local photo and video catalog by minimum star rating, include or exclude tag chips, and sidecar adoption, updating the matched file estimate live."
       }
     ],
     "thumbs": [
       {
-        "placeholder": true,
-        "width": 220,
-        "height": 114,
         "caption": "Dashboard health rings and status summary",
-        "alt": "Close-up of Backup Bucket status rings showing 100 percent healthy green rings next to an 82 percent amber review ring."
+        "alt": "Status rings: two green 100 percent rings beside an amber 82 percent Needs review ring.",
+        "sizes": "(min-width: 720px) 220px, calc(50vw - 28px)",
+        "page": {
+          "src": "/img/builds/backup-bucket/thumb-1-health-rings.webp",
+          "width": 220,
+          "height": 114,
+          "srcset": "/img/builds/backup-bucket/thumb-1-health-rings.webp 220w, /img/builds/backup-bucket/thumb-1-health-rings@2x.webp 440w"
+        },
+        "full": {
+          "src": "/img/builds/backup-bucket/thumb-1-health-rings@2x.webp",
+          "width": 440,
+          "height": 228
+        }
       },
       {
-        "placeholder": true,
-        "width": 220,
-        "height": 114,
         "caption": "Plain-English attention triage modal",
-        "alt": "Attention triage window showing grouped issue No source receipt was found with 2 affected items and plain-English recovery guidance."
+        "alt": "Attention window grouping \"No source receipt was found\" with 2 affected items and a What to do step.",
+        "sizes": "(min-width: 720px) 220px, calc(50vw - 28px)",
+        "page": {
+          "src": "/img/builds/backup-bucket/thumb-2-attention-triage.webp",
+          "width": 220,
+          "height": 114,
+          "srcset": "/img/builds/backup-bucket/thumb-2-attention-triage.webp 220w, /img/builds/backup-bucket/thumb-2-attention-triage@2x.webp 440w"
+        },
+        "full": {
+          "src": "/img/builds/backup-bucket/thumb-2-attention-triage@2x.webp",
+          "width": 440,
+          "height": 228
+        }
       },
       {
-        "placeholder": true,
-        "width": 220,
-        "height": 114,
         "caption": "Review assets filter for missing receipts",
-        "alt": "Review Source-Backed Assets filtered to No source receipt showing two uncovered asset folders ready to be marked Unique."
+        "alt": "Review assets filtered to No source receipt (3): two folders that need review and the foley recordings already marked Unique.",
+        "sizes": "(min-width: 720px) 220px, calc(50vw - 28px)",
+        "page": {
+          "src": "/img/builds/backup-bucket/thumb-3-review-no-receipt.webp",
+          "width": 220,
+          "height": 114,
+          "srcset": "/img/builds/backup-bucket/thumb-3-review-no-receipt.webp 220w, /img/builds/backup-bucket/thumb-3-review-no-receipt@2x.webp 440w"
+        },
+        "full": {
+          "src": "/img/builds/backup-bucket/thumb-3-review-no-receipt@2x.webp",
+          "width": 440,
+          "height": 228
+        }
       },
       {
-        "placeholder": true,
-        "width": 220,
-        "height": 114,
         "caption": "Live Immich rating and tag filter",
-        "alt": "Immich filter controls displaying blue include tag chips, red exclude tag chips, and a live estimate of 5 matched assets and 6 sidecar files."
+        "alt": "Include tag chips travel-4k, family-milestone, drone-hero, exclude chips outtake and proxy, and the live match estimate.",
+        "sizes": "(min-width: 720px) 220px, calc(50vw - 28px)",
+        "page": {
+          "src": "/img/builds/backup-bucket/thumb-4-immich-filters.webp",
+          "width": 220,
+          "height": 114,
+          "srcset": "/img/builds/backup-bucket/thumb-4-immich-filters.webp 220w, /img/builds/backup-bucket/thumb-4-immich-filters@2x.webp 440w"
+        },
+        "full": {
+          "src": "/img/builds/backup-bucket/thumb-4-immich-filters@2x.webp",
+          "width": 440,
+          "height": 228
+        }
       },
       {
-        "placeholder": true,
-        "width": 220,
-        "height": 114,
         "caption": "Backup Browser tree and safe restore",
-        "alt": "Backup Browser showing encrypted cloud files for Documents & Finances and Creative & Stock Asset Packs with safe restore controls."
+        "alt": "Backup Browser tree with the four buckets and the Creative & Stock Asset Packs folder listing Unique originals and .source.json receipts.",
+        "sizes": "(min-width: 720px) 220px, calc(50vw - 28px)",
+        "page": {
+          "src": "/img/builds/backup-bucket/thumb-5-backup-browser.webp",
+          "width": 220,
+          "height": 114,
+          "srcset": "/img/builds/backup-bucket/thumb-5-backup-browser.webp 220w, /img/builds/backup-bucket/thumb-5-backup-browser@2x.webp 440w"
+        },
+        "full": {
+          "src": "/img/builds/backup-bucket/thumb-5-backup-browser@2x.webp",
+          "width": 440,
+          "height": 228
+        }
       },
       {
-        "placeholder": true,
-        "width": 220,
-        "height": 284,
         "caption": "Generated Markdown run report",
-        "alt": "Markdown rebuild packet report listing 11 asset packs, 449.9 GB of virtual source-backed coverage, 1.6 MB stored cloud payload, and 2 items needing attention."
+        "alt": "Rebuild packet report: 11 asset packs, 449,897,824,256 bytes of virtual coverage, 1,618,179 bytes stored, and two Needs Attention items.",
+        "sizes": "(min-width: 720px) 220px, calc(50vw - 28px)",
+        "page": {
+          "src": "/img/builds/backup-bucket/thumb-6-run-report.webp",
+          "width": 220,
+          "height": 284,
+          "srcset": "/img/builds/backup-bucket/thumb-6-run-report.webp 220w, /img/builds/backup-bucket/thumb-6-run-report@2x.webp 440w"
+        },
+        "full": {
+          "src": "/img/builds/backup-bucket/thumb-6-run-report@2x.webp",
+          "width": 440,
+          "height": 568
+        }
       },
       {
-        "placeholder": true,
-        "width": 220,
-        "height": 114,
         "caption": "Encrypted rclone remote validation",
-        "alt": "Settings rclone panel showing validated executable status, cloud-demo and cloud-demo-crypt remotes, and a Connected status message."
+        "alt": "rclone settings with the cloud-demo and cloud-demo-crypt remotes and Cloud connection: Connected.",
+        "sizes": "(min-width: 720px) 220px, calc(50vw - 28px)",
+        "page": {
+          "src": "/img/builds/backup-bucket/thumb-7-rclone-connected.webp",
+          "width": 220,
+          "height": 114,
+          "srcset": "/img/builds/backup-bucket/thumb-7-rclone-connected.webp 220w, /img/builds/backup-bucket/thumb-7-rclone-connected@2x.webp 440w"
+        },
+        "full": {
+          "src": "/img/builds/backup-bucket/thumb-7-rclone-connected@2x.webp",
+          "width": 440,
+          "height": 228
+        }
       },
       {
-        "placeholder": true,
-        "width": 220,
-        "height": 114,
         "caption": "Disaster recovery kit export panel",
-        "alt": "Disaster recovery kit export panel describing self-contained rclone config export for protected vault storage."
+        "alt": "Disaster recovery kit card with the Export recovery kit button, for storing the kit as a protected 1Password attachment.",
+        "sizes": "(min-width: 720px) 220px, calc(50vw - 28px)",
+        "page": {
+          "src": "/img/builds/backup-bucket/thumb-8-recovery-kit.webp",
+          "width": 220,
+          "height": 114,
+          "srcset": "/img/builds/backup-bucket/thumb-8-recovery-kit.webp 220w, /img/builds/backup-bucket/thumb-8-recovery-kit@2x.webp 440w"
+        },
+        "full": {
+          "src": "/img/builds/backup-bucket/thumb-8-recovery-kit@2x.webp",
+          "width": 440,
+          "height": 228
+        }
       }
     ]
   }

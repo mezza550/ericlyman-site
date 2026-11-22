@@ -493,9 +493,24 @@ function shotFigure(item) {
   const lightbox = item.lightbox || item.caption || "";
   const sources = [];
   if (page.srcset) sources.push(page.srcset);
-  if (full.src && full.width && full.src !== page.src) sources.push(`${full.src} ${full.width}w`);
+  if (full.src && full.width && full.src !== page.src && !String(page.srcset || "").includes(full.src)) sources.push(`${full.src} ${full.width}w`);
   const img = `<img src="${esc(page.src)}"${srcset}${sizes} width="${page.width}" height="${page.height}" alt="${esc(item.alt || "")}" loading="lazy" decoding="async">`;
-  return `<figure class="shot-thumb"><a class="shot-link" href="${esc(full.src)}" data-srcset="${esc(sources.join(", "))}" data-caption="${esc(lightbox)}"><span class="shot-frame">${img}</span></a><figcaption class="shot-cap">${esc(item.caption || "")}</figcaption></figure>`;
+  const portrait = Number(page.width) === 220 && Number(page.height) === 284 ? " shot-frame--portrait" : "";
+  return `<figure class="shot-thumb"><a class="shot-link" href="${esc(full.src)}" data-srcset="${esc(sources.join(", "))}" data-caption="${esc(lightbox)}"><span class="shot-frame${portrait}">${img}</span></a><figcaption class="shot-cap">${esc(item.caption || "")}</figcaption></figure>`;
+}
+
+function featureFigure(item) {
+  const page = item.page || {};
+  const full = item.full || page;
+  const srcset = page.srcset ? ` srcset="${esc(page.srcset)}"` : "";
+  const sizes = item.sizes ? ` sizes="${esc(item.sizes)}"` : "";
+  const lightbox = item.lightbox || item.caption || "";
+  const sources = [];
+  if (page.srcset) sources.push(page.srcset);
+  if (full.src && full.width && full.src !== page.src && !String(page.srcset || "").includes(full.src)) sources.push(`${full.src} ${full.width}w`);
+  const ratio = page.width && page.height ? ` style="aspect-ratio:${Number(page.width)} / ${Number(page.height)}"` : "";
+  const img = `<img src="${esc(page.src)}"${srcset}${sizes} width="${page.width}" height="${page.height}" alt="${esc(item.alt || "")}" loading="lazy" decoding="async">`;
+  return `<figure class="shot-feature"><a class="shot-link" href="${esc(full.src)}" data-srcset="${esc(sources.join(", "))}" data-caption="${esc(lightbox)}"><span class="shot-frame"${ratio}>${img}</span></a><figcaption class="shot-cap">${esc(item.caption || "")}</figcaption></figure>`;
 }
 
 function hasMedia(item) {
@@ -530,7 +545,7 @@ function shotsSection(build) {
   const heading = gallery.heading || "In use";
   const disclaimer = filled(gallery.disclaimer) ? `<p class="shot-note">${esc(gallery.disclaimer)}</p>` : "";
   const clipHtml = clips.map((item) => isPlaceholder(item) ? placeholderFigure(item, true) : clipFigure(item)).join("");
-  const slideHtml = slides.map((item) => isPlaceholder(item) ? placeholderFigure(item, true) : (item.kind === "video" ? clipFigure(item) : shotFigure(item))).join("");
+  const slideHtml = slides.map((item) => isPlaceholder(item) ? placeholderFigure(item, true) : (item.kind === "video" ? clipFigure(item) : featureFigure(item))).join("");
   const grid = thumbs.length ? `<ul class="shot-thumbs">${thumbs.map((item) => `<li>${isPlaceholder(item) ? placeholderFigure(item, false) : shotFigure(item)}</li>`).join("")}</ul>` : "";
   const hasReal = [...clips, ...slides, ...thumbs].some(hasMedia);
   const dialog = hasReal ? `<dialog class="shot-dialog"><div class="shot-dialog-top"><button type="button" data-shot-close>Close</button></div><div class="shot-dialog-stage"><img class="shot-dialog-img" alt="" sizes="95vw"><video class="shot-dialog-video" controls muted loop playsinline hidden></video></div><p class="shot-dialog-cap"></p><div class="shot-dialog-nav"><button type="button" data-shot-prev>Previous</button><button type="button" data-shot-next>Next</button></div></dialog>` : "";

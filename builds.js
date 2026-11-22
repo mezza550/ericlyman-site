@@ -264,7 +264,12 @@
       opener = from || null;
       show(next);
       if (!dialog.open) dialog.showModal();
-      fitOpen();
+      var el = image.hidden ? video : image;
+      var ready = image.hidden ? video.videoWidth : image.naturalWidth;
+      if (ready) fitOpen();
+      else el.addEventListener(image.hidden ? "loadedmetadata" : "load", function () {
+        if (dialog.open) fitOpen();
+      }, { once: true });
       closeButton.focus();
     }
 
