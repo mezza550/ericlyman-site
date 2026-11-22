@@ -3,7 +3,7 @@
   "name": "Backup Bucket",
   "order": 4,
   "context": "",
-  "status": "In daily use",
+  "status": "Daily use",
   "status_since": "",
   "users": "My personal Windows PC",
   "card_line": "A Windows desktop backup app that encrypts files, tracks rebuild receipts, and filters media libraries.",

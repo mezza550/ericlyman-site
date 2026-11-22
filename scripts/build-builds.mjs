@@ -30,7 +30,7 @@ const TAGS = [
   "Books and Audio",
   "Cross-device Sync"
 ];
-const STATUSES = ["In daily use", "In regular use", "In testing", "In progress", "Retired"];
+const STATUSES = ["Daily use", "Regular use", "In testing", "In progress", "Retired"];
 const CONTEXTS = ["Personal project", "Work project", "Small-business project"];
 const OWNERS = ["Person", "AI", "Code", "TODO"];
 const TOOL_ICONS = {

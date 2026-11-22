@@ -16,7 +16,7 @@ Commit the JSON and the HTML the script writes. GitHub Pages publishes those fil
 | name | Build name. | |
 | order | Display order. Lower numbers come first. | |
 | context | `Personal project`, `Work project`, or `Small-business project`. Work projects may include `employer`. | |
-| status | One of: In daily use, In regular use, In testing, In progress, Retired. | |
+| status | One of: Daily use, Regular use, In testing, In progress, Retired. | |
 | status_since | Month and year. Joined with status on the fact strip as "status since date". | |
 | card_status | Optional exact line for the card only. When set, the homepage and Builds page cards use it instead of status and users. | |
 | users | Who uses it. Shown on the fact strip. Also on the card when `card_status` is empty. | 40 characters |
