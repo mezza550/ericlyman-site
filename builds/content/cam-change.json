@@ -33,7 +33,7 @@
   "snapshot": {
     "problem": "Moving an association to a new manager meant about a dozen screens across three web systems, plus spreadsheet updates. Steps were easy to miss, and clients with the same name in different branches could get mixed up.",
     "what_i_built": "An AI agent that checks whether the new manager is a good fit, makes the change in each system, reads back every save, and drafts the notice email for review.",
-    "result": "Fewer errors. Every move follows the same steps, checks the client's unique code before each save, and leaves a before-and-after record. I expect it to save at least 15 minutes per move."
+    "result": "Fewer errors. Every move follows the same steps, checks the client's unique code before each save, and leaves a before-and-after record. Saved 15 minutes per individual move, multiple hours when handling an employee offboarding."
   },
   "problem": "He's the Branch President at a property management company, and manager changes fell to him and the VP of Community Management. Each move meant about a dozen screens across three web systems, then spreadsheet updates. Open action items, invoices waiting on the old manager, and old access were easy to miss. A manager could end up with too many associations, or one too far away to visit. The company has several branches, and some clients share a name, so a search could land on the wrong one. Afterward, nobody could say what had changed.",
   "how_it_works": [
