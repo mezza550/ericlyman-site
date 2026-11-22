@@ -38,7 +38,7 @@
   "problem": "In my role as the Branch President at a property management company, manager-to-client changes fell to me and the VP of Community Management. Each move meant about a dozen screens across three web systems, then spreadsheet updates. Open action items, invoices waiting on the old manager, and old access were easy to miss. A manager could end up with too many associations, or one too far away to visit. The company has several branches, and some clients share a name, so a search could land on the wrong one. Afterward, nobody could say what had changed. This was a tedious process in the best case, and in the worst case could lead to real assignment errors and client service disruptions.",
   "how_it_works": [
     {
-      "text": "He types one command with the association, the new manager, and the effective date. If the date is missing, the agent asks first.",
+      "text": "I type one command with the association, the new manager, and the effective date. If the date is missing, the agent asks first.",
       "owner": "Person"
     },
     {
@@ -52,11 +52,11 @@
       ]
     },
     {
-      "text": "Any warning stops the run until he keeps the manager, picks a suggested alternative, or cancels, and overriding a staffing rule needs a logged reason.",
+      "text": "Any warning stops the run until I keep the manager, pick a suggested alternative, or cancel, and overriding a staffing rule needs a logged reason.",
       "owner": "Person"
     },
     {
-      "text": "Once he confirms the plan, the agent works through the management system in his browser: access, action items, manager details, invoice approval, waiting invoices, the board listing, and the old manager's access.",
+      "text": "Once I confirm the plan, the agent works through the management system in my browser: access, action items, manager details, invoice approval, waiting invoices, the board listing, and the old manager's access.",
       "owner": "AI",
       "tools": [
         {
@@ -88,7 +88,7 @@
       ]
     },
     {
-      "text": "It updates the client tracker and drafts the notice email to both managers with a board introduction, which he reviews and sends himself.",
+      "text": "It updates the client tracker and drafts the notice email to both managers with a board introduction, which I review and send it myself.",
       "owner": "AI",
       "tools": [
         {
