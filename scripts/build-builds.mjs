@@ -584,7 +584,7 @@ ${topbar("builds")}
       ${backScript}
       <header class="build-header">
         ${titleRow(build, "h1")}
-        ${filled(build.card_line) ? `<p class="build-subtitle">${esc(build.card_line)}</p>` : ""}
+        ${filled(build.page_subtitle || build.card_line) ? `<p class="build-subtitle">${esc(build.page_subtitle || build.card_line)}</p>` : ""}
         ${headerTags(build)}
         ${toolsRow(build)}
         ${timeLine(build)}

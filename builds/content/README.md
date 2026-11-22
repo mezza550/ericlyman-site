@@ -20,7 +20,8 @@ Commit the JSON and the HTML the script writes. GitHub Pages publishes those fil
 | status_since | Month and year. Joined with status on the fact strip as "status since date". | |
 | card_status | Optional exact line for the card only. When set, the homepage and Builds page cards use it instead of status and users. | |
 | users | Who uses it. Shown on the fact strip. Also on the card when `card_status` is empty. | 40 characters |
-| card_line | One sentence on the job it does. | 80 characters |
+| card_line | One sentence on the job it does. Shown on the homepage card and the Builds page card. | 80 characters |
+| page_subtitle | Optional page subtitle. When set, the build page uses this instead of `card_line`. Cards keep `card_line`. | |
 | headline_metric | Optional `value`, `label`, and `basis` (`measured` or `expected`). | |
 | tags | Up to 4 concept tags from the list below. On a card with `tools`, these are tag-shaped labels. Other cards keep the plain pills. Card tag lists use two columns and reserve two lines so the cards line up. | |
 | tools | Optional tool names. Shown as the logo row on the card and in the build page header. | |
