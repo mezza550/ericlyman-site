@@ -1,0 +1,365 @@
+{
+  "slug": "chapterbridge",
+  "name": "ChapterBridge",
+  "order": 3,
+  "context": "",
+  "status": "Daily use",
+  "status_since": "October 2026",
+  "card_status": "Daily use: A small group of readers at home and on the road.",
+  "users": "Me and a small group of other readers, at home and on the road.",
+  "card_line": "An app that matches ebooks to audiobooks, highlights each spoken word, and uses one bookmark.",
+  "page_subtitle": "An app that matches ebooks to audiobooks, highlights each spoken word, and syncs my place.",
+  "tags": [
+    "Human-in-the-loop",
+    "Books and Audio",
+    "Cross-device Sync"
+  ],
+  "tools": [
+    "Android",
+    "Node.js",
+    "Whisper",
+    "FFmpeg",
+    "Supabase",
+    "Google Drive",
+    "Codex",
+    "Claude Code"
+  ],
+  "icon": {
+    "src": "/img/builds/chapterbridge-icon.webp",
+    "alt": "ChapterBridge app icon"
+  },
+  "time_to_build": "A few hours of building with Codex and Claude, then a few days of testing and tweaks",
+  "snapshot": {
+    "problem": "Ebooks and audiobooks didn't know about each other, so switching from reading to listening meant hunting for my place and in different apps.",
+    "what_i_built": "A Windows app that lines up an ebook with its audiobook, and an Android app that reads, plays, and keeps one place.",
+    "result": "One streamlined app for reading and listening, so I never lose my place or juggle separate apps. I've finished two books, reading at night and listening while driving, and I'm on the third."
+  },
+  "problem": "I read the ebook at night and listen to the audiobook in the car, and the two copies never knew about each other. Every switch meant scrubbing a 20-plus-hour recording for the scene I'd stopped on, or paging through the ebook to find where the narrator left off. Audio tracks don't line up with chapters, so even a close guess left me hunting. The books are files I already own, so the tool had to work with my copies, on my own computer, without breaking any copy protection.",
+  "how_it_works": [
+    {
+      "text": "I add an ebook and its audiobook on my PC, either one file or a stack of tracks put in order.",
+      "owner": "Person"
+    },
+    {
+      "text": "Speech recognition transcribes the narration on my own computer, in 10-minute chunks it can resume after a restart.",
+      "owner": "AI",
+      "tools": [
+        { "name": "Whisper", "label": "Whisper (local)" }
+      ]
+    },
+    {
+      "text": "Code matches the transcript to the ebook word by word in reading order, and words it can't place stay untimed instead of guessed.",
+      "owner": "Code",
+      "tools": [
+        { "name": "Node.js", "label": "Node.js" }
+      ]
+    },
+    {
+      "text": "The finished book goes to my private Google Drive, and the phone checks every byte of its download before marking it ready offline.",
+      "owner": "Code",
+      "tools": [
+        { "name": "Google Drive", "label": "Google Drive" }
+      ]
+    },
+    {
+      "text": "I read, listen, or use Read Along, which highlights each word as it's spoken, and all three share one saved place.",
+      "owner": "Person",
+      "tools": [
+        { "name": "Android", "label": "Android" }
+      ]
+    },
+    {
+      "text": "Each move of my place is saved as a new entry that never replaces an old one, and it syncs between the PC and phone.",
+      "owner": "Code",
+      "tools": [
+        { "name": "Supabase", "label": "Supabase" }
+      ]
+    },
+    {
+      "text": "If both devices moved while apart, the app shows both places and I pick the one to keep.",
+      "owner": "Person"
+    }
+  ],
+  "decisions": [
+    {
+      "decision": "I choose when two places disagree.",
+      "reason": "Every saved place is kept, and the database can add places but not change them. When the phone and PC moved separately, the app asks me. It never picks by clock time or by which is farther along."
+    },
+    {
+      "decision": "Speech recognition listens, and code decides what matches.",
+      "reason": "The recognizer turns audio into words with rough times. Code matches them to the ebook in order and leaves the rest untimed, so a gap clears the highlight."
+    },
+    {
+      "decision": "My books stay on my machines and my Drive.",
+      "reason": "The PC services answer only to the PC. Google access covers only files the app made, and only my account can read my places."
+    },
+    {
+      "decision": "It only handles books I own and can open.",
+      "reason": "It reads plain EPUB and common audio. It doesn't buy or unlock books, and an encrypted ebook stops the import."
+    },
+    {
+      "decision": "Real reading removed prompts I didn't need.",
+      "reason": "Early versions stopped at every contents page and cast list the narrator skips. Now the app skips to the next spoken point and flags only a missed story chapter."
+    }
+  ],
+  "results": [
+    {
+      "value": "One virtual bookmark everywhere",
+      "label": "Reading, listening, PC, and phone all pick up from it."
+    },
+    {
+      "value": "No manual timing",
+      "label": "The app finds where each word is spoken in the audio."
+    },
+    {
+      "value": "Local AI transcription",
+      "label": "Speech recognition runs on my PC. Books stay in my own Drive."
+    },
+    {
+      "value": "Offline available",
+      "label": "Synced books can be saved to device, so internet dead zones are irrelevant while on the go."
+    }
+  ],
+  "checks": [
+    {
+      "value": "100%",
+      "label": "Word matching inside chapters. Non-spoken text (forwards, publisher info) stays untimed, not guessed."
+    },
+    {
+      "value": "128 MB",
+      "label": "Enough memory for a full-book import now. The old code failed a 256 MB test after a phone crash."
+    },
+    {
+      "value": "End-to-end systemized testing",
+      "label": "Automated tests performed after new builds, before deployment."
+    }
+  ],
+  "next": [
+    "Sync in the background, so my place is current before I sit at the PC. Today the phone syncs only while the app is open.",
+    "Add Android Auto, so I can pick a chapter from the car's screen. Today the car just plays the phone's audio."
+  ],
+  "gallery": {
+    "heading": "ChapterBridge in use",
+    "slides": [
+      {
+        "kind": "image",
+        "caption": "Read Along on the PC. The highlight follows the narration word by word, with the text and playback controls on one screen.",
+        "alt": "Desktop Read along view of chapter 20 with the overall book position at 35.8 percent, a paragraph of text with the spoken word highlighted, and the player bar at the bottom showing 0:24 elapsed.",
+        "sizes": "(min-width: 720px) 68ch, calc(100vw - 40px)",
+        "page": {
+          "src": "/img/builds/chapterbridge/gallery/slide-read-along-half.webp",
+          "width": 1440,
+          "height": 655,
+          "srcset": "/img/builds/chapterbridge/gallery/slide-read-along-half.webp 1440w, /img/builds/chapterbridge/gallery/slide-read-along.webp 2880w"
+        },
+        "full": {
+          "src": "/img/builds/chapterbridge/gallery/slide-read-along.webp",
+          "width": 2880,
+          "height": 1310
+        }
+      },
+      {
+        "kind": "image",
+        "caption": "Adding a book on the PC. I pick the ebook and the tracks, put the tracks in order, and it processes locally.",
+        "alt": "On the left, the Add a book screen with The Time Machine chosen as the ebook, 12 audio files totalling 100.4 MB, and the track order list sorted by name with up and down arrows. On the right, the book's library card reading Recognizing speech, above a progress panel showing Recognizing spoken words with 5 of 28 chunks complete and a Cancel processing button.",
+        "sizes": "(min-width: 720px) 68ch, calc(100vw - 40px)",
+        "page": {
+          "src": "/img/builds/chapterbridge/gallery/slide-add-book-half.webp",
+          "width": 1440,
+          "height": 810,
+          "srcset": "/img/builds/chapterbridge/gallery/slide-add-book-half.webp 1440w, /img/builds/chapterbridge/gallery/slide-add-book.webp 2880w"
+        },
+        "full": {
+          "src": "/img/builds/chapterbridge/gallery/slide-add-book.webp",
+          "width": 2880,
+          "height": 1620
+        }
+      },
+      {
+        "kind": "image",
+        "present": "center",
+        "caption": "Two devices moved while apart. The app names the book, shows both places, and waits for me to choose.",
+        "alt": "Dialog titled Choose your place for Red Rising, with the cover, asking where to continue. Two cards: Your phone, 62.1 percent complete, 31: The Fall of Mustang, listening; and This device, 52.9 percent complete, 28: My Brother, reading. A Decide later button sits below.",
+        "sizes": "(min-width: 720px) 480px, 92vw",
+        "page": {
+          "src": "/img/builds/chapterbridge/gallery/slide-place-choice-half.webp",
+          "width": 472,
+          "height": 558,
+          "srcset": "/img/builds/chapterbridge/gallery/slide-place-choice-half.webp 472w, /img/builds/chapterbridge/gallery/slide-place-choice.webp 944w"
+        },
+        "full": {
+          "src": "/img/builds/chapterbridge/gallery/slide-place-choice.webp",
+          "width": 944,
+          "height": 1116
+        }
+      }
+    ],
+    "thumbs": [
+      {
+        "caption": "Tracks put in order before processing",
+        "alt": "Track order list showing four numbered audiobook tracks sorted by name, each with move up and move down arrow buttons.",
+        "sizes": "(min-width: 720px) 220px, calc(50vw - 28px)",
+        "page": {
+          "src": "/img/builds/chapterbridge/gallery/thumb-tracks.webp",
+          "width": 220,
+          "height": 114,
+          "srcset": "/img/builds/chapterbridge/gallery/thumb-tracks.webp 220w, /img/builds/chapterbridge/gallery/thumb-tracks@2x.webp 440w"
+        },
+        "full": {
+          "src": "/img/builds/chapterbridge/gallery/thumb-tracks@hires.webp",
+          "width": 880,
+          "height": 456
+        }
+      },
+      {
+        "caption": "Book details with Read and Listen",
+        "alt": "Book details for Red Rising with a large cover, the line Your place, 20: The House Mars, 36.0 percent complete, and Read, Listen and Read along buttons.",
+        "sizes": "(min-width: 720px) 220px, calc(50vw - 28px)",
+        "page": {
+          "src": "/img/builds/chapterbridge/gallery/thumb-details.webp",
+          "width": 220,
+          "height": 114,
+          "srcset": "/img/builds/chapterbridge/gallery/thumb-details.webp 220w, /img/builds/chapterbridge/gallery/thumb-details@2x.webp 440w"
+        },
+        "full": {
+          "src": "/img/builds/chapterbridge/gallery/thumb-details@hires.webp",
+          "width": 1760,
+          "height": 912
+        }
+      },
+      {
+        "caption": "Whole-book progress while listening",
+        "alt": "Listening screen on the PC with Reading, Listening and Read along tabs above an overall book position bar at 35.8 percent.",
+        "sizes": "(min-width: 720px) 220px, calc(50vw - 28px)",
+        "page": {
+          "src": "/img/builds/chapterbridge/gallery/thumb-progress.webp",
+          "width": 220,
+          "height": 114,
+          "srcset": "/img/builds/chapterbridge/gallery/thumb-progress.webp 220w, /img/builds/chapterbridge/gallery/thumb-progress@2x.webp 440w"
+        },
+        "full": {
+          "src": "/img/builds/chapterbridge/gallery/thumb-progress@hires.webp",
+          "width": 1056,
+          "height": 547
+        }
+      },
+      {
+        "caption": "The sync light in the header",
+        "alt": "Header button with a green light and the word Synced.",
+        "sizes": "(min-width: 720px) 220px, calc(50vw - 28px)",
+        "page": {
+          "src": "/img/builds/chapterbridge/gallery/thumb-sync.webp",
+          "width": 220,
+          "height": 114,
+          "srcset": "/img/builds/chapterbridge/gallery/thumb-sync.webp 220w, /img/builds/chapterbridge/gallery/thumb-sync@2x.webp 440w"
+        },
+        "full": {
+          "src": "/img/builds/chapterbridge/gallery/thumb-sync@hires.webp",
+          "width": 308,
+          "height": 160
+        }
+      }
+    ]
+  },
+  "mobile": {
+    "heading": "Mobile experience",
+    "shots": [
+      {
+        "caption": "Library",
+        "alt": "Library screen with a Continue card for Morning Star at Chapter 36: Swill, Read, Listen, and Read Along buttons, and Red Rising and Golden Son below.",
+        "sizes": "(min-width: 720px) 120px, 46vw",
+        "page": {
+          "src": "/img/builds/chapterbridge/m1-library-287.webp",
+          "width": 287,
+          "height": 640,
+          "srcset": "/img/builds/chapterbridge/m1-library-287.webp 287w, /img/builds/chapterbridge/m1-library.webp 574w"
+        },
+        "full": {
+          "src": "/img/builds/chapterbridge/m1-library.webp",
+          "width": 574,
+          "height": 1280
+        }
+      },
+      {
+        "caption": "Read Along",
+        "alt": "Read Along screen with page text, the spoken word highlighted, and the player below.",
+        "sizes": "(min-width: 720px) 120px, 46vw",
+        "page": {
+          "src": "/img/builds/chapterbridge/m2-read-along-287.webp",
+          "width": 287,
+          "height": 640,
+          "srcset": "/img/builds/chapterbridge/m2-read-along-287.webp 287w, /img/builds/chapterbridge/m2-read-along.webp 574w"
+        },
+        "full": {
+          "src": "/img/builds/chapterbridge/m2-read-along.webp",
+          "width": 574,
+          "height": 1280
+        }
+      },
+      {
+        "caption": "Listen",
+        "alt": "Listen screen with cover art, Chapter 36: Swill, a chapter scrubber, and playback controls.",
+        "sizes": "(min-width: 720px) 120px, 46vw",
+        "page": {
+          "src": "/img/builds/chapterbridge/m3-listen-287.webp",
+          "width": 287,
+          "height": 640,
+          "srcset": "/img/builds/chapterbridge/m3-listen-287.webp 287w, /img/builds/chapterbridge/m3-listen.webp 574w"
+        },
+        "full": {
+          "src": "/img/builds/chapterbridge/m3-listen.webp",
+          "width": 574,
+          "height": 1280
+        }
+      },
+      {
+        "caption": "Read",
+        "alt": "Read screen with full-screen text and the current word highlighted.",
+        "sizes": "(min-width: 720px) 120px, 46vw",
+        "page": {
+          "src": "/img/builds/chapterbridge/m4-read-287.webp",
+          "width": 287,
+          "height": 640,
+          "srcset": "/img/builds/chapterbridge/m4-read-287.webp 287w, /img/builds/chapterbridge/m4-read.webp 574w"
+        },
+        "full": {
+          "src": "/img/builds/chapterbridge/m4-read.webp",
+          "width": 574,
+          "height": 1280
+        }
+      },
+      {
+        "caption": "Stats",
+        "alt": "Stats screen showing 2h 7m listened, 1 chapter read, and 2 books completed.",
+        "sizes": "(min-width: 720px) 120px, 46vw",
+        "page": {
+          "src": "/img/builds/chapterbridge/m5-stats-287.webp",
+          "width": 287,
+          "height": 640,
+          "srcset": "/img/builds/chapterbridge/m5-stats-287.webp 287w, /img/builds/chapterbridge/m5-stats.webp 574w"
+        },
+        "full": {
+          "src": "/img/builds/chapterbridge/m5-stats.webp",
+          "width": 574,
+          "height": 1280
+        }
+      },
+      {
+        "caption": "Settings",
+        "alt": "Settings screen with Supabase cloud sync and a Google Drive connection.",
+        "sizes": "(min-width: 720px) 120px, 46vw",
+        "page": {
+          "src": "/img/builds/chapterbridge/m6-settings-287.webp",
+          "width": 287,
+          "height": 640,
+          "srcset": "/img/builds/chapterbridge/m6-settings-287.webp 287w, /img/builds/chapterbridge/m6-settings.webp 574w"
+        },
+        "full": {
+          "src": "/img/builds/chapterbridge/m6-settings.webp",
+          "width": 574,
+          "height": 1280
+        }
+      }
+    ]
+  }
+}

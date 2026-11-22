@@ -1,0 +1,343 @@
+{
+  "slug": "ruby",
+  "name": "Ruby",
+  "order": 1,
+  "context": "Small-business project",
+  "status": "Daily use",
+  "status_since": "November 2026",
+  "users": "A one-person freelance design business",
+  "card_line": "A back-office agent and app that logs hours, drafts invoices, and tracks payments.",
+  "tags": [
+    "Human-in-the-loop",
+    "Small Business",
+    "Accounting"
+  ],
+  "tools": [
+    "Python",
+    "SQLite",
+    "DeepSeek",
+    "OpenRouter",
+    "Claude Code",
+    "Gemini"
+  ],
+  "icon": {
+    "src": "/img/builds/ruby-icon.webp",
+    "alt": "Ruby gemstone icon"
+  },
+  "built_with": "Python, SQLite, DeepSeek via OpenRouter, Claude Code, Gemini",
+  "time_to_build": "One week of planning, one week of building with Claude and Gemini",
+  "snapshot": {
+    "problem": "Freelance hour tracking and billing ran on manual entry, napkin math, and copy-paste, which caused errors and missed invoice follow-ups.",
+    "what_i_built": "An agent inside a MacOS app she chats with. It logs hours, nudges her to act, drafts invoice emails, and asks before anything important.",
+    "result": "Consistency, fewer errors, accurate books and payments, and reliable follow-up. Invoices go out the same way every week, unpaid ones get flagged, and I expect it to save about an hour a week."
+  },
+  "problem": "She's a designer, not a bookkeeper, and very non-technical. Bookkeeping was a drag that kept her from the more rewarding, creative work. The designer ran all of her admin by hand in a spreadsheet. Hours were typed into cells, totals were worked out by hand, and every invoice was built and emailed manually. It was a copy-paste nightmare that led to miscalculations. Following up on unpaid invoices depended on remembering to check, so it got missed. Her main client also caps weekly hours, so she had to keep a running total.",
+  "how_it_works": [
+    {
+      "title": "Logs hours in a sentence",
+      "text": "She tells Ruby what she worked on in a plain sentence, like \"2.5 hours on the holiday mailer today.\"",
+      "owner": "Person"
+    },
+    {
+      "title": "Turns the sentence into a date, hours, and an item",
+      "text": "The model turns the sentence into a date, hours, and an item. If something is missing, it asks instead of guessing.",
+      "owner": "AI",
+      "tools": [
+        {
+          "name": "DeepSeek",
+          "label": "DeepSeek (via OpenRouter)"
+        }
+      ]
+    },
+    {
+      "title": "Applies the billing rules",
+      "text": "Code applies the billing rules, catches likely duplicates, saves the entry, and warns her as she nears her weekly hours cap.",
+      "owner": "Code",
+      "tools": [
+        {
+          "name": "SQLite",
+          "label": "SQLite"
+        }
+      ]
+    },
+    {
+      "title": "Nudges her and flags past due",
+      "text": "Ruby nudges her at the end of any workday with nothing logged, and flags every invoice that's past due.",
+      "owner": "Code"
+    },
+    {
+      "title": "Builds the invoice and drafts the email",
+      "text": "At the end of the week, Ruby builds the invoice PDF in her own layout and drafts the email to the client.",
+      "owner": "Code"
+    },
+    {
+      "title": "Reviews the preview and hits Send",
+      "text": "She reviews the preview and says yes. Ruby saves the draft in Gmail, and she hits Send herself.",
+      "owner": "Person",
+      "tools": [
+        {
+          "name": "Gmail",
+          "label": "Gmail (read-only)"
+        }
+      ]
+    },
+    {
+      "title": "Confirms each payment",
+      "text": "She confirms each payment Ruby matched from her inbox. Ruby marks the invoice paid and reminds her what to set aside for taxes.",
+      "owner": "Person",
+      "tools": [
+        {
+          "name": "Gmail",
+          "label": "Gmail (read-only)"
+        }
+      ]
+    }
+  ],
+  "decisions": [
+    {
+      "decision": "A person owns the final mile.",
+      "reason": "Ruby does the prep. She confirms every payment match and sends every invoice and email herself. Ruby's email connection can't send, and code holds changes until she says yes. An AI is never allowed to hit Send."
+    },
+    {
+      "decision": "I watched how she actually invoiced before writing any code.",
+      "reason": "That turned up a step I hadn't planned for: her client's processor emails a confirmation, so Ruby can tell \"sent\" from \"received\" without asking."
+    },
+    {
+      "decision": "The model handles language, and code handles money.",
+      "reason": "The model only turns sentences into fields. Rounding, billing math, the hours cap, and the no-delete rule run in code and the database."
+    },
+    {
+      "decision": "No bank login, and no AI on payment emails.",
+      "reason": "Ruby matches payments from read-only email alerts, checks they really came from the bank and the client, and keeps that text away from the model."
+    },
+    {
+      "decision": "Ruby is polite, and it sticks to business.",
+      "reason": "Its instructions give it one job and only the tools for that job, so a conversation that drifts gets steered back to the work."
+    }
+  ],
+  "results": [
+    {
+      "value": "Consistent billing",
+      "label": "Invoices go out the same way every week."
+    },
+    {
+      "value": "No missed follow-ups",
+      "label": "Unpaid invoices get flagged."
+    },
+    {
+      "value": "Fewer errors",
+      "label": "No more napkin math or copy-paste."
+    },
+    {
+      "value": "About 1 hour",
+      "label": "Admin time saved per week",
+      "basis": "expected"
+    }
+  ],
+  "checks": [
+    {
+      "value": "26 of 26",
+      "label": "End-to-end test chats logged correctly, checked against what was saved (22 of 26 before I fixed what the first run caught)",
+      "basis": "measured"
+    },
+    {
+      "value": "6 of 6",
+      "label": "Past invoices rebuilt from her records with matching totals. The check caught a rate change the spec had missed.",
+      "basis": "measured"
+    },
+    {
+      "value": "$0.00003",
+      "label": "Model cost per message",
+      "basis": "measured"
+    }
+  ],
+  "next": [
+    "Draft a follow-up email when an invoice goes past due, so she only has to review it and hit Send.",
+    "Keep the model test chats in the project and rerun them after every change. Right now only the code tests rerun automatically."
+  ],
+  "gallery": {
+    "heading": "Ruby in use",
+    "disclaimer": "All names, clients, and figures shown below are fictional, for demonstration only.",
+    "clips": [
+      {
+        "src": "/media/ruby/01_log_hours_by_chat_directed.mp4",
+        "poster": "/media/ruby/01_log_hours_by_chat_directed.jpg",
+        "width": 1920,
+        "height": 1080,
+        "label": "Demo: logging 2.5 hours in Ruby's chat and the entry appearing in the spreadsheet",
+        "caption": "Logging time takes one sentence. Ruby works out the date, project, and project manager, saves the entry, and updates the weekly total."
+      },
+      {
+        "src": "/media/ruby/02_ask_then_warn_directed.mp4",
+        "poster": "/media/ruby/02_ask_then_warn_directed.jpg",
+        "width": 1920,
+        "height": 1080,
+        "label": "Demo: Ruby asks which project the user means, then saves the hours and warns that the week is near the 40-hour cap",
+        "caption": "When a request is ambiguous, Ruby asks instead of guessing. Once the entry is saved, it warns her that the week is at 36.5 of the client's 40-hour cap."
+      },
+      {
+        "src": "/media/ruby/03_payment_match_directed.mp4",
+        "poster": "/media/ruby/03_payment_match_directed.jpg",
+        "width": 1920,
+        "height": 1080,
+        "label": "Demo: opening a payment email in Ruby, confirming its match to invoice 216, and the invoice status changing to Client Paid",
+        "caption": "A payment notice arrives. Ruby matches it to the right invoice and shows the original email beside the match. She confirms, and the invoice moves to Client Paid."
+      }
+    ],
+    "thumbs": [
+      {
+        "caption": "Corrections in plain language",
+        "lightbox": "Corrections work the same way as logging. Ruby shows what changed, from 2.5 hours to 3, and updates the weekly total. Records are never deleted; replaced entries are kept as history.",
+        "alt": "Chat where the user corrects an entry from 2.5 to 3 hours and Ruby confirms the change and the new weekly total.",
+        "sizes": "(min-width: 720px) 220px, calc(50vw - 28px)",
+        "page": {
+          "src": "/img/builds/ruby/03-fix-an-entry-1600.webp",
+          "width": 1600,
+          "height": 834,
+          "srcset": "/img/builds/ruby/03-fix-an-entry-800.webp 800w, /img/builds/ruby/03-fix-an-entry-1600.webp 1600w"
+        },
+        "full": {
+          "src": "/img/builds/ruby/03-fix-an-entry-2400.webp",
+          "width": 2400,
+          "height": 1251
+        }
+      },
+      {
+        "caption": "\"How close am I to the cap?\"",
+        "lightbox": "She can ask about her week in plain language. Ruby answers from the stored records, with a total, a breakdown by project, and how much room is left under the cap.",
+        "alt": "Chat where Ruby summarizes the week as 37 of 40 hours logged, broken down by project, with a warning about the hours cap.",
+        "sizes": "(min-width: 720px) 220px, calc(50vw - 28px)",
+        "page": {
+          "src": "/img/builds/ruby/04-weekly-summary-1600.webp",
+          "width": 1600,
+          "height": 834,
+          "srcset": "/img/builds/ruby/04-weekly-summary-800.webp 800w, /img/builds/ruby/04-weekly-summary-1600.webp 1600w"
+        },
+        "full": {
+          "src": "/img/builds/ruby/04-weekly-summary-2400.webp",
+          "width": 2400,
+          "height": 1251
+        }
+      },
+      {
+        "caption": "Invoices tracked from sent to paid",
+        "lightbox": "Each work week becomes one invoice, and Ruby tracks it from In Progress to Funds Received. Most status changes come from email Ruby reads for her: the sent invoice, the client's receipt notice, the payment notice, and the bank's deposit alert.",
+        "alt": "Invoices table with six weekly invoices and color-coded statuses from In Progress to Funds Received, under a banner announcing a payment email to review.",
+        "sizes": "(min-width: 720px) 220px, calc(50vw - 28px)",
+        "page": {
+          "src": "/img/builds/ruby/05-invoices-1600.webp",
+          "width": 1600,
+          "height": 834,
+          "srcset": "/img/builds/ruby/05-invoices-800.webp 800w, /img/builds/ruby/05-invoices-1600.webp 1600w"
+        },
+        "full": {
+          "src": "/img/builds/ruby/05-invoices-2400.webp",
+          "width": 2400,
+          "height": 1251
+        }
+      },
+      {
+        "caption": "The match, beside the original email",
+        "lightbox": "When the client's payment notice arrives, Ruby reads it, matches the amount to the right invoice, and shows the original email next to its match. Nothing changes until she confirms. Ruby only reads email and never logs in to the bank.",
+        "alt": "Review window showing a $1,925 remittance email matched to invoice 216, with the original email shown beside the match and buttons to confirm or reject it.",
+        "sizes": "(min-width: 720px) 220px, calc(50vw - 28px)",
+        "page": {
+          "src": "/img/builds/ruby/06-payment-review-1600.webp",
+          "width": 1600,
+          "height": 980,
+          "srcset": "/img/builds/ruby/06-payment-review-800.webp 800w, /img/builds/ruby/06-payment-review-1600.webp 1600w"
+        },
+        "full": {
+          "src": "/img/builds/ruby/06-payment-review-2400.webp",
+          "width": 2400,
+          "height": 1471
+        }
+      },
+      {
+        "caption": "The weekly invoice, in her design",
+        "lightbox": "Ruby builds the weekly invoice from her logged hours, using her own invoice design, then saves it as a Gmail draft for her to review and send. Ruby can't send email itself.",
+        "alt": "A one-page invoice with line items for three projects, 33.5 total hours at $55 per hour, and a total due of $1,843.",
+        "sizes": "(min-width: 720px) 220px, calc(50vw - 28px)",
+        "page": {
+          "src": "/img/builds/ruby/07-invoice-1600.webp",
+          "width": 1236,
+          "height": 1600,
+          "srcset": "/img/builds/ruby/07-invoice-800.webp 618w, /img/builds/ruby/07-invoice-1600.webp 1236w"
+        },
+        "full": {
+          "src": "/img/builds/ruby/07-invoice-full.webp",
+          "width": 1700,
+          "height": 2200
+        }
+      },
+      {
+        "caption": "Next week's estimate, written from one sentence",
+        "lightbox": "Each Friday she sends the client a forecast of next week's hours. She describes her plan in a sentence, and Ruby fills in the form and writes the email for her to review.",
+        "alt": "Estimates tab with a form for next week's hours on the left, an email preview in the middle, and the chat where the user describes the plan.",
+        "sizes": "(min-width: 720px) 220px, calc(50vw - 28px)",
+        "page": {
+          "src": "/img/builds/ruby/08-weekly-estimate-1600.webp",
+          "width": 1600,
+          "height": 834,
+          "srcset": "/img/builds/ruby/08-weekly-estimate-800.webp 800w, /img/builds/ruby/08-weekly-estimate-1600.webp 1600w"
+        },
+        "full": {
+          "src": "/img/builds/ruby/08-weekly-estimate-2400.webp",
+          "width": 2400,
+          "height": 1251
+        }
+      },
+      {
+        "caption": "Rate changes, scheduled by date",
+        "lightbox": "Rate changes are scheduled by date, so past invoices keep the rate they were billed at. Ruby confirms the change and the first week it applies to before saving anything.",
+        "alt": "Rates table with three hourly rates by date, and a chat where Ruby confirms a change to $60 per hour starting January 4, 2027.",
+        "sizes": "(min-width: 720px) 220px, calc(50vw - 28px)",
+        "page": {
+          "src": "/img/builds/ruby/09-rate-change-1600.webp",
+          "width": 1600,
+          "height": 834,
+          "srcset": "/img/builds/ruby/09-rate-change-800.webp 800w, /img/builds/ruby/09-rate-change-1600.webp 1600w"
+        },
+        "full": {
+          "src": "/img/builds/ruby/09-rate-change-2400.webp",
+          "width": 2400,
+          "height": 1251
+        }
+      },
+      {
+        "caption": "Setup inside the app",
+        "lightbox": "Setup happens in the app with no config files. The API key is stored only on her computer and never included in the installer.",
+        "alt": "Settings screen with sections for the AI connection, invoice numbering, appearance, and the assistant's name.",
+        "sizes": "(min-width: 720px) 220px, calc(50vw - 28px)",
+        "page": {
+          "src": "/img/builds/ruby/10-settings-1600.webp",
+          "width": 1600,
+          "height": 834,
+          "srcset": "/img/builds/ruby/10-settings-800.webp 800w, /img/builds/ruby/10-settings-1600.webp 1600w"
+        },
+        "full": {
+          "src": "/img/builds/ruby/10-settings-2400.webp",
+          "width": 2400,
+          "height": 1251
+        }
+      },
+      {
+        "caption": "Light and dark appearance",
+        "lightbox": "Ruby follows the Mac's light or dark appearance, or she can pick one.",
+        "alt": "Ruby's main window in dark mode, showing the time entries spreadsheet and the chat about the weekly hours cap.",
+        "sizes": "(min-width: 720px) 220px, calc(50vw - 28px)",
+        "page": {
+          "src": "/img/builds/ruby/11-dark-mode-1600.webp",
+          "width": 1600,
+          "height": 834,
+          "srcset": "/img/builds/ruby/11-dark-mode-800.webp 800w, /img/builds/ruby/11-dark-mode-1600.webp 1600w"
+        },
+        "full": {
+          "src": "/img/builds/ruby/11-dark-mode-2400.webp",
+          "width": 2400,
+          "height": 1251
+        }
+      }
+    ]
+  }
+}

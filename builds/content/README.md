@@ -1,0 +1,89 @@
+# Build content
+
+Each build is one JSON file in this folder. Add a build by adding `your-slug.json` and its images, then run:
+
+```
+node scripts/build-builds.mjs
+```
+
+Commit the JSON and the HTML the script writes. GitHub Pages publishes those files as they are. It does not run the script.
+
+## Fields
+
+| Field | What it holds | Limit |
+| --- | --- | --- |
+| slug | URL slug. The page is `/builds/<slug>/`. | |
+| name | Build name. | |
+| order | Display order. Lower numbers come first. | |
+| context | `Personal project`, `Work project`, or `Small-business project`. Work projects may include `employer`. | |
+| status | One of: Daily use, Regular use, In testing, In progress, Retired. | |
+| status_since | Month and year. Joined with status on the fact strip as "status since date". | |
+| card_status | Optional exact line for the card only. When set, the homepage and Builds page cards use it instead of status and users. | |
+| users | Who uses it. Shown on the fact strip. Also on the card when `card_status` is empty. | 40 characters |
+| card_line | One sentence on the job it does. Shown on the homepage card and the Builds page card. | 80 characters |
+| page_subtitle | Optional page subtitle. When set, the build page uses this instead of `card_line`. Cards keep `card_line`. | |
+| headline_metric | Optional `value`, `label`, and `basis` (`measured` or `expected`). | |
+| tags | Up to 4 concept tags from the list below. On a card with `tools`, these are tag-shaped labels. Other cards keep the plain pills. Card tag lists use two columns and reserve two lines so the cards line up. | |
+| tools | Optional tool names. Shown as the logo row on the card and in the build page header. | |
+| time_to_build | Short text, such as "About five weeks". Shown as a muted line under the tags and tools on the build page. | |
+| thumbnail | `src` and `alt`. | Image 16:9 |
+| icon | Optional `src` and `alt`. Sits beside the name on the card and the page, like the Experience logos. | 96×96 transparent PNG or WebP |
+| og_image | Optional sharing image. | 1200×630 |
+| built_with | Short tools line kept in the data. It is not shown as the header line. | 60 characters |
+| snapshot | `problem`, `what_i_built`, and `result`. | 120 characters each |
+| demo | Optional `type` (`video`, `gif`, or `images`), `sources`, `poster`, and `captions`. | |
+| problem | The manual process before, in plain prose. | 40–80 words |
+| how_it_works | 3–7 steps. Each has `text` and `owner` (`Person`, `AI`, `Code`, or `TODO`). Optional `title` is stored and not shown. Optional `tools` (`name` and `label`) hang under that step. | 25 words per step |
+| gallery | Optional `heading`, `disclaimer` (one small italic line under the heading; any build can set it), `slides`, `clips`, and `thumbs`. A slide or thumb with no media `src` is kept in the data and not shown. Shown after How it works only when at least one item has a file. On a still, `page` is the image in the grid (`src`, `width`, `height`, `srcset`). `full` is a separate file used only when the lightbox opens. To swap in a sharper crop later, replace `full.src`, `full.width`, and `full.height`. | |
+| decisions | 3–5 items. Each has `decision` and `reason`. | 35 words per item |
+| results | 1–4 items. Each has `value` and `label`. `basis` (`measured`, `expected`, or `TODO`) is optional. Omit it when the tile is an outcome, not a metric. | |
+| checks | Optional items for How I checked it, directly under Results. Same fields as `results`. | |
+| next | What to change next. | 2–3 bullets, 25 words each |
+| confidentiality_note | Optional short note. | |
+| links | Optional public links, such as a video. | |
+
+Leave a field as `""` or `[]` when it is unknown. The page skips empty sections. Do not write "coming soon".
+
+On the page, the Results tiles sit directly under the snapshot. How I checked it sits under Results when `checks` is filled. A build with no results or no checks skips that heading.
+
+The top link on a build page is "All builds" and goes to `/builds/`. A small script checks `document.referrer` on this site only: from the homepage it becomes "Back to home" (`/#builds`), and from `/builds/` it becomes "Back to builds". Each row of links at the bottom ends with ` | Home`, and Home goes to `/`.
+
+The script prints a warning when a filled field is outside its limit. It still writes the page, and the site shows the full text.
+
+## Tags
+
+Process redesign, Human approval, Evals, Rules in code, Data reconciliation, Multi-system automation, Local AI, Privacy by design, Automated testing, Human-in-the-loop, Small Business, Accounting, Property Management, Browser Automation, Claude Skill.
+
+Tags on a card are labels. They are not buttons and they do not open a bubble.
+
+A description Eric approved for Human-in-the-loop, saved here in case it is wanted later: "The agent does the work, but a person approves anything important before it happens, like sending an invoice."
+
+- Tool logos: Simple Icons, CC0, stored in `img/tools/` and inlined. They are about 20px, gray by default, and ruby when hovered or focused. Each logo is a button with a styled bubble for its name, an `aria-label` on cards, and the bubble also opens on keyboard focus. A tap toggles it on a touch screen. Cards show only tools that have an icon. The build page header still shows a text chip when a name has no file.
+
+## Images
+
+- Card thumbnail: 16:9, WebP or AVIF, with alt text. The card uses a gray block when both `thumbnail` and `icon` are empty. A build with an icon and no thumbnail drops that gray block.
+- Icon: 96×96 transparent PNG or WebP, with alt text. It is shown at 44px (40px under 560px) in a column beside the title, with a 14px gap (12px under 560px). No empty box when `icon` is omitted.
+- Open Graph image: 1200×630. When `og_image` is empty, the page uses `/img/og-default.png`.
+- Tool logos: Simple Icons, CC0, stored in `img/tools/` and inlined on the card. See the tag section for how the bubble works. A name with no file falls back to a small text label.
+
+| Tool name | File |
+| --- | --- |
+| Python | `img/tools/python.svg` |
+| SQLite | `img/tools/sqlite.svg` |
+| DeepSeek | `img/tools/deepseek.svg` |
+| OpenRouter | `img/tools/openrouter.svg` |
+| Claude Code | `img/tools/claude-code.svg` (traced Anthropic AI letterform) |
+| Claude in Chrome | `img/tools/claude.svg` (the Claude starburst) |
+| Gemini | `img/tools/gemini.svg` |
+| Gmail | `img/tools/gmail.svg` |
+| Codex | `img/tools/openai.svg` (the OpenAI mark) |
+| Google Maps | `img/tools/googlemaps.svg` |
+| CINC Systems | `img/tools/cinc.svg` (traced CINC wordmark; systems is illegible at icon size) |
+| WebAxis | `img/tools/webaxis.svg` (traced concentric C) |
+| Microsoft SharePoint | `img/tools/sharepoint.svg` (traced S panel and three circles) |
+| Microsoft Excel | `img/tools/excel.svg` (traced panel, X, and grid) |
+
+## Home page
+
+`HOME_BUILD_LIMIT` in `scripts/build-builds.mjs` is 4. The home page shows every build while there are that many or fewer.
