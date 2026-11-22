@@ -122,8 +122,8 @@
   ],
   "results": [
     {
-      "value": "Right client, every save",
-      "label": "The agent checks the client's unique code on screen before it saves."
+      "value": "Error prevention",
+      "label": "Every save is matched to the client's unique code before it's written."
     },
     {
       "value": "No loose ends",
@@ -134,20 +134,18 @@
       "label": "Workload, service level, and drive time are checked before anything changes."
     },
     {
-      "value": "15+ minutes",
+      "value": "15 Mins to Multiple Hours Faster",
       "label": "Saved per manager change, at minimum."
     }
   ],
   "checks": [
     {
-      "value": "7 of 7",
-      "label": "Manager workloads in the test plan match a recount of the 95-association client tracker.",
-      "basis": "measured"
+      "value": "End-to-end tests",
+      "label": "Systematic tests ran every step across all three systems, reloading each save to confirm it."
     },
     {
-      "value": "3 placed, 11 no fit",
-      "label": "The batch rules, rerun on a departing remote manager's 14 associations, matched the test plan. The check showed every remote manager is at the limit.",
-      "basis": "measured"
+      "value": "Side-by-side review",
+      "label": "A manager watched real changes run and compared each choice to what he would have picked himself."
     }
   ],
   "next": [
