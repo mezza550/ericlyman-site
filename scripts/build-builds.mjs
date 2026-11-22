@@ -551,6 +551,23 @@ function shotsSection(build) {
   return `<section class="build-block shot-gallery" aria-labelledby="shots-h"><h2 id="shots-h">${esc(heading)}</h2>${disclaimer}${clipHtml}${slideHtml}${grid}${dialog}</section>`;
 }
 
+function mobileSection(build) {
+  const mobile = build.mobile;
+  const shots = mobile && Array.isArray(mobile.shots) ? mobile.shots.filter((item) => hasMedia(item)) : [];
+  if (!shots.length) return "";
+  const items = shots.map((item) => {
+    const page = item.page || {};
+    const full = item.full || page;
+    const srcset = page.srcset ? ` srcset="${esc(page.srcset)}"` : "";
+    const sizes = item.sizes ? ` sizes="${esc(item.sizes)}"` : "";
+    const caption = item.lightbox || item.caption || "";
+    const img = `<img src="${esc(page.src)}"${srcset}${sizes} width="${page.width || 287}" height="${page.height || 640}" alt="${esc(item.alt || "")}" loading="lazy" decoding="async">`;
+    return `<li><figure class="phone-shot"><a class="shot-link" href="${esc(full.src)}" data-srcset="${esc(lightboxSrcset(full))}" data-caption="${esc(caption)}"><span class="phone-frame">${img}</span></a><figcaption class="shot-cap">${esc(item.caption || "")}</figcaption></figure></li>`;
+  }).join("");
+  const dialog = `<dialog class="shot-dialog"><div class="shot-dialog-top"><button type="button" data-shot-close>Close</button></div><div class="shot-dialog-stage"><img class="shot-dialog-img" alt="" sizes="95vw"><video class="shot-dialog-video" controls muted loop playsinline hidden></video></div><p class="shot-dialog-cap"></p><div class="shot-dialog-nav"><button type="button" data-shot-prev>Previous</button><button type="button" data-shot-next>Next</button></div></dialog>`;
+  return `<section class="build-block shot-gallery phone-gallery" aria-labelledby="mobile-h"><h2 id="mobile-h">${esc(mobile.heading || "Mobile experience")}</h2><ul class="phone-row">${items}</ul>${dialog}</section>`;
+}
+
 function decisionsSection(build) {
   const items = build.decisions || [];
   if (!items.length) return "";
@@ -628,6 +645,7 @@ function buildPage(build, builds) {
   const description = build.card_line || build.name;
   const title = `${build.name} | Eric Lyman`;
   const note = filled(build.confidentiality_note) ? `<p class="build-note">${esc(build.confidentiality_note)}</p>` : "";
+  const mobile = mobileSection(build);
   return `${pageHead({
     title,
     description,
@@ -654,7 +672,7 @@ ${topbar("builds")}
       ${demo(build)}
       ${proseSection("problem-h", "The problem", build.problem)}
       ${stepsSection(build)}
-      ${shotsSection(build)}
+      ${shotsSection(build)}${mobile ? `\n      ${mobile}` : ""}
       ${decisionsSection(build)}
       ${nextSection(build)}
       ${note}

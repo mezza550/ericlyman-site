@@ -273,6 +273,16 @@ button.tool-logo:focus-visible,a.tool-logo:focus-visible{outline:2px solid var(-
 @media (max-width:719px){
   .shot-thumbs{grid-template-columns:1fr 1fr}
 }
+.phone-row{list-style:none;display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:12px;margin:0;padding:2px 0 4px}
+.build-block .phone-row li{margin:0;padding:0}
+.build-block .phone-row li::before{content:none}
+.phone-shot{margin:0}
+.phone-frame{display:block;aspect-ratio:574 / 1280;overflow:hidden;border:1px solid var(--line);border-radius:16px;background:var(--stone);box-shadow:0 8px 22px rgba(31,30,28,.08)}
+.phone-frame img{display:block;width:100%;height:100%;object-fit:contain;border:0;border-radius:0;box-shadow:none;background:transparent}
+@media (max-width:719px){
+  .phone-row{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;padding-bottom:8px}
+  .phone-row li{flex:0 0 46%;scroll-snap-align:start}
+}
 .shot-dialog{display:flex;flex-direction:column;width:max-content;max-width:calc(100vw - 16px);max-height:calc(100vh - 16px);margin:auto;padding:12px 12px 16px;border:0;border-radius:12px;background:var(--bg);color:var(--body);box-shadow:0 16px 40px rgba(31,30,28,.28);overflow:auto}
 .shot-dialog:not([open]){display:none !important}
 .shot-dialog::backdrop{background:rgba(31,30,28,.62)}

@@ -154,7 +154,7 @@
         "kind": "image",
         "width": 1240,
         "height": 820,
-        "caption": "Adding a book on the PC. I pick the ebook and the tracks, put the tracks in order, and it processes locally while I keep reading.",
+        "caption": "Adding a book on the PC. I pick the ebook and the tracks, put the tracks in order, and it processes locally.",
         "alt": "Desktop Add a book screen listing an EPUB file and eight numbered audiobook tracks in order with Move up and Move down buttons, beside a library card showing the book transcribing with a progress bar."
       },
       {
@@ -215,6 +215,107 @@
         "height": 114,
         "caption": "Listening time in Stats",
         "alt": "Stats screen showing hours listened and chapters read on this phone."
+      }
+    ]
+  },
+  "mobile": {
+    "heading": "Mobile experience",
+    "shots": [
+      {
+        "caption": "Library",
+        "alt": "Library screen with a Continue card for Morning Star at Chapter 36: Swill, Read, Listen, and Read Along buttons, and Red Rising and Golden Son below.",
+        "sizes": "(min-width: 720px) 120px, 46vw",
+        "page": {
+          "src": "/img/builds/chapterbridge/m1-library-287.webp",
+          "width": 287,
+          "height": 640,
+          "srcset": "/img/builds/chapterbridge/m1-library-287.webp 287w, /img/builds/chapterbridge/m1-library.webp 574w"
+        },
+        "full": {
+          "src": "/img/builds/chapterbridge/m1-library.webp",
+          "width": 574,
+          "height": 1280
+        }
+      },
+      {
+        "caption": "Read Along",
+        "alt": "Read Along screen with page text, the spoken word highlighted, and the player below.",
+        "sizes": "(min-width: 720px) 120px, 46vw",
+        "page": {
+          "src": "/img/builds/chapterbridge/m2-read-along-287.webp",
+          "width": 287,
+          "height": 640,
+          "srcset": "/img/builds/chapterbridge/m2-read-along-287.webp 287w, /img/builds/chapterbridge/m2-read-along.webp 574w"
+        },
+        "full": {
+          "src": "/img/builds/chapterbridge/m2-read-along.webp",
+          "width": 574,
+          "height": 1280
+        }
+      },
+      {
+        "caption": "Listen",
+        "alt": "Listen screen with cover art, Chapter 36: Swill, a chapter scrubber, and playback controls.",
+        "sizes": "(min-width: 720px) 120px, 46vw",
+        "page": {
+          "src": "/img/builds/chapterbridge/m3-listen-287.webp",
+          "width": 287,
+          "height": 640,
+          "srcset": "/img/builds/chapterbridge/m3-listen-287.webp 287w, /img/builds/chapterbridge/m3-listen.webp 574w"
+        },
+        "full": {
+          "src": "/img/builds/chapterbridge/m3-listen.webp",
+          "width": 574,
+          "height": 1280
+        }
+      },
+      {
+        "caption": "Read",
+        "alt": "Read screen with full-screen text and the current word highlighted.",
+        "sizes": "(min-width: 720px) 120px, 46vw",
+        "page": {
+          "src": "/img/builds/chapterbridge/m4-read-287.webp",
+          "width": 287,
+          "height": 640,
+          "srcset": "/img/builds/chapterbridge/m4-read-287.webp 287w, /img/builds/chapterbridge/m4-read.webp 574w"
+        },
+        "full": {
+          "src": "/img/builds/chapterbridge/m4-read.webp",
+          "width": 574,
+          "height": 1280
+        }
+      },
+      {
+        "caption": "Stats",
+        "alt": "Stats screen showing 2h 7m listened, 1 chapter read, and 2 books completed.",
+        "sizes": "(min-width: 720px) 120px, 46vw",
+        "page": {
+          "src": "/img/builds/chapterbridge/m5-stats-287.webp",
+          "width": 287,
+          "height": 640,
+          "srcset": "/img/builds/chapterbridge/m5-stats-287.webp 287w, /img/builds/chapterbridge/m5-stats.webp 574w"
+        },
+        "full": {
+          "src": "/img/builds/chapterbridge/m5-stats.webp",
+          "width": 574,
+          "height": 1280
+        }
+      },
+      {
+        "caption": "Settings",
+        "alt": "Settings screen with Supabase cloud sync and a Google Drive connection.",
+        "sizes": "(min-width: 720px) 120px, 46vw",
+        "page": {
+          "src": "/img/builds/chapterbridge/m6-settings-287.webp",
+          "width": 287,
+          "height": 640,
+          "srcset": "/img/builds/chapterbridge/m6-settings-287.webp 287w, /img/builds/chapterbridge/m6-settings.webp 574w"
+        },
+        "full": {
+          "src": "/img/builds/chapterbridge/m6-settings.webp",
+          "width": 574,
+          "height": 1280
+        }
       }
     ]
   }
