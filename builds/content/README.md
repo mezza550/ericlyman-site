@@ -17,8 +17,9 @@ Commit the JSON and the HTML the script writes. GitHub Pages publishes those fil
 | order | Display order. Lower numbers come first. | |
 | context | `Personal project`, `Work project`, or `Small-business project`. Work projects may include `employer`. | |
 | status | One of: In daily use, In regular use, In testing, In progress, Retired. | |
-| status_since | Month and year. | |
-| users | Who uses it. | 40 characters |
+| status_since | Month and year. Joined with status on the fact strip as "status since date". | |
+| card_status | Optional exact line for the card only. When set, the homepage and Builds page cards use it instead of status and users. | |
+| users | Who uses it. Shown on the fact strip. Also on the card when `card_status` is empty. | 40 characters |
 | card_line | One sentence on the job it does. | 80 characters |
 | headline_metric | Optional `value`, `label`, and `basis` (`measured` or `expected`). | |
 | tags | Up to 3 concept tags from the list below. On a card with `tools`, these are tag-shaped labels. Other cards keep the plain pills. | |
@@ -56,7 +57,7 @@ Tags on a card are labels. They are not buttons and they do not open a bubble.
 
 A description Eric approved for Human-in-the-loop, saved here in case it is wanted later: "The agent does the work, but a person approves anything important before it happens, like sending an invoice."
 
-- Tool logos: Simple Icons, CC0, stored in `img/tools/` and inlined on the card. They are about 20px, gray by default, and ruby when the card is hovered or focused. Each logo is a button with a styled bubble for its name. A name with no file falls back to a small text label. The bubble also opens on keyboard focus, and a tap toggles it on a touch screen.
+- Tool logos: Simple Icons, CC0, stored in `img/tools/` and inlined. They are about 20px, gray by default, and ruby when hovered or focused. Each logo is a button with a styled bubble for its name, an `aria-label` on cards, and the bubble also opens on keyboard focus. A tap toggles it on a touch screen. Cards show only tools that have an icon. The build page header still shows a text chip when a name has no file.
 
 ## Images
 

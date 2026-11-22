@@ -134,7 +134,7 @@ function check(file, build) {
   (build.tools || []).forEach((name, index) => {
     const fileName = TOOL_ICONS[name];
     if (!fileName || !existsSync(join(root, "img", "tools", fileName))) {
-      warn(file, `tools[${index}]`, `has no logo for ${name}; the card shows a text label`);
+      warn(file, `tools[${index}]`, `has no logo for ${name}; the page shows a text label and the card omits it`);
     }
   });
   if (filled(build.status) && !STATUSES.includes(build.status)) {
@@ -181,6 +181,7 @@ function thumb(build) {
 }
 
 function statusLine(build) {
+  if (filled(build.card_status)) return `<p class="build-status">${esc(build.card_status)}</p>`;
   const parts = [build.status, build.users].filter(filled);
   if (!parts.length) return "";
   return `<p class="build-status">${esc(parts.join(" · "))}</p>`;
@@ -230,6 +231,19 @@ function toolsRow(build) {
   return `<ul class="build-tools" aria-label="Tools">${items}</ul>`;
 }
 
+function cardTools(build) {
+  if (!build.tools || !build.tools.length) return "";
+  const items = build.tools.map((name, index) => {
+    const svg = toolSvg(name);
+    if (!svg) return "";
+    const label = esc(name);
+    const id = `tip-${esc(build.slug)}-card-tool-${index}`;
+    return `<li><button type="button" class="tool-logo" data-tip aria-label="${label}" aria-describedby="${id}">${svg}</button>${tip(id, name)}</li>`;
+  }).filter(Boolean).join("");
+  if (!items) return "";
+  return `<ul class="build-tools" aria-label="Tools">${items}</ul>`;
+}
+
 function card(build, heading) {
   const image = thumb(build);
   const body = `${image ? `${image}\n                ` : ""}${titleRow(build, heading)}
@@ -244,7 +258,7 @@ function card(build, heading) {
               </a>
               <div class="build-card-extra">
                 ${tagList(build)}
-                ${toolsRow(build)}
+                ${cardTools(build)}
               </div>
             </div>
           </li>`;
