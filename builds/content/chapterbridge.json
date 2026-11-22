@@ -5,8 +5,8 @@
   "context": "",
   "status": "In daily use",
   "status_since": "October 2026",
-  "users": "My family, both at home and when traveling",
-  "card_line": "An app that matches ebooks to audiobooks, highlights each spoken word, and syncs my place.",
+  "users": "Me and a small group of other readers, at home and on the road.",
+  "card_line": "An app that matches ebooks to audiobooks, highlights each spoken word, and uses one bookmark.",
   "page_subtitle": "An app that matches ebooks to audiobooks, highlights each spoken word, and syncs my place.",
   "tags": [
     "Human-in-the-loop",
@@ -31,7 +31,7 @@
   "snapshot": {
     "problem": "Ebooks and audiobooks didn't know about each other, so switching from reading to listening meant hunting for my place and in different apps.",
     "what_i_built": "A Windows app that lines up an ebook with its audiobook, and an Android app that reads, plays, and keeps one place.",
-    "result": "I've finished two books, reading at night and listening while driving, currently on the third."
+    "result": "One streamlined app for reading and listening, so I never lose my place or juggle separate apps. I've finished two books, reading at night and listening while driving, and I'm on the third."
   },
   "problem": "I read the ebook at night and listen to the audiobook in the car, and the two copies never knew about each other. Every switch meant scrubbing a 20-plus-hour recording for the scene I'd stopped on, or paging through the ebook to find where the narrator left off. Audio tracks don't line up with chapters, so even a close guess left me hunting. The books are files I already own, so the tool had to work with my copies, on my own computer, without breaking any copy protection.",
   "how_it_works": [
@@ -103,7 +103,7 @@
   ],
   "results": [
     {
-      "value": "One place per book",
+      "value": "One virtual bookmark everywhere",
       "label": "Reading, listening, PC, and phone all pick up from it."
     },
     {
@@ -111,7 +111,7 @@
       "label": "The app finds where each word is spoken in the audio."
     },
     {
-      "value": "Local transcription",
+      "value": "Local AI transcription",
       "label": "Speech recognition runs on my PC. Books stay in my own Drive."
     },
     {
@@ -129,8 +129,8 @@
       "label": "Enough memory for a full-book import now. The old code failed a 256 MB test after a phone crash."
     },
     {
-      "value": "383 of 386",
-      "label": "Automated tests passing today. One FFmpeg check fails, and two skip on Windows."
+      "value": "End-to-end systemized testing",
+      "label": "Automated tests performed after new builds, before deployment."
     }
   ],
   "next": [
