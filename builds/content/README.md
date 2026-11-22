@@ -79,7 +79,8 @@ A description Eric approved for Human-in-the-loop, saved here in case it is want
 | Gmail | `img/tools/gmail.svg` |
 | Codex | `img/tools/openai.svg` (the OpenAI mark) |
 | Google Maps | `img/tools/googlemaps.svg` |
-| CINC Systems | `img/tools/cinc.svg` (traced concentric C, mark only) |
+| CINC Systems | `img/tools/cinc.svg` (traced CINC wordmark; systems is illegible at icon size) |
+| WebAxis | `img/tools/webaxis.svg` (traced concentric C) |
 | Microsoft SharePoint | `img/tools/sharepoint.svg` (traced S panel and three circles) |
 | Microsoft Excel | `img/tools/excel.svg` (traced panel, X, and grid) |
 

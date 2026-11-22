@@ -40,6 +40,7 @@ const TOOL_ICONS = {
   "Codex": "openai.svg",
   "Google Maps": "googlemaps.svg",
   "CINC Systems": "cinc.svg",
+  "WebAxis": "webaxis.svg",
   "Microsoft SharePoint": "sharepoint.svg",
   "Microsoft Excel": "excel.svg"
 };
