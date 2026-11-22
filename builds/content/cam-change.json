@@ -88,7 +88,7 @@
       ]
     },
     {
-      "text": "It updates the client tracker and drafts the notice email to both managers with a board introduction, which I review and send it myself.",
+      "text": "It updates the client tracker and drafts the notice email to both managers with a board introduction, which I review and send myself.",
       "owner": "AI",
       "tools": [
         {
