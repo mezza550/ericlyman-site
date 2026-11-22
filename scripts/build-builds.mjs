@@ -178,7 +178,9 @@ function hasIcon(build) {
 
 function iconImg(build) {
   if (!hasIcon(build)) return "";
-  return `<img class="build-icon" src="${esc(build.icon.src)}" alt="${esc(build.icon.alt || "")}" width="96" height="96">`;
+  const scale = Number(build.icon.scale);
+  const style = Number.isFinite(scale) && scale > 0 && scale !== 1 ? ` style="--icon-scale:${scale}"` : "";
+  return `<img class="build-icon" src="${esc(build.icon.src)}" alt="${esc(build.icon.alt || "")}" width="96" height="96"${style}>`;
 }
 
 function titleRow(build, tag) {

@@ -26,7 +26,8 @@
   ],
   "icon": {
     "src": "/img/builds/backup-bucket-icon.webp",
-    "alt": "Backup Bucket app icon"
+    "alt": "Backup Bucket app icon",
+    "scale": 0.85
   },
   "time_to_build": "One day for core development, followed by a few days of UX and rclone tuning with Codex",
   "snapshot": {
