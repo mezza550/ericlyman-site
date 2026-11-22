@@ -2,83 +2,219 @@
   "slug": "chapterbridge",
   "name": "ChapterBridge",
   "order": 3,
-  "context": "Personal project",
-  "status": "",
-  "status_since": "",
-  "users": "",
-  "card_line": "Read or listen to the same book without losing your place.",
-  "tags": [],
-  "built_with": "Windows, Android, Google Drive, Codex, Claude Code",
-  "time_to_build": "About five weeks",
-  "snapshot": {
-    "problem": "I like switching between reading and listening, depending on whether I’m at my desk or in the car.",
-    "what_i_built": "Lines up an ebook and its audiobook word by word. All three share one saved place.",
-    "result": "On a 22-hour novel, it matched 91% of the words (about 155,000 of 170,000) and flagged the rest for review."
+  "context": "",
+  "status": "In daily use",
+  "status_since": "October 2026",
+  "users": "My family, both at home and when traveling",
+  "card_line": "An app that matches ebooks to audiobooks, highlights each spoken word, and syncs my place.",
+  "page_subtitle": "An app that matches ebooks to audiobooks, highlights each spoken word, and syncs my place.",
+  "tags": [
+    "Human-in-the-loop",
+    "Books and Audio",
+    "Cross-device Sync"
+  ],
+  "tools": [
+    "Android",
+    "Node.js",
+    "Whisper",
+    "FFmpeg",
+    "Supabase",
+    "Google Drive",
+    "Codex",
+    "Claude Code"
+  ],
+  "icon": {
+    "src": "/img/builds/chapterbridge-icon.webp",
+    "alt": "ChapterBridge app icon"
   },
-  "problem": "I like switching between reading and listening, depending on whether I’m at my desk or in the car. Every time I switched, I lost my place and ended up scrubbing through hours of audio to find where I left off. The big platforms sync reading and listening, but only for books you buy in their store. Nothing did it for files I already owned, so I built it.",
+  "time_to_build": "A few hours of building with Codex and Claude, then a few days of testing and tweaks",
+  "snapshot": {
+    "problem": "Ebooks and audiobooks didn't know about each other, so switching from reading to listening meant hunting for my place and in different apps.",
+    "what_i_built": "A Windows app that lines up an ebook with its audiobook, and an Android app that reads, plays, and keeps one place.",
+    "result": "I've finished two books, reading at night and listening while driving, currently on the third."
+  },
+  "problem": "I read the ebook at night and listen to the audiobook in the car, and the two copies never knew about each other. Every switch meant scrubbing a 20-plus-hour recording for the scene I'd stopped on, or paging through the ebook to find where the narrator left off. Audio tracks don't line up with chapters, so even a close guess left me hunting. The books are files I already own, so the tool had to work with my copies, on my own computer, without breaking any copy protection.",
   "how_it_works": [
     {
-      "text": "Lines up an ebook and its audiobook word by word, using speech-to-text that runs on my own PC.",
-      "owner": "TODO"
+      "text": "I add an ebook and its audiobook on my PC, either one file or a stack of tracks put in order.",
+      "owner": "Person"
     },
     {
-      "text": "Lets me read, listen, or follow along with each word highlighted as the narrator reads it. All three share one saved place.",
-      "owner": "TODO"
+      "text": "Speech recognition transcribes the narration on my own computer, in 10-minute chunks it can resume after a restart.",
+      "owner": "AI",
+      "tools": [
+        { "name": "Whisper", "label": "Whisper (local)" }
+      ]
     },
     {
-      "text": "Syncs that place between my PC and phone through my own Google Drive, and works offline on the phone.",
-      "owner": "TODO"
+      "text": "Code matches the transcript to the ebook word by word in reading order, and words it can't place stay untimed instead of guessed.",
+      "owner": "Code",
+      "tools": [
+        { "name": "Node.js", "label": "Node.js" }
+      ]
     },
     {
-      "text": "Flags passages it couldn’t match instead of guessing.",
-      "owner": "TODO"
+      "text": "The finished book goes to my private Google Drive, and the phone checks every byte of its download before marking it ready offline.",
+      "owner": "Code",
+      "tools": [
+        { "name": "Google Drive", "label": "Google Drive" }
+      ]
+    },
+    {
+      "text": "I read, listen, or use Read Along, which highlights each word as it's spoken, and all three share one saved place.",
+      "owner": "Person",
+      "tools": [
+        { "name": "Android", "label": "Android" }
+      ]
+    },
+    {
+      "text": "Each move of my place is saved as a new entry that never replaces an old one, and it syncs between the PC and phone.",
+      "owner": "Code",
+      "tools": [
+        { "name": "Supabase", "label": "Supabase" }
+      ]
+    },
+    {
+      "text": "If both devices moved while apart, the app shows both places and I pick the one to keep.",
+      "owner": "Person"
     }
   ],
   "decisions": [
     {
-      "decision": "My own Google Drive as the backend.",
-      "reason": "There’s no server to run, pay for or secure, and the data stays in my account. The app can only see files it created."
+      "decision": "I choose when two places disagree.",
+      "reason": "Every saved place is kept, and the database can add places but not change them. When the phone and PC moved separately, the app asks me. It never picks by clock time or by which is farther along."
     },
     {
-      "decision": "Local transcription.",
-      "reason": "The books are copyrighted and private, so I ran Whisper on my PC instead of sending audio to a cloud service. It’s slower, but it’s free and nothing leaves the machine."
+      "decision": "Speech recognition listens, and code decides what matches.",
+      "reason": "The recognizer turns audio into words with rough times. Code matches them to the ebook in order and leaves the rest untimed, so a gap clears the highlight."
     },
     {
-      "decision": "No “last save wins.”",
-      "reason": "Every saved position is kept as history. If my phone and PC disagree, the app asks me which one is right. The farthest point isn’t always where I stopped."
+      "decision": "My books stay on my machines and my Drive.",
+      "reason": "The PC services answer only to the PC. Google access covers only files the app made, and only my account can read my places."
     },
     {
-      "decision": "Sized for one user.",
-      "reason": "One PC manages the shared library and each phone keeps its own file. For a real product, I’d move to a proper sync service and cloud transcription."
+      "decision": "It only handles books I own and can open.",
+      "reason": "It reads plain EPUB and common audio. It doesn't buy or unlock books, and an encrypted ebook stops the import."
     },
     {
-      "decision": "There’s no analytics or tracking.",
-      "reason": "The desktop app only accepts connections from the same computer. Google credentials and the app’s signing key are encrypted with Windows’ built-in protection."
+      "decision": "Real reading removed prompts I didn't need.",
+      "reason": "Early versions stopped at every contents page and cast list the narrator skips. Now the app skips to the next spoken point and flags only a missed story chapter."
     }
   ],
   "results": [
     {
-      "value": "More than 30",
-      "label": "signed Android releases in about five weeks",
-      "basis": "TODO"
+      "value": "One place per book",
+      "label": "Reading, listening, PC, and phone all pick up from it."
     },
     {
-      "value": "About 300",
-      "label": "automated tests on the desktop side and about 40 Android test suites",
-      "basis": "TODO"
+      "value": "No manual timing",
+      "label": "The app finds where each word is spoken in the audio."
     },
     {
-      "value": "Roughly 12,500",
-      "label": "lines of Node.js and Java, all written by AI",
-      "basis": "TODO"
+      "value": "Local transcription",
+      "label": "Speech recognition runs on my PC. Books stay in my own Drive."
     },
     {
-      "value": "91%",
-      "label": "On a 22-hour novel, it matched 91% of the words (about 155,000 of 170,000) and flagged the rest for review.",
-      "basis": "TODO"
+      "value": "Offline available",
+      "label": "Synced books can be saved to device, so internet dead zones are irrelevant while on the go."
+    }
+  ],
+  "checks": [
+    {
+      "value": "100%",
+      "label": "Word matching inside chapters. Non-spoken text (forwards, publisher info) stays untimed, not guessed."
+    },
+    {
+      "value": "128 MB",
+      "label": "Enough memory for a full-book import now. The old code failed a 256 MB test after a phone crash."
+    },
+    {
+      "value": "383 of 386",
+      "label": "Automated tests passing today. One FFmpeg check fails, and two skip on Windows."
     }
   ],
   "next": [
-    "For a real product, I’d move to a proper sync service and cloud transcription."
-  ]
+    "Sync in the background, so my place is current before I sit at the PC. Today the phone syncs only while the app is open.",
+    "Add Android Auto, so I can pick a chapter from the car's screen. Today the car just plays the phone's audio."
+  ],
+  "gallery": {
+    "heading": "ChapterBridge in use",
+    "slides": [
+      {
+        "placeholder": true,
+        "kind": "video",
+        "width": 1240,
+        "height": 820,
+        "caption": "Read Along on the phone. The highlight follows the narration word by word, with the text and playback controls on one screen.",
+        "alt": "Phone screen in Read Along mode with a chapter title at the top, a few lines of text with the current spoken word highlighted, and play, pause, and skip controls at the bottom showing the elapsed time."
+      },
+      {
+        "placeholder": true,
+        "kind": "image",
+        "width": 1240,
+        "height": 820,
+        "caption": "Adding a book on the PC. I pick the ebook and the tracks, put the tracks in order, and it processes locally while I keep reading.",
+        "alt": "Desktop Add a book screen listing an EPUB file and eight numbered audiobook tracks in order with Move up and Move down buttons, beside a library card showing the book transcribing with a progress bar."
+      },
+      {
+        "placeholder": true,
+        "kind": "video",
+        "width": 1240,
+        "height": 820,
+        "caption": "Two devices moved while apart. The app names the book, shows both places, and waits for me to choose.",
+        "alt": "Dialog titled with the book name showing two device cards, one for the phone at Chapter 31 and one for the PC at Chapter 28, each with a button to keep that place."
+      }
+    ],
+    "thumbs": [
+      {
+        "placeholder": true,
+        "width": 220,
+        "height": 114,
+        "caption": "Library with the current book first",
+        "alt": "Phone library with the book in progress under Continue and three series covers below it."
+      },
+      {
+        "placeholder": true,
+        "width": 220,
+        "height": 284,
+        "caption": "Book details with Read and Listen",
+        "alt": "Book details screen with a large cover, the title, and Read and Listen buttons."
+      },
+      {
+        "placeholder": true,
+        "width": 220,
+        "height": 114,
+        "caption": "Tracks put in order before processing",
+        "alt": "List of numbered audiobook tracks in natural order with Move up and Move down buttons."
+      },
+      {
+        "placeholder": true,
+        "width": 220,
+        "height": 284,
+        "caption": "Printed chapter titles from the ebook",
+        "alt": "Chapter list showing the prologue and the first chapters under their printed titles."
+      },
+      {
+        "placeholder": true,
+        "width": 220,
+        "height": 114,
+        "caption": "Whole-book progress while listening",
+        "alt": "Listening screen with a whole-book progress bar at 55 percent beneath the chapter scrubber."
+      },
+      {
+        "placeholder": true,
+        "width": 220,
+        "height": 114,
+        "caption": "The sync light in the header",
+        "alt": "Desktop app header with a green sync light beside the library title."
+      },
+      {
+        "placeholder": true,
+        "width": 220,
+        "height": 114,
+        "caption": "Listening time in Stats",
+        "alt": "Stats screen showing hours listened and chapters read on this phone."
+      }
+    ]
+  }
 }

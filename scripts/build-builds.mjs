@@ -26,7 +26,9 @@ const TAGS = [
   "Claude Skill",
   "Desktop App",
   "Data Safety",
-  "Automation"
+  "Automation",
+  "Books and Audio",
+  "Cross-device Sync"
 ];
 const STATUSES = ["In daily use", "In regular use", "In testing", "In progress", "Retired"];
 const CONTEXTS = ["Personal project", "Work project", "Small-business project"];
@@ -52,7 +54,13 @@ const TOOL_ICONS = {
   "rclone": "rclone.svg",
   "Backblaze B2": "backblaze.svg",
   "Google Cloud": "googlecloud.svg",
-  "Immich": "immich.svg"
+  "Immich": "immich.svg",
+  "Android": "android.svg",
+  "Node.js": "nodedotjs.svg",
+  "Whisper": "whisper.svg",
+  "FFmpeg": "ffmpeg.svg",
+  "Supabase": "supabase.svg",
+  "Google Drive": "googledrive.svg"
 };
 const REDIRECTS = {
   "chapter-bridge": "chapterbridge",
