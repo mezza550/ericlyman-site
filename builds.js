@@ -159,10 +159,11 @@
       dialog.style.width = (w + padX) + "px";
     }
     place(Math.min(Math.floor(vh * 0.85), room, nh));
-    var overflow = dialog.scrollHeight - room;
-    if (overflow > 1) {
+    for (var pass = 0; pass < 3; pass++) {
+      var overflow = dialog.scrollHeight - room;
+      if (overflow <= 1) break;
       var used = el.getBoundingClientRect().height;
-      place(Math.max(80, Math.floor(used - overflow)));
+      place(Math.max(80, Math.floor(used - overflow - 1)));
     }
   }
 
