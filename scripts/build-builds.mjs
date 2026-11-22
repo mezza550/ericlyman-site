@@ -485,18 +485,20 @@ function clipFigure(item) {
   return `<figure class="shot-clip"><div class="shot-clip-hit"><video class="demo-clip" muted loop playsinline preload="none"${poster} width="${item.width || 1920}" height="${item.height || 1080}" aria-hidden="true"><source src="${esc(item.src)}" type="video/mp4"></video><button type="button" class="shot-open" data-kind="video" data-src="${esc(item.src)}" data-poster="${esc(item.poster || "")}" data-caption="${esc(item.caption || "")}" aria-label="${esc(label)}"></button></div>${caption}</figure>`;
 }
 
+function lightboxSrcset(full) {
+  if (!full || !full.src || !full.width) return "";
+  return `${full.src} ${Number(full.width)}w`;
+}
+
 function shotFigure(item) {
   const page = item.page || {};
   const full = item.full || page;
   const srcset = page.srcset ? ` srcset="${esc(page.srcset)}"` : "";
   const sizes = item.sizes ? ` sizes="${esc(item.sizes)}"` : "";
   const lightbox = item.lightbox || item.caption || "";
-  const sources = [];
-  if (page.srcset) sources.push(page.srcset);
-  if (full.src && full.width && full.src !== page.src && !String(page.srcset || "").includes(full.src)) sources.push(`${full.src} ${full.width}w`);
   const img = `<img src="${esc(page.src)}"${srcset}${sizes} width="${page.width}" height="${page.height}" alt="${esc(item.alt || "")}" loading="lazy" decoding="async">`;
   const portrait = Number(page.width) === 220 && Number(page.height) === 284 ? " shot-frame--portrait" : "";
-  return `<figure class="shot-thumb"><a class="shot-link" href="${esc(full.src)}" data-srcset="${esc(sources.join(", "))}" data-caption="${esc(lightbox)}"><span class="shot-frame${portrait}">${img}</span></a><figcaption class="shot-cap">${esc(item.caption || "")}</figcaption></figure>`;
+  return `<figure class="shot-thumb"><a class="shot-link" href="${esc(full.src)}" data-srcset="${esc(lightboxSrcset(full))}" data-caption="${esc(lightbox)}"><span class="shot-frame${portrait}">${img}</span></a><figcaption class="shot-cap">${esc(item.caption || "")}</figcaption></figure>`;
 }
 
 function featureFigure(item) {
@@ -505,12 +507,9 @@ function featureFigure(item) {
   const srcset = page.srcset ? ` srcset="${esc(page.srcset)}"` : "";
   const sizes = item.sizes ? ` sizes="${esc(item.sizes)}"` : "";
   const lightbox = item.lightbox || item.caption || "";
-  const sources = [];
-  if (page.srcset) sources.push(page.srcset);
-  if (full.src && full.width && full.src !== page.src && !String(page.srcset || "").includes(full.src)) sources.push(`${full.src} ${full.width}w`);
   const ratio = page.width && page.height ? ` style="aspect-ratio:${Number(page.width)} / ${Number(page.height)}"` : "";
   const img = `<img src="${esc(page.src)}"${srcset}${sizes} width="${page.width}" height="${page.height}" alt="${esc(item.alt || "")}" loading="lazy" decoding="async">`;
-  return `<figure class="shot-feature"><a class="shot-link" href="${esc(full.src)}" data-srcset="${esc(sources.join(", "))}" data-caption="${esc(lightbox)}"><span class="shot-frame"${ratio}>${img}</span></a><figcaption class="shot-cap">${esc(item.caption || "")}</figcaption></figure>`;
+  return `<figure class="shot-feature"><a class="shot-link" href="${esc(full.src)}" data-srcset="${esc(lightboxSrcset(full))}" data-caption="${esc(lightbox)}"><span class="shot-frame"${ratio}>${img}</span></a><figcaption class="shot-cap">${esc(item.caption || "")}</figcaption></figure>`;
 }
 
 function hasMedia(item) {

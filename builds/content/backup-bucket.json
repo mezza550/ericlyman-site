@@ -202,9 +202,9 @@
           "srcset": "/img/builds/backup-bucket/thumb-1-health-rings.webp 220w, /img/builds/backup-bucket/thumb-1-health-rings@2x.webp 440w"
         },
         "full": {
-          "src": "/img/builds/backup-bucket/thumb-1-health-rings@2x.webp",
-          "width": 440,
-          "height": 228
+          "src": "/img/builds/backup-bucket/thumb-1-health-rings@hires.webp",
+          "width": 1276,
+          "height": 661
         }
       },
       {
@@ -250,9 +250,9 @@
           "srcset": "/img/builds/backup-bucket/thumb-4-immich-filters.webp 220w, /img/builds/backup-bucket/thumb-4-immich-filters@2x.webp 440w"
         },
         "full": {
-          "src": "/img/builds/backup-bucket/thumb-4-immich-filters@2x.webp",
-          "width": 440,
-          "height": 228
+          "src": "/img/builds/backup-bucket/thumb-4-immich-filters@hires.webp",
+          "width": 1654,
+          "height": 857
         }
       },
       {
@@ -266,9 +266,9 @@
           "srcset": "/img/builds/backup-bucket/thumb-5-backup-browser.webp 220w, /img/builds/backup-bucket/thumb-5-backup-browser@2x.webp 440w"
         },
         "full": {
-          "src": "/img/builds/backup-bucket/thumb-5-backup-browser@2x.webp",
-          "width": 440,
-          "height": 228
+          "src": "/img/builds/backup-bucket/thumb-5-backup-browser@hires.webp",
+          "width": 1289,
+          "height": 668
         }
       },
       {
