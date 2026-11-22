@@ -73,13 +73,15 @@ A description Eric approved for Human-in-the-loop, saved here in case it is want
 | SQLite | `img/tools/sqlite.svg` |
 | DeepSeek | `img/tools/deepseek.svg` |
 | OpenRouter | `img/tools/openrouter.svg` |
-| Claude Code | `img/tools/claude.svg` (the Claude mark) |
+| Claude Code | `img/tools/claude-code.svg` (traced Anthropic AI letterform) |
+| Claude in Chrome | `img/tools/claude.svg` (the Claude starburst) |
 | Gemini | `img/tools/gemini.svg` |
 | Gmail | `img/tools/gmail.svg` |
 | Codex | `img/tools/openai.svg` (the OpenAI mark) |
 | Google Maps | `img/tools/googlemaps.svg` |
 | CINC Systems | `img/tools/cinc.svg` (traced concentric C, mark only) |
 | Microsoft SharePoint | `img/tools/sharepoint.svg` (traced S panel and three circles) |
+| Microsoft Excel | `img/tools/excel.svg` (traced panel, X, and grid) |
 
 ## Home page
 

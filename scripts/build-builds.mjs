@@ -33,13 +33,15 @@ const TOOL_ICONS = {
   "SQLite": "sqlite.svg",
   "DeepSeek": "deepseek.svg",
   "OpenRouter": "openrouter.svg",
-  "Claude Code": "claude.svg",
+  "Claude Code": "claude-code.svg",
+  "Claude in Chrome": "claude.svg",
   "Gemini": "gemini.svg",
   "Gmail": "gmail.svg",
   "Codex": "openai.svg",
   "Google Maps": "googlemaps.svg",
   "CINC Systems": "cinc.svg",
-  "Microsoft SharePoint": "sharepoint.svg"
+  "Microsoft SharePoint": "sharepoint.svg",
+  "Microsoft Excel": "excel.svg"
 };
 const REDIRECTS = {
   "chapter-bridge": "chapterbridge",
