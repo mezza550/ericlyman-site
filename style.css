@@ -1,5 +1,5 @@
 :root{
-  --bg:#faf9f7; --surface:#ffffff; --warm:#fbf7f0; --ink:#1f1e1c; --body:#3b3936; --muted:#6b6660;
+  --bg:#faf9f7; --surface:#ffffff; --ink:#1f1e1c; --body:#3b3936; --muted:#6b6660;
   --line:#e6e2dc; --stone:#efece7; --ruby:#b0123a; --ruby-dark:#8e0e2f;
   --serif:"Fraunces",Georgia,"Times New Roman",serif;
   --sans:"Inter",system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
@@ -151,7 +151,7 @@ section{margin-bottom:56px}
 .builds-grid{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:1fr;gap:12px;align-items:start}
 @media (min-width:700px){.builds-grid{grid-template-columns:1fr 1fr}}
 .builds-grid>li{display:flex;min-width:0;align-items:flex-start}
-.build-card{display:flex;flex-direction:column;gap:8px;width:100%;height:auto;padding:12px;background:var(--warm);border:1px solid var(--line);border-radius:12px;color:inherit;text-decoration:none;position:relative}
+.build-card{display:flex;flex-direction:column;gap:8px;width:100%;height:auto;padding:12px;background:var(--surface);border:1px solid var(--line);border-radius:12px;color:inherit;text-decoration:none;position:relative}
 .build-card:hover{border-color:var(--ruby);text-decoration:none}
 .build-card:focus-visible,.build-card:has(.build-card-link:focus-visible){outline:2px solid var(--ruby);outline-offset:3px}
 .build-card-link{display:flex;flex-direction:column;gap:8px;color:inherit;text-decoration:none}
@@ -213,7 +213,7 @@ button.tool-logo:focus-visible,a.tool-logo:focus-visible{outline:2px solid var(-
 .build-block ul li:last-child{margin-bottom:0}
 .build-block ul li::before{content:"";position:absolute;left:3px;top:.62em;width:6px;height:6px;border-radius:50%;background:#111}
 .build-block li strong{font-weight:600;color:var(--ink)}
-.snapshot{display:grid;gap:8px;margin:0 0 22px;padding:12px 14px;background:var(--warm);border:1px solid var(--line);border-radius:12px}
+.snapshot{display:grid;gap:8px;margin:0 0 22px;padding:12px 14px;background:var(--surface);border:1px solid var(--line);border-radius:12px}
 .snapshot div{display:grid;grid-template-columns:8.5em 1fr;gap:8px;align-items:baseline}
 .snapshot dt{margin:0;font-size:12px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
 .snapshot dd{margin:0;color:var(--ink)}
@@ -281,7 +281,7 @@ button.tool-logo:focus-visible,a.tool-logo:focus-visible{outline:2px solid var(-
 .shot-dialog button:hover{border-color:#c4beb6}
 .shot-dialog button:focus-visible{outline:2px solid var(--ruby);outline-offset:3px}
 .result-tiles{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:1fr 1fr;gap:10px;align-items:stretch}
-.build-block .result-tiles li{margin:0;padding:12px 14px;background:var(--warm);border:1px solid var(--line);border-radius:12px}
+.build-block .result-tiles li{margin:0;padding:12px 14px;background:var(--surface);border:1px solid var(--line);border-radius:12px}
 .build-block .result-tiles li::before{content:none}
 .result-value{display:block;font-family:var(--serif);font-weight:500;font-size:22px;line-height:1.2;color:var(--ruby)}
 .result-label{display:block;margin-top:4px;color:var(--body)}
@@ -290,7 +290,7 @@ button.tool-logo:focus-visible,a.tool-logo:focus-visible{outline:2px solid var(-
 @media (max-width:599px){
   .result-tiles{grid-template-columns:1fr}
 }
-.build-block .check-tiles li{padding:8px 12px;background:var(--warm)}
+.build-block .check-tiles li{padding:8px 12px;background:var(--stone)}
 .check-tiles .result-value{font-size:18px;line-height:1.25}
 .check-tiles .result-label{font-size:14.5px}
 .check-tiles .result-basis{margin-top:4px}
