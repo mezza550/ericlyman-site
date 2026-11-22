@@ -460,10 +460,11 @@ function shotsSection(build) {
   const thumbs = gallery && gallery.thumbs;
   if (!gallery || ((!clips || !clips.length) && (!thumbs || !thumbs.length))) return "";
   const heading = gallery.heading || "In use";
+  const disclaimer = filled(gallery.disclaimer) ? `<p class="shot-note">${esc(gallery.disclaimer)}</p>` : "";
   const clipHtml = (clips || []).map((item) => clipFigure(item)).join("");
   const grid = thumbs && thumbs.length ? `<ul class="shot-thumbs">${thumbs.map((item) => `<li>${shotFigure(item)}</li>`).join("")}</ul>` : "";
   const dialog = `<dialog class="shot-dialog"><div class="shot-dialog-top"><button type="button" data-shot-close>Close</button></div><div class="shot-dialog-stage"><img class="shot-dialog-img" alt="" sizes="95vw"><video class="shot-dialog-video" controls muted loop playsinline hidden></video></div><p class="shot-dialog-cap"></p><div class="shot-dialog-nav"><button type="button" data-shot-prev>Previous</button><button type="button" data-shot-next>Next</button></div></dialog>`;
-  return `<section class="build-block shot-gallery" aria-labelledby="shots-h"><h2 id="shots-h">${esc(heading)}</h2>${clipHtml}${grid}${dialog}</section>`;
+  return `<section class="build-block shot-gallery" aria-labelledby="shots-h"><h2 id="shots-h">${esc(heading)}</h2>${disclaimer}${clipHtml}${grid}${dialog}</section>`;
 }
 
 function decisionsSection(build) {

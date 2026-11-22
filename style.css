@@ -256,6 +256,7 @@ button.tool-logo:focus-visible,a.tool-logo:focus-visible{outline:2px solid var(-
 .shot-open:focus-visible{outline:2px solid var(--ruby);outline-offset:3px}
 .shot-clip.is-reduced .shot-open{bottom:48px}
 .shot-cap,.shot-gallery figcaption{margin:8px 0 0;font-size:13.5px;line-height:1.45;color:var(--muted)}
+.build-block .shot-note{margin:0 0 16px;font-size:13.5px;font-style:italic;line-height:1.45;color:var(--muted)}
 .shot-thumbs{list-style:none;margin:8px 0 0;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px 12px}
 .build-block .shot-thumbs li{margin:0;padding:0}
 .build-block .shot-thumbs li::before{content:none}
@@ -264,11 +265,11 @@ button.tool-logo:focus-visible,a.tool-logo:focus-visible{outline:2px solid var(-
 @media (max-width:719px){
   .shot-thumbs{grid-template-columns:1fr 1fr}
 }
-.shot-dialog{display:flex;flex-direction:column;width:95vw;max-width:95vw;max-height:calc(100vh - 16px);margin:auto;padding:12px 12px 14px;border:0;border-radius:12px;background:var(--bg);color:var(--body);box-shadow:0 16px 40px rgba(31,30,28,.28);overflow:auto}
+.shot-dialog{display:flex;flex-direction:column;width:max-content;max-width:calc(100vw - 16px);max-height:calc(100vh - 16px);margin:auto;padding:12px 12px 14px;border:0;border-radius:12px;background:var(--bg);color:var(--body);box-shadow:0 16px 40px rgba(31,30,28,.28);overflow:auto}
 .shot-dialog::backdrop{background:rgba(31,30,28,.62)}
 .shot-dialog-top{display:flex;justify-content:flex-end;margin:0 0 8px}
-.shot-dialog-stage{display:flex;align-items:center;justify-content:center;min-height:0;max-height:min(85vh,calc(100vh - 168px))}
-.shot-dialog-img,.shot-dialog-video{display:block;width:auto;height:auto;max-width:min(95vw,100%);max-height:min(85vh,calc(100vh - 168px));object-fit:contain;background:var(--stone);border-radius:8px}
+.shot-dialog-stage{display:block;max-width:100%}
+.shot-dialog-img,.shot-dialog-video{display:block;width:auto;height:auto;max-width:calc(95vw - 24px);max-height:min(85vh,calc(100vh - 168px));object-fit:contain;background:transparent;border-radius:8px}
 .shot-dialog-img[hidden],.shot-dialog-video[hidden]{display:none !important}
 .shot-dialog-video{background:#1f1e1c}
 .shot-dialog-cap{margin:10px 0 0;font-size:15px;line-height:1.45;color:var(--ink)}

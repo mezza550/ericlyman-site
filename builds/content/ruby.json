@@ -157,6 +157,7 @@
   ],
   "gallery": {
     "heading": "Ruby in use",
+    "disclaimer": "All names, clients, and figures shown below are fictional, for demonstration only.",
     "clips": [
       {
         "src": "/media/ruby/01_log_hours_by_chat_directed.mp4",

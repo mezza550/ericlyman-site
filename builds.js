@@ -126,12 +126,44 @@
     return visible / rect.height >= 0.4;
   }
 
-  function fit(el) {
-    var width = el.naturalWidth || el.videoWidth;
-    var height = el.naturalHeight || el.videoHeight;
-    if (!width || !height) return;
-    el.style.maxWidth = "min(95vw, " + width + "px)";
-    el.style.maxHeight = "min(85vh, calc(100vh - 168px), " + height + "px)";
+  function clearSize(el) {
+    el.style.width = "";
+    el.style.height = "";
+    el.style.maxWidth = "";
+    el.style.maxHeight = "";
+  }
+
+  function fit(el, dialog) {
+    var nw = el.naturalWidth || el.videoWidth;
+    var nh = el.naturalHeight || el.videoHeight;
+    if (!nw || !nh || !dialog.open) return;
+    var padX = 24;
+    var vw = window.innerWidth || document.documentElement.clientWidth;
+    var vh = window.innerHeight || document.documentElement.clientHeight;
+    var maxW = Math.min(Math.floor(vw * 0.95) - padX, nw);
+    var room = vh - 16;
+    function place(limitH) {
+      var capH = Math.min(limitH, nh);
+      var scale = Math.min(maxW / nw, capH / nh, 1);
+      var w = Math.max(1, Math.floor(nw * scale));
+      var h = Math.max(1, Math.round(w * nh / nw));
+      if (h > capH) {
+        h = Math.max(1, Math.floor(capH));
+        w = Math.max(1, Math.round(h * nw / nh));
+      }
+      if (w > maxW) w = maxW;
+      el.style.width = w + "px";
+      el.style.height = h + "px";
+      el.style.maxWidth = w + "px";
+      el.style.maxHeight = h + "px";
+      dialog.style.width = (w + padX) + "px";
+    }
+    place(Math.min(Math.floor(vh * 0.85), room, nh));
+    var overflow = dialog.scrollHeight - room;
+    if (overflow > 1) {
+      var used = el.getBoundingClientRect().height;
+      place(Math.max(80, Math.floor(used - overflow)));
+    }
   }
 
   galleries.forEach(function (gallery) {
@@ -161,8 +193,7 @@
       video.removeAttribute("src");
       video.load();
       video.hidden = true;
-      video.style.maxWidth = "";
-      video.style.maxHeight = "";
+      clearSize(video);
     }
 
     function releaseHeld() {
@@ -195,7 +226,9 @@
         video.controls = true;
         video.setAttribute("aria-label", item.getAttribute("aria-label") || "");
         hold(item.parentNode.querySelector("video.demo-clip"));
-        video.onloadedmetadata = function () { fit(video); };
+        clearSize(video);
+        video.onloadedmetadata = function () { fit(video, dialog); };
+        if (video.readyState >= 1) fit(video, dialog);
         if (reduce) video.pause();
         else {
           var play = video.play();
@@ -206,15 +239,14 @@
         var thumb = item.querySelector("img");
         image.hidden = false;
         image.alt = thumb ? thumb.alt : "";
-        image.style.maxWidth = "";
-        image.style.maxHeight = "";
+        clearSize(image);
         image.onload = null;
         image.removeAttribute("src");
         image.sizes = "(min-width: 1200px) 2400px, 95vw";
         image.srcset = item.getAttribute("data-srcset") || "";
-        image.onload = function () { fit(image); };
+        image.onload = function () { fit(image, dialog); };
         image.src = item.href;
-        if (image.complete && image.naturalWidth) fit(image);
+        if (image.complete && image.naturalWidth) fit(image, dialog);
       }
       if (count < 2) {
         prevButton.hidden = true;
@@ -222,10 +254,16 @@
       }
     }
 
+    function fitOpen() {
+      var el = image.hidden ? video : image;
+      if (el && !el.hidden) fit(el, dialog);
+    }
+
     function openAt(next, from) {
       opener = from || null;
       show(next);
       if (!dialog.open) dialog.showModal();
+      fitOpen();
       closeButton.focus();
     }
 
@@ -245,8 +283,13 @@
     });
     dialog.addEventListener("close", function () {
       stopDialogVideo();
+      clearSize(image);
+      dialog.style.width = "";
       releaseHeld();
       if (opener) opener.focus();
+    });
+    window.addEventListener("resize", function () {
+      if (dialog.open) fitOpen();
     });
     dialog.addEventListener("keydown", function (event) {
       if (event.key === "ArrowRight") {
