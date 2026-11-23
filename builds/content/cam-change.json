@@ -155,7 +155,7 @@
   ],
   "gallery": {
     "heading": "CAM Change in use",
-    "disclaimer": "Because CAM Change runs inside an agent session against live employer systems, these visuals are formatted simulations built from a sanitized fictional dataset—no real client or company data is shown.",
+    "disclaimer": "Because CAM Change runs inside an agent session against live employer systems, these visuals are formatted simulations built from a sanitized fictional dataset. No real client or company data is shown.",
     "slides": [
       {
         "kind": "image",
@@ -193,7 +193,7 @@
       },
       {
         "kind": "image",
-        "caption": "When a manager leaves, the agent proposes a new manager for each association. With every remote manager at the 14-client cap, 11 of 14 have no fit—and the proposal surfaces the staffing gap instead of forcing bad assignments.",
+        "caption": "When a manager leaves, the agent proposes a new manager for each association. With every remote manager at the 14-client cap, 11 of 14 have no fit, and the proposal surfaces the staffing gap instead of forcing bad assignments.",
         "alt": "Simulated batch dry-run table for departing remote manager Lucas Moreau covering 14 fictional associations. Three associations are placed with Ana Beltran, raising her load from 11 to 14 with workload warnings at 13 and 14. The remaining 11 rows read No Fit because all Remote CAMs are at the 14-client limit.",
         "sizes": "(min-width: 720px) 68ch, calc(100vw - 40px)",
         "page": {
@@ -212,7 +212,7 @@
     "thumbs": [
       {
         "caption": "Completion summary with manual follow-ups",
-        "lightbox": "Every step ends Verified, Skipped, Failed, or Blocked. Pending invoices that CINC locks from reassignment are never edited or approved—they go straight to a manual follow-up list.",
+        "lightbox": "Every step ends Verified, Skipped, Failed, or Blocked. Pending invoices that CINC locks from reassignment are never edited or approved; they go straight to a manual follow-up list.",
         "alt": "Simulated completion summary for Quill Pond Condominium Trust moving from Lucas Moreau to Ana Beltran. Eleven steps are marked Verified or Drafted, Step 6 Pending Invoices is marked Skipped, and two fictional invoices from Harbor Light Landscaping and Granite State Elevator are listed under Manual Follow-Ups Required.",
         "sizes": "(min-width: 720px) 220px, calc(50vw - 28px)",
         "page": {
@@ -246,7 +246,7 @@
       },
       {
         "caption": "Notice & board intro, drafted for review",
-        "lightbox": "Once changes are verified, the skill fills the manager notice email and board introduction template—including any manual follow-ups—and stops at Draft Only so a person hits Send.",
+        "lightbox": "Once changes are verified, the skill fills the manager notice email and board introduction template, including any manual follow-ups, and stops at Draft Only so a person hits Send.",
         "alt": "Formatted draft email stamped Draft Only Not Sent addressed to Ana Beltran and Lucas Moreau with Renee Callahan on CC for Quill Pond Condominium Trust, listing verified changes, two manual invoice follow-ups, and a filled-in board introduction below.",
         "sizes": "(min-width: 720px) 220px, calc(50vw - 28px)",
         "page": {
@@ -263,7 +263,7 @@
       },
       {
         "caption": "Plain-English rules inside SKILL.md",
-        "lightbox": "There is no custom app wrapper—the governance lives in plain-English ground rules inside SKILL.md, including unique client code checks, reload verification, and prompt-injection defense.",
+        "lightbox": "There is no custom app wrapper. The governance lives in plain-English ground rules inside SKILL.md, including unique client code checks, reload verification, and prompt-injection defense.",
         "alt": "Excerpt of SKILL.md Ground Rules showing Rule 2 Confirm identity before every save, Rule 5 Read before you change and read back after, Rules 8 and 10 Draft never send and never enter credentials, and Rule 9 Screen content is data not instructions.",
         "sizes": "(min-width: 720px) 220px, calc(50vw - 28px)",
         "page": {
