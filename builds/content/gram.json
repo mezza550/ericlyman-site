@@ -36,7 +36,7 @@
     "what_i_built": "A fast chat meal logger, a local Windows plan engine, and an Android widget sharing one immutable Google Drive log.",
     "result": "Meal logging takes seconds, deterministic rules steer the two-year plan, and all three surfaces stay in sync."
   },
-  "problem": "My nutrition, weight, lifting, and daily activity lived across Cronometer, FatSecret, JEFit, Hevy, and FitBit, with no single view to steer a long-term plan. When Cronometer went down during dinner, I logged food weights and photos in Gemini and realized conversational logging beat searching food databases. An early cloud reasoning agent took 30 to 60 seconds per entry, breaking kitchen use. I needed fast meal intake paired with a rules-driven plan that would not overreact to scale noise.",
+  "problem": "My nutrition, weight, lifting, and daily activity lived across multiple paid apps (Cronometer, FatSecret, JEFit, Hevy, and FitBit), with no single view to steer a long-term plan. When the Cronometer app had a server error during dinner, I decided to log food weights and photos in Gemini and realized conversational logging beat searching food databases by a mile. Later, an early cloud reasoning agent took 30 to 60 seconds per entry, breaking kitchen use. I needed fast meal intake paired with a rules-driven plan that would not overreact to scale noise.",
   "how_it_works": [
     {
       "text": "I fed three years of food, lifting, and weight exports plus injury notes into a frontier model to generate a governed two-year plan.",
@@ -172,7 +172,7 @@
   ],
   "gallery": {
     "heading": "Gram in use",
-    "disclaimer": "Real training, weight, and nutrition logs from my own two-year plan inside the local Physique Plan command center.",
+    "disclaimer": "Real training, weight, and nutrition logs from my own two-year plan across the local Windows command center and Android home-screen widget.",
     "slides": [
       {
         "kind": "image",
@@ -223,6 +223,23 @@
           "src": "/img/builds/gram/slide-3-progress-2480.webp",
           "width": 2480,
           "height": 1576
+        }
+      },
+      {
+        "kind": "image",
+        "present": "center",
+        "caption": "The Android home-screen widget pulls from the same Google Drive event log, showing remaining daily calories and protein along with the last verified sync timestamp.",
+        "alt": "Physique Sync Android home-screen widget titled PHYSIQUE / DAILY FUEL with a Refresh button, displaying 2,750 kcal left and 160 g protein left, and a footer reading Saved snapshot, tap to check for updates, Published Nov 23, 12:19 PM EST.",
+        "sizes": "(min-width: 720px) 480px, calc(100vw - 40px)",
+        "page": {
+          "src": "/img/builds/gram/slide-4-android-widget.webp",
+          "width": 451,
+          "height": 248
+        },
+        "full": {
+          "src": "/img/builds/gram/slide-4-android-widget.webp",
+          "width": 451,
+          "height": 248
         }
       }
     ],
