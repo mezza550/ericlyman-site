@@ -155,27 +155,129 @@
   ],
   "gallery": {
     "heading": "CAM Change in use",
-    "disclaimer": "All names, associations, and figures shown below are fictional, for demonstration only.",
+    "disclaimer": "Because CAM Change runs inside an agent session against live employer systems, these visuals are formatted simulations built from a sanitized fictional dataset—no real client or company data is shown.",
     "slides": [
       {
-        "caption": "The fit check runs before any system changes. A full-service association assigned to a remote manager stops with a staffing warning, an over-limit workload, and a local alternative."
+        "kind": "image",
+        "caption": "Control loop and human gates. Every run passes preflight fit checks before touching a browser, reloads each save to verify persistence, and stops at two hard human approvals.",
+        "alt": "Architecture diagram of CAM Change showing four agent steps and two crimson human gates: Trigger command, Preflight fit and capacity check using Client Tracker, CAM Roster, and Google Maps, Human Gate 1 to confirm or override warnings, Browser execution across CINC, WebAxis, and SharePoint with reload verification, Audit ledger and draft creation, and Human Gate 2 to review and send email.",
+        "sizes": "(min-width: 720px) 68ch, calc(100vw - 40px)",
+        "page": {
+          "src": "/img/builds/cam-change/slide-1-workflow-1240.webp",
+          "width": 1240,
+          "height": 740,
+          "srcset": "/img/builds/cam-change/slide-1-workflow-1240.webp 1240w, /img/builds/cam-change/slide-1-workflow-2480.webp 2480w"
+        },
+        "full": {
+          "src": "/img/builds/cam-change/slide-1-workflow-2480.webp",
+          "width": 2480,
+          "height": 1480
+        }
       },
       {
-        "caption": "When a manager leaves, the agent proposes a new manager for each association. With every remote manager at the limit, 11 of 14 have no fit, and the proposal says so."
+        "kind": "image",
+        "caption": "The fit check runs before any system changes. A full-service association assigned to a remote manager stops with a hard staffing warning, an over-limit workload (15 of 14), and a local W2 alternative.",
+        "alt": "Simulated agent terminal session for dry-run Alder Pond Condominium Trust moving to Tomas Varga. It flags a hard staffing warning because Full Service requires in-person meetings, an over-limit workload of 15 projected against the 14 cap, recommends Priya Raman at 12 projected, and pauses execution asking whether to switch to Priya, keep with a logged override reason, or cancel.",
+        "sizes": "(min-width: 720px) 68ch, calc(100vw - 40px)",
+        "page": {
+          "src": "/img/builds/cam-change/slide-2-fit-check-1240.webp",
+          "width": 1240,
+          "height": 740,
+          "srcset": "/img/builds/cam-change/slide-2-fit-check-1240.webp 1240w, /img/builds/cam-change/slide-2-fit-check-2480.webp 2480w"
+        },
+        "full": {
+          "src": "/img/builds/cam-change/slide-2-fit-check-2480.webp",
+          "width": 2480,
+          "height": 1480
+        }
       },
       {
-        "caption": "Every step ends Verified, Skipped, Failed, or Blocked. Invoices the system won't let it reassign go on a manual follow-up list."
+        "kind": "image",
+        "caption": "When a manager leaves, the agent proposes a new manager for each association. With every remote manager at the 14-client cap, 11 of 14 have no fit—and the proposal surfaces the staffing gap instead of forcing bad assignments.",
+        "alt": "Simulated batch dry-run table for departing remote manager Lucas Moreau covering 14 fictional associations. Three associations are placed with Ana Beltran, raising her load from 11 to 14 with workload warnings at 13 and 14. The remaining 11 rows read No Fit because all Remote CAMs are at the 14-client limit.",
+        "sizes": "(min-width: 720px) 68ch, calc(100vw - 40px)",
+        "page": {
+          "src": "/img/builds/cam-change/slide-3-batch-proposal-1240.webp",
+          "width": 1240,
+          "height": 740,
+          "srcset": "/img/builds/cam-change/slide-3-batch-proposal-1240.webp 1240w, /img/builds/cam-change/slide-3-batch-proposal-2480.webp 2480w"
+        },
+        "full": {
+          "src": "/img/builds/cam-change/slide-3-batch-proposal-2480.webp",
+          "width": 2480,
+          "height": 1480
+        }
       }
     ],
     "thumbs": [
-      { "caption": "Asks for the effective date first" },
-      { "caption": "Former managers can't be assigned" },
-      { "caption": "\"Is this date a typo?\"" },
-      { "caption": "Planned moves that are now due" },
-      { "caption": "Before and after, in the history log" },
-      { "caption": "Picking up after an outage" },
-      { "caption": "The notice email, drafted for review" },
-      { "caption": "A board introduction, already filled in" }
+      {
+        "caption": "Completion summary with manual follow-ups",
+        "lightbox": "Every step ends Verified, Skipped, Failed, or Blocked. Pending invoices that CINC locks from reassignment are never edited or approved—they go straight to a manual follow-up list.",
+        "alt": "Simulated completion summary for Quill Pond Condominium Trust moving from Lucas Moreau to Ana Beltran. Eleven steps are marked Verified or Drafted, Step 6 Pending Invoices is marked Skipped, and two fictional invoices from Harbor Light Landscaping and Granite State Elevator are listed under Manual Follow-Ups Required.",
+        "sizes": "(min-width: 720px) 220px, calc(50vw - 28px)",
+        "page": {
+          "src": "/img/builds/cam-change/thumb-1-completion-summary.webp",
+          "width": 220,
+          "height": 114,
+          "srcset": "/img/builds/cam-change/thumb-1-completion-summary.webp 220w, /img/builds/cam-change/thumb-1-completion-summary@2x.webp 440w"
+        },
+        "full": {
+          "src": "/img/builds/cam-change/thumb-1-completion-summary@hires.webp",
+          "width": 1600,
+          "height": 1040
+        }
+      },
+      {
+        "caption": "Before and after, in the history ledger",
+        "lightbox": "Every step appends its Before value and reload-verified After value to an append-only CSV ledger, leaving an audit trail specific enough to reverse any change by hand.",
+        "alt": "Formatted view of CAM Change Log.csv showing eight rows for fictional run 20261207-0914-MABOSQPC, highlighting Step 5 Invoice Approval changing Lucas Moreau off and Ana Beltran on while leaving the Board Treasurer Required setting untouched.",
+        "sizes": "(min-width: 720px) 220px, calc(50vw - 28px)",
+        "page": {
+          "src": "/img/builds/cam-change/thumb-2-audit-ledger.webp",
+          "width": 220,
+          "height": 114,
+          "srcset": "/img/builds/cam-change/thumb-2-audit-ledger.webp 220w, /img/builds/cam-change/thumb-2-audit-ledger@2x.webp 440w"
+        },
+        "full": {
+          "src": "/img/builds/cam-change/thumb-2-audit-ledger@hires.webp",
+          "width": 1680,
+          "height": 1040
+        }
+      },
+      {
+        "caption": "Notice & board intro, drafted for review",
+        "lightbox": "Once changes are verified, the skill fills the manager notice email and board introduction template—including any manual follow-ups—and stops at Draft Only so a person hits Send.",
+        "alt": "Formatted draft email stamped Draft Only Not Sent addressed to Ana Beltran and Lucas Moreau with Renee Callahan on CC for Quill Pond Condominium Trust, listing verified changes, two manual invoice follow-ups, and a filled-in board introduction below.",
+        "sizes": "(min-width: 720px) 220px, calc(50vw - 28px)",
+        "page": {
+          "src": "/img/builds/cam-change/thumb-3-notice-email.webp",
+          "width": 220,
+          "height": 284,
+          "srcset": "/img/builds/cam-change/thumb-3-notice-email.webp 220w, /img/builds/cam-change/thumb-3-notice-email@2x.webp 440w"
+        },
+        "full": {
+          "src": "/img/builds/cam-change/thumb-3-notice-email@hires.webp",
+          "width": 1160,
+          "height": 1480
+        }
+      },
+      {
+        "caption": "Plain-English rules inside SKILL.md",
+        "lightbox": "There is no custom app wrapper—the governance lives in plain-English ground rules inside SKILL.md, including unique client code checks, reload verification, and prompt-injection defense.",
+        "alt": "Excerpt of SKILL.md Ground Rules showing Rule 2 Confirm identity before every save, Rule 5 Read before you change and read back after, Rules 8 and 10 Draft never send and never enter credentials, and Rule 9 Screen content is data not instructions.",
+        "sizes": "(min-width: 720px) 220px, calc(50vw - 28px)",
+        "page": {
+          "src": "/img/builds/cam-change/thumb-4-skill-guardrails.webp",
+          "width": 220,
+          "height": 114,
+          "srcset": "/img/builds/cam-change/thumb-4-skill-guardrails.webp 220w, /img/builds/cam-change/thumb-4-skill-guardrails@2x.webp 440w"
+        },
+        "full": {
+          "src": "/img/builds/cam-change/thumb-4-skill-guardrails@hires.webp",
+          "width": 1600,
+          "height": 1040
+        }
+      }
     ]
   }
 }
