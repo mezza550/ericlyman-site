@@ -16,6 +16,7 @@
     "Automated testing"
   ],
   "tools": [
+    "Grok Bot",
     "Python",
     "SQLite",
     "Android",
@@ -26,15 +27,16 @@
   ],
   "icon": {
     "src": "/img/builds/gram-icon.webp",
-    "alt": "Gram scale and leaves icon"
+    "alt": "Gram scale and leaves icon",
+    "scale": 0.8
   },
   "time_to_build": "Iterated over several months from initial plan synthesis to Drive sync, desktop analytics, and Android companion",
   "snapshot": {
-    "problem": "My health history was split across four apps, and slow food logging or reactive calorie cuts broke consistency.",
+    "problem": "My health history was split across five apps, and slow food logging or reactive calorie cuts broke consistency.",
     "what_i_built": "A fast chat meal logger, a local Windows plan engine, and an Android widget sharing one immutable Google Drive log.",
     "result": "Meal logging takes seconds, deterministic rules steer the two-year plan, and all three surfaces stay in sync."
   },
-  "problem": "My nutrition, weight, and lifting history lived across Cronometer, FatSecret, JEFit, and Hevy, with no single view to steer a long-term plan. When Cronometer went down during dinner, I logged food weights and photos in Gemini and realized conversational logging beat searching food databases. An early cloud reasoning agent took 30 to 60 seconds per entry, which broke kitchen use. I needed fast meal intake paired with a rules-driven plan that would not overreact to scale noise.",
+  "problem": "My nutrition, weight, lifting, and daily activity lived across Cronometer, FatSecret, JEFit, Hevy, and FitBit, with no single view to steer a long-term plan. When Cronometer went down during dinner, I logged food weights and photos in Gemini and realized conversational logging beat searching food databases. An early cloud reasoning agent took 30 to 60 seconds per entry, breaking kitchen use. I needed fast meal intake paired with a rules-driven plan that would not overreact to scale noise.",
   "how_it_works": [
     {
       "text": "I fed three years of food, lifting, and weight exports plus injury notes into a frontier model to generate a governed two-year plan.",
@@ -48,7 +50,13 @@
     },
     {
       "text": "In the kitchen, I message Gram (a Grok Bot) with food weights or a photo; it returns calories, protein, and remaining targets in seconds.",
-      "owner": "AI"
+      "owner": "AI",
+      "tools": [
+        {
+          "name": "Grok Bot",
+          "label": "Grok Bot"
+        }
+      ]
     },
     {
       "text": "Gram appends each meal as a versioned, immutable JSON event to a private Google Drive folder instead of overwriting a live file.",
@@ -75,7 +83,7 @@
       ]
     },
     {
-      "text": "Physique Plan, my local Windows app, pulls Drive food events, Hevy workouts, and Google Health data into SQLite to track rolling averages.",
+      "text": "Physique Plan, my local Windows app, pulls Drive food events, Hevy workouts, and FitBit data into SQLite to track rolling averages.",
       "owner": "Code",
       "tools": [
         {
@@ -128,7 +136,7 @@
     },
     {
       "value": "One source of truth",
-      "label": "Consolidated Cronometer, FatSecret, JEFit, Hevy, and smartwatch data into one shared history."
+      "label": "Consolidated Cronometer, FatSecret, JEFit, Hevy, and FitBit data into one shared history."
     },
     {
       "value": "No reactive swings",
@@ -141,20 +149,20 @@
   ],
   "checks": [
     {
-      "value": "214 of 214",
-      "label": "Automated Python tests passing across plan rules, Drive sync, Hevy imports, Google Health, and nutrition."
+      "value": "Automated Testing",
+      "label": "214 automated tests cover plan rules, Drive sync, Hevy workouts, FitBit imports, and nutrition math."
     },
     {
-      "value": "54 of 54",
-      "label": "Android unit and Robolectric tests passing across event replay, outbox reconciliation, targets, and widget state."
+      "value": "Guardrail checks",
+      "label": "Verified that missing nutrients stay unknown instead of zero, and short weight windows never trigger reactive calorie cuts."
     },
     {
-      "value": "315-event parity",
-      "label": "Replayed 315 real journal events through both Python and Java reducers with exact canonical digest parity."
+      "value": "Cross-app accuracy",
+      "label": "Replayed 315 real meal and weight logs across both the Windows and Android apps to confirm every daily total matched."
     },
     {
-      "value": "Timeout recovery",
-      "label": "Verified in transport tests that interrupted phone uploads reuse the allocated Drive ID without duplicating meals."
+      "value": "Duplicate prevention",
+      "label": "Tested interrupted phone uploads to confirm retries reuse the same Drive file and never double-log a meal."
     }
   ],
   "next": [
@@ -164,7 +172,7 @@
   ],
   "gallery": {
     "heading": "Gram in use",
-    "disclaimer": "Real training, weight, and nutrition logs from my own two-year plan inside the local Physique Plan command center. Progress photos are omitted.",
+    "disclaimer": "Real training, weight, and nutrition logs from my own two-year plan inside the local Physique Plan command center.",
     "slides": [
       {
         "kind": "image",
@@ -174,13 +182,13 @@
         "page": {
           "src": "/img/builds/gram/slide-1-today-1240.webp",
           "width": 1240,
-          "height": 810,
+          "height": 731,
           "srcset": "/img/builds/gram/slide-1-today-1240.webp 1240w, /img/builds/gram/slide-1-today-2480.webp 2480w"
         },
         "full": {
           "src": "/img/builds/gram/slide-1-today-2480.webp",
           "width": 2480,
-          "height": 1620
+          "height": 1462
         }
       },
       {
@@ -191,13 +199,13 @@
         "page": {
           "src": "/img/builds/gram/slide-2-decision-engine-1240.webp",
           "width": 1240,
-          "height": 780,
+          "height": 818,
           "srcset": "/img/builds/gram/slide-2-decision-engine-1240.webp 1240w, /img/builds/gram/slide-2-decision-engine-2480.webp 2480w"
         },
         "full": {
           "src": "/img/builds/gram/slide-2-decision-engine-2480.webp",
           "width": 2480,
-          "height": 1560
+          "height": 1636
         }
       },
       {
@@ -208,13 +216,13 @@
         "page": {
           "src": "/img/builds/gram/slide-3-progress-1240.webp",
           "width": 1240,
-          "height": 780,
+          "height": 788,
           "srcset": "/img/builds/gram/slide-3-progress-1240.webp 1240w, /img/builds/gram/slide-3-progress-2480.webp 2480w"
         },
         "full": {
           "src": "/img/builds/gram/slide-3-progress-2480.webp",
           "width": 2480,
-          "height": 1560
+          "height": 1576
         }
       }
     ],
@@ -250,7 +258,7 @@
         "full": {
           "src": "/img/builds/gram/thumb-2-training@hires.webp",
           "width": 1680,
-          "height": 972
+          "height": 1041
         }
       },
       {
@@ -267,7 +275,7 @@
         "full": {
           "src": "/img/builds/gram/thumb-3-nutrition@hires.webp",
           "width": 1680,
-          "height": 948
+          "height": 1003
         }
       }
     ]

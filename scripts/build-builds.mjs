@@ -42,6 +42,7 @@ const TOOL_ICONS = {
   "Claude Code": "claude-code.svg",
   "Claude in Chrome": "claude.svg",
   "Gemini": "gemini.svg",
+  "Grok Bot": "grok.svg",
   "Gmail": "gmail.svg",
   "Codex": "openai.svg",
   "Google Maps": "googlemaps.svg",
