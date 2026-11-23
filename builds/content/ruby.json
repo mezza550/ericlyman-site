@@ -77,7 +77,7 @@
       "tools": [
         {
           "name": "Gmail",
-          "label": "Gmail (read-only)"
+          "label": "Gmail (draft-only)"
         }
       ]
     },
