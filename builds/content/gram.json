@@ -1,0 +1,300 @@
+{
+  "slug": "gram",
+  "name": "Gram",
+  "order": 5,
+  "context": "Personal project",
+  "status": "Daily use",
+  "status_since": "August 2026",
+  "card_status": "Daily use · Personal system",
+  "users": "Me, across chat, phone, and desktop",
+  "card_line": "A conversational meal logger and two-year fitness plan synced across devices.",
+  "page_subtitle": "A fast conversational meal logger, a rules-driven Windows command center, and an Android sync app sharing one Google Drive event log.",
+  "tags": [
+    "Health & Fitness",
+    "Rules in code",
+    "Cross-device Sync",
+    "Automated testing"
+  ],
+  "tools": [
+    "Grok Bot",
+    "Python",
+    "SQLite",
+    "Android",
+    "Google Drive",
+    "Gemini",
+    "Claude Code",
+    "Codex"
+  ],
+  "icon": {
+    "src": "/img/builds/gram-icon.webp",
+    "alt": "Gram scale and leaves icon",
+    "scale": 0.8
+  },
+  "time_to_build": "Iterated over several months from initial plan synthesis to Drive sync, desktop analytics, and Android companion",
+  "snapshot": {
+    "problem": "My health history was split across five apps, and slow food logging or reactive calorie cuts broke consistency.",
+    "what_i_built": "A fast chat meal logger, a local Windows plan engine, and an Android widget sharing one immutable Google Drive log.",
+    "result": "Meal logging takes seconds, deterministic rules steer the two-year plan, and all three surfaces stay in sync."
+  },
+  "problem": "My nutrition, weight, lifting, and daily activity lived across multiple paid apps (Cronometer, FatSecret, JEFit, Hevy, and FitBit), with no single view to steer a long-term plan. When the Cronometer app had a server error during dinner, I decided to log food weights and photos in Gemini and realized conversational logging beat searching food databases by a mile. Later, an early cloud reasoning agent took 30 to 60 seconds per entry, breaking kitchen use. I needed fast meal intake paired with a rules-driven plan that would not overreact to scale noise.",
+  "how_it_works": [
+    {
+      "text": "I fed three years of food, lifting, and weight exports plus injury notes into a frontier model to generate a governed two-year plan.",
+      "owner": "Person",
+      "tools": [
+        {
+          "name": "Claude Code",
+          "label": "Claude Code"
+        }
+      ]
+    },
+    {
+      "text": "In the kitchen, I message Gram (a Grok Bot) with food weights or a photo; it returns calories, protein, and remaining targets in seconds.",
+      "owner": "AI",
+      "tools": [
+        {
+          "name": "Grok Bot",
+          "label": "Grok Bot"
+        }
+      ]
+    },
+    {
+      "text": "Gram appends each meal as a versioned, immutable JSON event to a private Google Drive folder instead of overwriting a live file.",
+      "owner": "AI",
+      "tools": [
+        {
+          "name": "Google Drive",
+          "label": "Google Drive"
+        }
+      ]
+    },
+    {
+      "text": "Physique Sync, a native Android app and home-screen widget, reads the Drive log into a verified cache and supports quick phone entries.",
+      "owner": "Code",
+      "tools": [
+        {
+          "name": "Android",
+          "label": "Android"
+        },
+        {
+          "name": "Google Drive",
+          "label": "Google Drive"
+        }
+      ]
+    },
+    {
+      "text": "Physique Plan, my local Windows app, pulls Drive food events, Hevy workouts, and FitBit data into SQLite to track rolling averages.",
+      "owner": "Code",
+      "tools": [
+        {
+          "name": "Python",
+          "label": "Python"
+        },
+        {
+          "name": "SQLite",
+          "label": "SQLite"
+        }
+      ]
+    },
+    {
+      "text": "Deterministic Python rules check weight trends, waist measurements, and lift signals, flagging stalls while refusing calorie changes on short windows.",
+      "owner": "Code",
+      "tools": [
+        {
+          "name": "Python",
+          "label": "Python"
+        }
+      ]
+    }
+  ],
+  "decisions": [
+    {
+      "decision": "Swapped models for kitchen-speed latency.",
+      "reason": "A deep-thinking cloud agent took 30 to 60 seconds per meal entry. Moving intake to a faster chat bot cut responses to seconds while keeping the same backend log."
+    },
+    {
+      "decision": "One immutable Google Drive event log.",
+      "reason": "Chat and Android each append standalone JSON event files rather than editing a shared file, so I can swap chat agents or log from my phone without duplicates."
+    },
+    {
+      "decision": "Deterministic code steers the plan.",
+      "reason": "The chat agent only handles meal intake and macro math. Weight trends, maintenance estimates, and phase checks run in tested Python code requiring four-week windows before changing targets."
+    },
+    {
+      "decision": "Missing nutrients stay unknown, never zero.",
+      "reason": "Partial meal entries leave blank carbs or fat unknown instead of zero, and the Android portion calculator refuses to suggest a serving when sync is stale or incomplete."
+    },
+    {
+      "decision": "Atomic phone uploads and local secrets.",
+      "reason": "Android preallocates a Drive file ID, uploads exact bytes, and verifies readback so retries never duplicate entries. Desktop API keys stay encrypted locally using Windows DPAPI."
+    }
+  ],
+  "results": [
+    {
+      "value": "Seconds per meal",
+      "label": "Replaced database search and 30 to 60 second reasoning lag with fast text or photo meal logging."
+    },
+    {
+      "value": "One source of truth",
+      "label": "Consolidated Cronometer, FatSecret, JEFit, Hevy, and FitBit data into one shared history."
+    },
+    {
+      "value": "No reactive swings",
+      "label": "Plan rules require four-week trend windows and call out predictable month-three stalls."
+    },
+    {
+      "value": "Model-agnostic log",
+      "label": "Immutable Drive events let me swap chat agents or phone clients without losing history."
+    }
+  ],
+  "checks": [
+    {
+      "value": "Automated Testing",
+      "label": "214 automated tests cover plan rules, Drive sync, Hevy workouts, FitBit imports, and nutrition math."
+    },
+    {
+      "value": "Guardrail checks",
+      "label": "Verified that missing nutrients stay unknown instead of zero, and short weight windows never trigger reactive calorie cuts."
+    },
+    {
+      "value": "Cross-app accuracy",
+      "label": "Replayed 315 real meal and weight logs across both the Windows and Android apps to confirm every daily total matched."
+    },
+    {
+      "value": "Duplicate prevention",
+      "label": "Tested interrupted phone uploads to confirm retries reuse the same Drive file and never double-log a meal."
+    }
+  ],
+  "next": [
+    "Add fast voice and photo meal logging directly inside the standalone Android app so intake no longer requires opening a separate chat app.",
+    "Write standalone phone intake to the exact same immutable Google Drive event contract so desktop analytics and history need zero migration.",
+    "Automate background refreshes for the Android home-screen widget so daily calorie and protein rings stay current without tapping refresh."
+  ],
+  "gallery": {
+    "heading": "Gram in use",
+    "disclaimer": "Real training, weight, and nutrition logs from my own two-year plan across the local Windows command center and Android home-screen widget.",
+    "slides": [
+      {
+        "kind": "image",
+        "caption": "The Today view combines Drive food events, weigh-ins, and maintenance estimates into one daily picture against the Build 1 corridor.",
+        "alt": "Physique Plan Today dashboard showing Monday Nov 23 2026 in Build 1 week 15 of 28, with 194.3 lb 7-day average, +0.30 lb per week trend, 193 to 196 lb planned corridor, 36.00 in waist, Weight against the plan chart, and Today's targets of 2,750 calories and 160 g protein based on 2,418 estimated maintenance.",
+        "sizes": "(min-width: 720px) 68ch, calc(100vw - 40px)",
+        "page": {
+          "src": "/img/builds/gram/slide-1-today-1240.webp",
+          "width": 1240,
+          "height": 731,
+          "srcset": "/img/builds/gram/slide-1-today-1240.webp 1240w, /img/builds/gram/slide-1-today-2480.webp 2480w"
+        },
+        "full": {
+          "src": "/img/builds/gram/slide-1-today-2480.webp",
+          "width": 2480,
+          "height": 1462
+        }
+      },
+      {
+        "kind": "image",
+        "caption": "Deterministic rules replace impulsive diet tweaks. The engine flags missing weigh-ins, warns when a trend window is under four weeks, and calls out the predicted month-three dip.",
+        "alt": "What the plan says right now panel listing four active rules: Only 7 weigh-ins in the last 14 days, No shoulder measurement recorded, Rate is faster than planned with a caution that the 3.7-week window is under four weeks, and This is the month-three stretch warning against Failure mode 1.",
+        "sizes": "(min-width: 720px) 68ch, calc(100vw - 40px)",
+        "page": {
+          "src": "/img/builds/gram/slide-2-decision-engine-1240.webp",
+          "width": 1240,
+          "height": 818,
+          "srcset": "/img/builds/gram/slide-2-decision-engine-1240.webp 1240w, /img/builds/gram/slide-2-decision-engine-2480.webp 2480w"
+        },
+        "full": {
+          "src": "/img/builds/gram/slide-2-decision-engine-2480.webp",
+          "width": 2480,
+          "height": 1636
+        }
+      },
+      {
+        "kind": "image",
+        "caption": "Scrubbable multi-year charts plot seven-day averages against the projected corridor, marking calorie target changes alongside weekly adherence bars.",
+        "alt": "Progress page displaying a 90-day weight chart against the projected Build 1 corridor with two calorie target change flags, closed camera check-in markers, Waist and shoulders panel, and Weekly adherence bars.",
+        "sizes": "(min-width: 720px) 68ch, calc(100vw - 40px)",
+        "page": {
+          "src": "/img/builds/gram/slide-3-progress-1240.webp",
+          "width": 1240,
+          "height": 788,
+          "srcset": "/img/builds/gram/slide-3-progress-1240.webp 1240w, /img/builds/gram/slide-3-progress-2480.webp 2480w"
+        },
+        "full": {
+          "src": "/img/builds/gram/slide-3-progress-2480.webp",
+          "width": 2480,
+          "height": 1576
+        }
+      },
+      {
+        "kind": "image",
+        "present": "center",
+        "caption": "The Android home-screen widget pulls from the same Google Drive event log, showing remaining daily calories and protein along with the last verified sync timestamp.",
+        "alt": "Physique Sync Android home-screen widget titled PHYSIQUE / DAILY FUEL with a Refresh button, displaying 2,750 kcal left and 160 g protein left, and a footer reading Saved snapshot, tap to check for updates, Published Nov 23, 12:19 PM EST.",
+        "sizes": "(min-width: 720px) 480px, calc(100vw - 40px)",
+        "page": {
+          "src": "/img/builds/gram/slide-4-android-widget.webp",
+          "width": 451,
+          "height": 248
+        },
+        "full": {
+          "src": "/img/builds/gram/slide-4-android-widget.webp",
+          "width": 451,
+          "height": 248
+        }
+      }
+    ],
+    "thumbs": [
+      {
+        "caption": "Two-year plan phases",
+        "lightbox": "The two-year roadmap sequences seven governed phases from Reset through Build, Cut, Hold, and Maintain, keeping every decision tied to the active phase.",
+        "alt": "Two-Year Physique Plan timeline showing seven phases from August 2026 through December 2028: Reset, Build 1 active at 28 weeks, Cut 1, Hold, Build 2, Cut 2, and Maintain.",
+        "sizes": "(min-width: 720px) 220px, calc(50vw - 28px)",
+        "page": {
+          "src": "/img/builds/gram/thumb-1-plan.webp",
+          "width": 220,
+          "height": 114,
+          "srcset": "/img/builds/gram/thumb-1-plan.webp 220w, /img/builds/gram/thumb-1-plan@2x.webp 440w"
+        },
+        "full": {
+          "src": "/img/builds/gram/thumb-1-plan@hires.webp",
+          "width": 1680,
+          "height": 940
+        }
+      },
+      {
+        "caption": "Strength signals & workouts",
+        "lightbox": "Synced Hevy workouts drive double-progression session templates and automatic progressing vs. plateau strength signals across main compound lifts.",
+        "alt": "Training view showing Session B with Romanian Deadlift at 280.0 lb and Overhead Press at 115.0 lb alongside Strength signals marking Squat and Romanian Deadlift as Progressing and Bench Press and Overhead Press as Plateau.",
+        "sizes": "(min-width: 720px) 220px, calc(50vw - 28px)",
+        "page": {
+          "src": "/img/builds/gram/thumb-2-training.webp",
+          "width": 220,
+          "height": 114,
+          "srcset": "/img/builds/gram/thumb-2-training.webp 220w, /img/builds/gram/thumb-2-training@2x.webp 440w"
+        },
+        "full": {
+          "src": "/img/builds/gram/thumb-2-training@hires.webp",
+          "width": 1680,
+          "height": 1041
+        }
+      },
+      {
+        "caption": "Honest nutrition ledger",
+        "lightbox": "Daily food logs pulled from Google Drive sum only known nutrient values and explicitly mark missing carbs or fat as unknown rather than zero.",
+        "alt": "Nutrition page for November 19 2026 showing 2,740 kcal and 170.3 g protein across 8 food rows, dashes for unknown carbs and fat, and a notice stating missing nutrient values remain unknown.",
+        "sizes": "(min-width: 720px) 220px, calc(50vw - 28px)",
+        "page": {
+          "src": "/img/builds/gram/thumb-3-nutrition.webp",
+          "width": 220,
+          "height": 114,
+          "srcset": "/img/builds/gram/thumb-3-nutrition.webp 220w, /img/builds/gram/thumb-3-nutrition@2x.webp 440w"
+        },
+        "full": {
+          "src": "/img/builds/gram/thumb-3-nutrition@hires.webp",
+          "width": 1680,
+          "height": 1003
+        }
+      }
+    ]
+  }
+}

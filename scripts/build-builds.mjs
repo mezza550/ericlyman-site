@@ -4,7 +4,7 @@ import { fileURLToPath } from "url";
 
 const root = join(dirname(fileURLToPath(import.meta.url)), "..");
 const contentDir = join(root, "builds", "content");
-const HOME_BUILD_LIMIT = 4;
+const HOME_BUILD_LIMIT = 6;
 const SITE = "https://ericlyman.com";
 const OG_DEFAULT = "/img/og-default.png";
 const INTRO = "Tools and agents I've designed and built with AI. Each page covers the process, the checks I put around it, and the results.";
@@ -28,7 +28,8 @@ const TAGS = [
   "Data Safety",
   "Automation",
   "Books and Audio",
-  "Cross-device Sync"
+  "Cross-device Sync",
+  "Health & Fitness"
 ];
 const STATUSES = ["Daily use", "Regular use", "In testing", "In progress", "Retired"];
 const CONTEXTS = ["Personal project", "Work project", "Small-business project"];
@@ -41,6 +42,7 @@ const TOOL_ICONS = {
   "Claude Code": "claude-code.svg",
   "Claude in Chrome": "claude.svg",
   "Gemini": "gemini.svg",
+  "Grok Bot": "grok.svg",
   "Gmail": "gmail.svg",
   "Codex": "openai.svg",
   "Google Maps": "googlemaps.svg",
