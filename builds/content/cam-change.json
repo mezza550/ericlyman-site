@@ -230,7 +230,7 @@
       {
         "caption": "Notice & board intro, drafted for review",
         "lightbox": "Once changes are verified, the skill fills the manager notice email and board introduction template, including any manual follow-ups, and stops at Draft Only so a person hits Send.",
-        "alt": "Formatted draft email stamped Draft Only Not Sent addressed to Ana Beltran and Lucas Moreau with Renee Callahan on CC for Quill Pond Condominium Trust (KAS-1017), listing verified changes, two manual invoice follow-ups, and a filled-in board introduction below.",
+        "alt": "Plain Outlook email draft showing Send and Draft saved (not sent), addressed to Ana Beltran and Lucas Moreau with Renee Callahan on Cc for Quill Pond Condominium Trust (KAS-1017), listing verified updates, two manual invoice follow-ups, and a filled-in board introduction below.",
         "sizes": "(min-width: 720px) 220px, calc(50vw - 28px)",
         "page": {
           "src": "/img/builds/cam-change/thumb-2-notice-email.webp",
