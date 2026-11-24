@@ -28,6 +28,7 @@
     "src": "/img/builds/chapterbridge-icon.webp",
     "alt": "ChapterBridge app icon"
   },
+  "og_image": "/img/og/chapterbridge.png",
   "time_to_build": "A few hours of building with Codex and Claude, then a few days of testing and tweaks",
   "snapshot": {
     "problem": "Ebooks and audiobooks didn't know about each other, so switching from reading to listening meant hunting for my place and in different apps.",

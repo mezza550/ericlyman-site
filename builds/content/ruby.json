@@ -24,6 +24,7 @@
     "src": "/img/builds/ruby-icon.webp",
     "alt": "Ruby gemstone icon"
   },
+  "og_image": "/img/og/ruby.png",
   "built_with": "Python, SQLite, DeepSeek via OpenRouter, Claude Code, Gemini",
   "time_to_build": "One week of planning, one week of building with Claude and Gemini",
   "snapshot": {

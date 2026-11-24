@@ -30,6 +30,7 @@
     "alt": "Gram scale and leaves icon",
     "scale": 0.8
   },
+  "og_image": "/img/og/gram.png",
   "time_to_build": "Iterated over several months from initial plan synthesis to Drive sync, desktop analytics, and Android companion",
   "snapshot": {
     "problem": "My health history was split across five apps, and slow food logging or reactive calorie cuts broke consistency.",
